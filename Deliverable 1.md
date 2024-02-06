@@ -1,7 +1,5 @@
 ## Mobility apps and privacy, a case study on the BIXI app
 
-I am adding this to test
-
 BIXI: 
 - It’s a useful service
 - Before we used to be able to use a key that you previously purchased in order to unlock a bike. It made this service less accessible to the public. All users are invited to download the application, and to even know that a Bixi key is an option, the user has to look it up. 
@@ -40,7 +38,7 @@ Where is the line (what user thinks they give vs what they actually give)
 Citation from a BIXI employee who started working there in 2010: “We know our users very, very well” (1). Users’ patterns are analyzed, Blain explained, and with nearly six years of data collected, Blain is able to make very accurate predictions.
 
 
-**Introduction**
+**Introduction** 
 
 - What is the technology transition
 - What is the application of this technology 
@@ -48,15 +46,16 @@ Citation from a BIXI employee who started working there in 2010: “We know our 
 
 **Research Method**
 
-- State what the research questions are
+- State what the research questions are:
     - For each quesiton state what we need to do to answer these questions and analyse the data
     - The results of this analysis will then be added to the results section
 
 **Results** 
 
 - Findings from research. What insights are there into BIXI 
-- Are there any studies or research done into the privacy implications of this technology
+- Are there any studies or research done into the privacy implications of this technology - Andrew
 - Have there been other attempts to solve this issue? What can we learn from these?
+- What data can we find that bixi is currently collecting - Holden
 
 **Conclusion**
 	
