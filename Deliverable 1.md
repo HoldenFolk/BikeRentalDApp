@@ -1,5 +1,7 @@
 ## Mobility apps and privacy, a case study on the BIXI app
 
+I am adding this to test
+
 BIXI: 
 - It’s a useful service
 - Before we used to be able to use a key that you previously purchased in order to unlock a bike. It made this service less accessible to the public. All users are invited to download the application, and to even know that a Bixi key is an option, the user has to look it up. 
