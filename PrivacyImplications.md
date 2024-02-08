@@ -23,5 +23,7 @@
 
 
 ##### Sources
+- [Lime Company](https://www.technologyreview.com/2018/09/28/139983/the-secret-data-collected-by-dockless-bikes-is-helping-cities-map-your-movement/)
 - [The Privacy Concerns’ Influences on Bike-Sharing Consumers’ Behavior](https://www.aasmr.org/jsms/Vol12/JSMS%20April%202022/Vol.12No.02.12.pdf)
 - [What do trip data reveal about bike-sharing system users?](https://www.sciencedirect.com/science/article/pii/S0966692321000247)
+
