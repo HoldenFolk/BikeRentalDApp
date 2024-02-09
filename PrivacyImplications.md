@@ -1,4 +1,4 @@
-## Privacy Implications of Online Bike Sharing Services and Possible Solutions
+## Privacy Implications of Online Bike Sharing Services 
 
 #### Studies and Researches
 
