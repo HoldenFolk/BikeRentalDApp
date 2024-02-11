@@ -7,6 +7,7 @@ When it comes to online bike sharing services, they collect a fair amount of the
 Lime, which is a transportation company that runs electric bikes all around the world based in San Francisco, California, is able to map your movement because of its bikes. Indeed, since they are built to operate without stations, the bikes transmit their location every few seconds, thus Lime knows where a ride starts and ends, and the whole route of the bike during the ride. This comes with its fair share of privacy implications. If a leak were to happen, adversaries could track people precisely, they could know where the users live, where they work, their habits, and many more private information. However, even if Bixi is not dockless, the same privacy threats apply. Bixi stores a user's start location and their end location. They also store the bike's location in real time. Therefore, an ill intent individual could in theory hack Bixi to obtain a user's habits, which could easily lead to a planned attack on a user that takes a specific route every morning. This means that even if Bixi does not sell or use our data for greedy purposes, the threats are still very present and prominent.
 
 
+Look at this: https://www.sciencedirect.com/science/article/pii/S2590198220300063
 
 
 
