@@ -1,0 +1,15 @@
+# Introduction
+
+Large-scale bike sharing services have a short but dense history, shaped by the successive technological revolutions of the past 30 years. It began in Copenhagen in 1995 with the launching of Bycyklen. The system was very straightforward: multiple bike racks were layed out accross the city. Users could unlock a bike by inserting a coin. They could later recover their coin by rechaining their bike at any other station (similarly to how shopping carts are retrieved in supermarkets). This system was completely anonymous and untraceable, ten out of ten in terms of privacy.
+
+In 2009, BIXI was launched using a totally different system: docking stations were electronized. This system is much more privacy invasive as each ride's data (start and finish time and location) is stored in databases for analysis. Regular users could subscribe to a membership and receive a magnetic card/key which they would use to unlock bikes. They must give in their name, adress, phone number and email to register. One time users must pay by credit card at the stations. In either case, BIXI's databases contained enough information to profile each user's riding habits and link it with their personal data. Note that one time users preserve relative anonymity (unless someone crosses BIXI's database with their credit card provider's database). This profiling of users is a goldmine of personal information.
+
+In 2013, BIXI introduced a new feature to their service: the Mobile app. This allows for users to see the availability of nearby stations in real time among other features. But these new features bring additional privacy concerns: BIXI now has access to the live location of all active users, allowing them to derive live information such as speed and precise itinerary of each trip. We will dwelve deeper into the privacy implications of this new layer of data added to BIXI's databases in the rest of this report. Both systems were concurrent until 2021, when BIXI removed the magnetic card service for regular users. To this day, it forces them to use the app. One-time purchases are also facilitated through the app, making it even more unavoidable.
+
+Presentation outline:
+
+We will start with some history of bike sharing services to see how the sucessive technological evolutions of the system led to a decline in user privacy. 
+First large scale bike sharing service: Copenhagen 1995, BYCYKLEN service -> Completely anonymous and untraceable.
+2009 Launch of BIXI: electronized docking stations -> track start and finish time and location of each trip. For single trips: payment by credit card allows for identification of users in the databases (unless change of credit card each time). Not for regulars with memberships -> Name, aaddress, phone number and email.  
+2013 -> App: live location -> raises major additional privacy concerns. Ways around it: Unlock bike and shut down phone. 
+One time rides also through the app now (must have an account giving in your info) -> More complete databases.
