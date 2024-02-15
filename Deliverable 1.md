@@ -84,7 +84,6 @@ When it comes to the data they collect, it might be deemed all necessary. Indeed
 **APPENDIX:**
 
 - Reference 1.
-
 "When you purchase a subscription through the App, our online payment providers collect certain personal information such as payment data (for example, the number, CVV code and expiration date of the payment card). BIXI does not have access to this information, which is encrypted and used by the online payment providers in compliance with PCI-DSS standards. Information thus collected is kept on servers that may be located outside Canada, particularly in the United States."
 (Terms and conditions of the BIXI mobile app, 2023)
 
