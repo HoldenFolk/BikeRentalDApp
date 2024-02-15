@@ -44,11 +44,6 @@ Data analysis of the API clarified the underlying privacy concerns around the Bi
   
 
 The first interest data was returned from a response to the Bixi account information endpoint. This endpoint is called at the start of every user session and delivers sensitive user data to the mobile application. Various personal identifiers can be found within the response, showing the extent of the information Bixi keeps stored for each user. The complete list of identifiers can be seen in the figure (insert figure here). Even more concerning is that Bixi stores the credit card expiration date, which violates their privacy policy. (Insert figure here)
-
-  
-
-![](https://lh7-us.googleusercontent.com/Tqkw2QradRWW1F6WjZaIXZxWnAQjcLBlCkegV2ygMEYOVfCHO3LtT8LfYIb-pQ9ab4TMox2dsIDdsJDuH4wa13L0Jt2AmiO7DGpY06mvZeBKgt_eN3H05Ek0xL8cS0QC95iTyUX96EiHd3U0JtrJJf8)
-
   
 
 A second cause for concern was found in the HTTP request made after a trip had been finished. This request, also made to the Bixi private API, is sent after docking your bike at a station. The information in the response body included trip statistics, geo-location data of the docking stations, and time stamps. All this information is directly linked with a unique identifier that Bixi uses to associate the information with the user. Aggregating this data could infer a user's daily routine and even more subtle information, such as physical ability. The complete response can be found (Here)
@@ -87,6 +82,10 @@ When it comes to the data they collect, it might be deemed all necessary. Indeed
 
 
 **APPENDIX:**
+
+- Figure 1.
+![](https://lh7-us.googleusercontent.com/Tqkw2QradRWW1F6WjZaIXZxWnAQjcLBlCkegV2ygMEYOVfCHO3LtT8LfYIb-pQ9ab4TMox2dsIDdsJDuH4wa13L0Jt2AmiO7DGpY06mvZeBKgt_eN3H05Ek0xL8cS0QC95iTyUX96EiHd3U0JtrJJf8)
+(Terms and conditions of the BIXI mobile app, 2023)
 
 - https://montrealgazette.com/news/local-news/managing-the-bixi-maze-a-day-in-the-life-of-montreals-bike-sharing-service-part-i
 
