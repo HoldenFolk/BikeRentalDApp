@@ -2,6 +2,7 @@
 
 ### Research Methods
 - Are there any studies or research done into the privacy implications of this technology
+
 The overall technology of online bike sharing services was researched. Studies that talked about the privacy implications of this technology were the keypoint of this research. Finally, the data these companies collect and what they do with it was researched as well.
 
 #### Results
