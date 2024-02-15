@@ -83,8 +83,9 @@ When it comes to the data they collect, it might be deemed all necessary. Indeed
 
 **APPENDIX:**
 
-- Figure 1.
-![](https://lh7-us.googleusercontent.com/Tqkw2QradRWW1F6WjZaIXZxWnAQjcLBlCkegV2ygMEYOVfCHO3LtT8LfYIb-pQ9ab4TMox2dsIDdsJDuH4wa13L0Jt2AmiO7DGpY06mvZeBKgt_eN3H05Ek0xL8cS0QC95iTyUX96EiHd3U0JtrJJf8)
+- Reference 1.
+
+"When you purchase a subscription through the App, our online payment providers collect certain personal information such as payment data (for example, the number, CVV code and expiration date of the payment card). BIXI does not have access to this information, which is encrypted and used by the online payment providers in compliance with PCI-DSS standards. Information thus collected is kept on servers that may be located outside Canada, particularly in the United States."
 (Terms and conditions of the BIXI mobile app, 2023)
 
 - https://montrealgazette.com/news/local-news/managing-the-bixi-maze-a-day-in-the-life-of-montreals-bike-sharing-service-part-i
