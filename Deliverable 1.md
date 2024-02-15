@@ -93,7 +93,7 @@ API Response From Bixi Endpoint: 'https://layer.bicyclesharing.net/mobile/v1/mtl
 {
     "dataWarehouseAvailable": true,
     "rentals": {
-        "PWCJSST2-1": [
+        "REDACTED": [
             {
                 "distanceInMeters": 367,
                 "co": 0,
@@ -134,22 +134,22 @@ API Response From Bixi Enpoint: 'https://layer.bicyclesharing.net/mobile/v1/mtl/
     },
     "billing": {
         "address": {
-            "postalCode": "M4V1G7"
+            "postalCode": "REDACTED"
         },
         "creditCard": {
             "holderName": "Holden Folk",
-            "number": "450003******2870",
-            "expirationMonth": 8,
-            "expirationYear": 2027,
+            "number": "450003****** REDACTED",
+            "expirationMonth": REDACTED,
+            "expirationYear": REDACTED,
             "numberDeleted": false,
             "mandatoryUpdateOnNextSubscriptionPurchase": false,
             "creditCardConfirmed": true,
             "expired": false,
-            "cardBrand": "VISA"
+            "cardBrand": "REDACTED"
         }
     },
     "member": {
-        "id": "PWCJSST2-1",
+        "id": "REDACTED",
         "firstName": "Holden",
         "lastName": "Folk",
         "language": "fr",
@@ -159,18 +159,18 @@ API Response From Bixi Enpoint: 'https://layer.bicyclesharing.net/mobile/v1/mtl/
             "year": 2002
         },
         "gender": "m",
-        "email": "holdenfolk1@gmail.com",
+        "email": "REDACTED",
         "emailCorrespondence": false,
         "type": "h",
-        "phoneNumber": "(647) 967 2658",
+        "phoneNumber": "REDACTED",
         "shippingAddress": {
-            "houseNumber": "420",
-            "street": "sherbrooke ave w",
-            "city": "Montreal",
+            "houseNumber": "REDACTED",
+            "street": "REDACTED",
+            "city": "REDACTED",
             "country": "CA",
             "countryRegion": "QC",
-            "postalCode": "H3A1B2",
-            "apartment": "314"
+            "postalCode": "REDACTED",
+            "apartment": "REDACTED"
         },
         "memberSinceMs": 1635045035016,
         "termsAndConditionsAcceptanceDateMs": 1635045033984,
