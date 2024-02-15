@@ -88,7 +88,7 @@ When it comes to the data they collect, it might be deemed all necessary. Indeed
 (Terms and conditions of the BIXI mobile app, 2023)
 
 - Reference 2.
-API Endpoint: 'https://layer.bicyclesharing.net/mobile/v1/mtl/rental/closed?memberId='
+API Response From Bixi Endpoint: 'https://layer.bicyclesharing.net/mobile/v1/mtl/rental/closed?memberId='
 ```json
 {
     "dataWarehouseAvailable": true,
@@ -120,6 +120,104 @@ API Endpoint: 'https://layer.bicyclesharing.net/mobile/v1/mtl/rental/closed?memb
             }
         ]
     }
+}
+```
+
+- Reference 3. 
+API Response From Bixi Enpoint: 'https://layer.bicyclesharing.net/mobile/v1/mtl/account'
+```json
+{
+    "status": "o",
+    "taxRegion": {
+        "code": "CA",
+        "name": "Canada"
+    },
+    "billing": {
+        "address": {
+            "postalCode": "M4V1G7"
+        },
+        "creditCard": {
+            "holderName": "Holden Folk",
+            "number": "450003******2870",
+            "expirationMonth": 8,
+            "expirationYear": 2027,
+            "numberDeleted": false,
+            "mandatoryUpdateOnNextSubscriptionPurchase": false,
+            "creditCardConfirmed": true,
+            "expired": false,
+            "cardBrand": "VISA"
+        }
+    },
+    "member": {
+        "id": "PWCJSST2-1",
+        "firstName": "Holden",
+        "lastName": "Folk",
+        "language": "fr",
+        "birthday": {
+            "day": 10,
+            "month": 12,
+            "year": 2002
+        },
+        "gender": "m",
+        "email": "holdenfolk1@gmail.com",
+        "emailCorrespondence": false,
+        "type": "h",
+        "phoneNumber": "(647) 967 2658",
+        "shippingAddress": {
+            "houseNumber": "420",
+            "street": "sherbrooke ave w",
+            "city": "Montreal",
+            "country": "CA",
+            "countryRegion": "QC",
+            "postalCode": "H3A1B2",
+            "apartment": "314"
+        },
+        "memberSinceMs": 1635045035016,
+        "termsAndConditionsAcceptanceDateMs": 1635045033984,
+        "currentSubscription": {
+            "id": "9142685",
+            "type": {
+                "id": "161",
+                "name": "One-Way Pass",
+                "minimumDelayBetweenRentalsMs": 0,
+                "configuration": {
+                    "paymentStrategy": "o"
+                }
+            },
+            "status": "e",
+            "numberOfConcurrentBikes": 1,
+            "startDateMs": 1707323840201,
+            "endDateMs": 1707324740201,
+            "corporateEmailConfirmed": "n"
+        },
+        "needsFirstKey": true,
+        "allowedAccessMethods": [
+            "CREDIT_CARD",
+            "BIKE_KEY",
+            "MOBILE"
+        ],
+        "partial": false,
+        "rideInsightsEnabled": false,
+        "hasAcceptedTermsAndConditions": true,
+        "canPurchaseSubscription": true,
+        "hasPassword": true
+    },
+    "entitlements": {
+        "mobileUnlock": false,
+        "hiddenFeatures": false,
+        "skipCheckLogin": false
+    }
+}
+```
+
+- Reference 4.
+API Response From Citi Bike Enpoint: 'https://layer.bicyclesharing.net/v2/nyc/favoritestation'
+```json
+{
+    "ids": [
+        "123",
+        ...
+    ]
 }
 ```
 
