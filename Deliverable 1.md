@@ -87,6 +87,42 @@ When it comes to the data they collect, it might be deemed all necessary. Indeed
 "When you purchase a subscription through the App, our online payment providers collect certain personal information such as payment data (for example, the number, CVV code and expiration date of the payment card). BIXI does not have access to this information, which is encrypted and used by the online payment providers in compliance with PCI-DSS standards. Information thus collected is kept on servers that may be located outside Canada, particularly in the United States."
 (Terms and conditions of the BIXI mobile app, 2023)
 
+- Reference 2.
+API Endpoint: 'https://layer.bicyclesharing.net/mobile/v1/mtl/rental/closed?memberId='
+```json
+{
+    "dataWarehouseAvailable": true,
+    "rentals": {
+        "PWCJSST2-1": [
+            {
+                "distanceInMeters": 367,
+                "co": 0,
+                "distanceCalculation": "AVERAGE_SPEED",
+                "ti": true,
+                "endLocation": [
+                    -73.57589408755302,
+                    45.50277615861811
+                ],
+                "startLocation": [
+                    -73.57589408755302,
+                    45.50277615861811
+                ],
+                "rentalId": "f252782e-b1b0-4420-a9f0-123c28d95621",
+                "rentalAccessMethod": "QR_CODE_MOBILE",
+                "sd": 1707421801872,
+                "ss": "McTavish / Sherbrooke",
+                "ed": 1707421912077,
+                "es": "McTavish / Sherbrooke",
+                "electricPedalAssist": false,
+                "bike": {
+                    "displayedNumber": "B03960"
+                }
+            }
+        ]
+    }
+}
+```
+
 - https://montrealgazette.com/news/local-news/managing-the-bixi-maze-a-day-in-the-life-of-montreals-bike-sharing-service-part-i
 
 - [Lime Company](https://www.technologyreview.com/2018/09/28/139983/the-secret-data-collected-by-dockless-bikes-is-helping-cities-map-your-movement/)
