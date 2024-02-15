@@ -39,7 +39,7 @@ The policies of BIXI, LIME, BIRD CANADA, and Citi Bike were very general. It was
 Data analysis of the API clarified the underlying privacy concerns around the Bixi technology. Of the data collected, three areas of interest were logging personal identifiers, logging trip information, and data aggregation.
   
 
-The first interest data was returned from a response to the Bixi account information endpoint. This endpoint is called at the start of every user session and delivers sensitive user data to the mobile application. Various personal identifiers can be found within the response, showing the extent of the information Bixi keeps stored for each user. The complete list of identifiers can be seen in [figure 3.](## Appendix). Even more concerning is that Bixi stores the credit card expiration date, which violates their privacy policy. (Insert figure here)
+The first interest data was returned from a response to the Bixi account information endpoint. This endpoint is called at the start of every user session and delivers sensitive user data to the mobile application. Various personal identifiers can be found within the response, showing the extent of the information Bixi keeps stored for each user. The complete list of identifiers can be seen in [figure 3.](## Appendix:). Even more concerning is that Bixi stores the credit card expiration date, which violates their privacy policy. (Insert figure here)
   
 
 A second cause for concern was found in the HTTP request made after a trip had been finished. This request, also made to the Bixi private API, is sent after docking your bike at a station. The information in the response body included trip statistics, geo-location data of the docking stations, and time stamps. All this information is directly linked with a unique identifier that Bixi uses to associate the information with the user. Aggregating this data could infer a user's daily routine and even more subtle information, such as physical ability. The complete response can be found (Here)
@@ -77,7 +77,7 @@ Furthermore, by leveraging real-time data, these companies could easily ascertai
 When it comes to the data they collect, it might be deemed all necessary. Indeed, they do need to track the start point, the end point and the entire route in case of any accidents or even theft. However, they do not need to keep this information after the ride is complete, and it was confirmed to be a trip with no complications. This aggregation of data brings a huge threat of privacy breach which is in itself not necessary for the service. If these companies publish their dataset, the implementation of robust anonymization techniques and adherence to rigid privacy policies are crucial to protecting the privacy of their user. Additionally, users should be clearly informed about the potential threats of using an online bike sharing service, and also warned about exercising caution when sharing sensitive information online.
 
 
-## APPENDIX:
+## Appendix:
 
 - Reference 1.
 "When you purchase a subscription through the App, our online payment providers collect certain personal information such as payment data (for example, the number, CVV code and expiration date of the payment card). BIXI does not have access to this information, which is encrypted and used by the online payment providers in compliance with PCI-DSS standards. Information thus collected is kept on servers that may be located outside Canada, particularly in the United States."
