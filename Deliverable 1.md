@@ -74,3 +74,28 @@ In 2013, BIXI introduced a new feature to their service: the Mobile app. This al
 
 https://montrealgazette.com/news/local-news/managing-the-bixi-maze-a-day-in-the-life-of-montreals-bike-sharing-service-part-i
 
+# ANTONIN
+
+links
+
+Bixi privacy policy : https://bixi.com/en/terms-and-conditions/
+
+
+18.5.8 Any other purpose that the Provider may identify from time to time and that is permitted by law or for which the Provider obtains specific consent from the user.
+The Provider may also disclose Personal Information to third parties if necessary to protect its assets or enforce its rights, including the collection of a debt.
+18.12 The Provider has appointed a Privacy Officer to oversee compliance with its Personal Information protection practices.
+
+## Research Methods
+I read the privacy policies of BIXI, LIME, BIRD CANADA, and Citi Bike. I compared the policies with PIPEDA and GDPR since most of the companies are providing services in Canada and Europe. I did some research on legal cases where ride-sharing services were involved. I searched for research papers on the implications of the data that the companies collect.
+
+## Results
+The policies of BIXI, LIME, BIRD CANADA, and Citi Bike were very general. It was difficult to find proper documentation on the delimitations they have in place to minimize the collection and use of personal data. They justify their collection by stating that they provide a service and need to improve it. However, the service is not clearly defined, and neither are their data retention policies, other than keeping data as long as it fulfills the purpose for which it was collected, generally to improve or provide the service. Similarly, the safeguards used to guarantee proper protection of the data are described as 'secure', but the level of security is not clearly specified.
+In the case of BIXI, their privacy policy states that a user can limit the collection of personal data, but doing so would reduce the features the user has access to. However, this claim is questionable as some services are closed off even when the data they require is unnecessary for their operation. Moreover, some of these companies share data with third parties known for their questionable privacy policies, such as Meta and Google.
+Unfortunately, there are not many papers talking about the implications and what BIXI could possibly do with all of the data they collect. But, we can assume that they build machine learnig model to predict a user movements using previous trips. Also, they could propably estimate your physical conditions and use it to profile you.
+
+## Conclusion
+At first glance, one could argue that these ride-sharing companies are compliant with regulations such as PIPEDA and GDPR. However, as shown before, they lack openness and transparency with their users. This lack of transparency poses a serious threat to customer privacy as users are asked to consent to vaguely defined policies. This is concerning because these companies make it seem like users consent to all activities, but in reality, users don't know what these companies are actually doing with their data.
+It's a recurring theme for these companies to justify their actions by claiming to improve their services. However, the service provided by each of these companies changes over time, making it almost impossible to argue that old data was not collected for the new service. This poses a threat of secondary use, and without enforcing proper delimitations in the privacy policies, this threat won't cease.
+Now that we discussed the extensive data use and retention practices of these companies, it's crucial to explore the profound implications of such practices. Just by analyzing the data collected in accordance with their privacy policies, it becomes evident that even in the absence of your name, these companies could effortlessly identify you using publicly available information. Moreover, they possess the capability to construct detailed profiles based on trip data, potentially exposing sensitive aspects of your physical condition.
+Furthermore, by leveraging real-time data, these companies could easily ascertain whether you are at home or not, thereby encroaching upon your privacy and engaging in unwarranted surveillance. This intrusion into personal space raises significant concerns regarding individual autonomy and the right to privacy.
+
