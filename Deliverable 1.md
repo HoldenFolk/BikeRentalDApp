@@ -99,3 +99,26 @@ It's a recurring theme for these companies to justify their actions by claiming 
 Now that we discussed the extensive data use and retention practices of these companies, it's crucial to explore the profound implications of such practices. Just by analyzing the data collected in accordance with their privacy policies, it becomes evident that even in the absence of your name, these companies could effortlessly identify you using publicly available information. Moreover, they possess the capability to construct detailed profiles based on trip data, potentially exposing sensitive aspects of your physical condition.
 Furthermore, by leveraging real-time data, these companies could easily ascertain whether you are at home or not, thereby encroaching upon your privacy and engaging in unwarranted surveillance. This intrusion into personal space raises significant concerns regarding individual autonomy and the right to privacy.
 
+## Andrew
+## Privacy Implications of Online Bike Sharing Services 
+
+### Research Methods
+I looked at the technology of online bike sharing services. I looked at studies that talked about the privacy implications of this technology. I researched about what they collect, and what they do with it.
+
+#### Results
+
+When it comes to online bike sharing services, they collect a fair amount of their users' personal information. In general, they collect the information and then they publish the dataset after removing each and every user's identity. However, an ill intent individual could, with some research, link this information to a user and therefore breach the user's privacy. There was a solution that was explained in detail in a chinese study: [An Effective Grouping Method for Privacy-Preserving Bike Sharing Data Publishing](https://www.mdpi.com/1999-5903/9/4/65). This group of researchers suggested a grouping-based anonymization that would help protect the privacy of the users by making it a lot harder or even impossible for an adversary to link the personal information to an individual. This technique is a good balanced solution that protects the privacy of the users while maximizing the data utility, as it utilizes the data more efficiently for analysis purposes compared to other anonymization techniques.
+
+Bixi is an online bike sharing service that uses docks, however, in the near future it could become dockless. Lime, which is a transportation company that runs electric bikes all around the world based in San Francisco, California, is able to map your movement because of its bikes. Indeed, since they are built to operate without stations, the bikes transmit their location every few seconds, thus Lime knows where a ride starts and ends, and the whole route of the bike during the ride. This comes with its fair share of privacy implications. If a leak were to happen, adversaries could track people precisely, they could know where the users live, where they work, their habits, and many more private information. However, even if Bixi is not dockless, the same privacy threats apply. Bixi stores a user's start location and their end location. They also store the bike's location in real time. Therefore, an ill intent individual could in theory hack Bixi to obtain a user's habits, which could easily lead to a planned attack on a user that takes a specific route every morning. This means that even if Bixi does not sell or use our data for greedy purposes, the threats are still very present and prominent.
+
+Unfortunately, not many papers talk about BIXI specifically, but it can be said that they have the ability collect all the information that Lime and any other bike sharing company collect. It can be said that even if the company's privacy policy states that they are not using their users' data or selling it to third parties, the threat of ill intent individuals is always there as we live in a society where there will always be people trying to take advantage of others. Additionally, any government agencies, with a warrant, could ask Bixi to give them real time data about their users' geolocation or any other information according to Bixi's privacy policy.
+
+
+
+
+##### Sources
+- [Lime Company](https://www.technologyreview.com/2018/09/28/139983/the-secret-data-collected-by-dockless-bikes-is-helping-cities-map-your-movement/)
+- [The Privacy Concerns’ Influences on Bike-Sharing Consumers’ Behavior](https://www.aasmr.org/jsms/Vol12/JSMS%20April%202022/Vol.12No.02.12.pdf)
+- [What do trip data reveal about bike-sharing system users?](https://www.sciencedirect.com/science/article/pii/S0966692321000247)
+
+
