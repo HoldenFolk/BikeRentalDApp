@@ -19,7 +19,7 @@ In 2013, BIXI introduced a new feature to their service: the Mobile app. This al
 
 **Research Method**
 
-  
+A privacy assessment was conducted on Bixi to determine the most critical threats and concerns that face the technology. Three research questions were asked to help organize the main areas of interest in the topic. 
 
 I read the privacy policies of BIXI, LIME, BIRD CANADA, and Citi Bike. I compared the policies with PIPEDA and GDPR since most of the companies are providing services in Canada and Europe. I did some research on legal cases where ride-sharing services were involved. I searched for research papers on the implications of the data that the companies collect.
 
