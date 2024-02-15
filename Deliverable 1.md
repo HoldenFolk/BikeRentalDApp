@@ -158,25 +158,9 @@ In 2013, BIXI introduced a new feature to their service: the Mobile app. This al
 
 I read the privacy policies of BIXI, LIME, BIRD CANADA, and Citi Bike. I compared the policies with PIPEDA and GDPR since most of the companies are providing services in Canada and Europe. I did some research on legal cases where ride-sharing services were involved. I searched for research papers on the implications of the data that the companies collect.
 
- 
+To what extent is the technology that Bixi is using a concern for the user's privacy? The objective of this question was to investigate any privacy concerns and data collection processes that could be found within the underlying technology of the Bixi application. The methodology used to answer this involved analysis of the Bixi mobile application's HTTP requests through a proxy server. This section outlines the procedures followed to collect the data.
 
- - Research Question:
-
-To what extent is the technology that Bixi is using a concern for the user's privacy?
-
-  
-
-The objective of this question was to investigate any privacy concerns and data collection processes that could be found within the underlying technology of the Bixi application. The methodology used to answer this involved analysis of the Bixi mobile application's HTTP requests through a proxy server. This section outlines the procedures followed to collect the data.
-
-  
-
- - Setting Up the Environment:
-
-A proxy server intercepted the HTTP requests sent from the mobile application to Bixi’s API. This required using a proxy application, such as Postman, to create the proxy. A mobile phone installed with the Bixi application was configured to route its traffic through the proxy server.
-
- - Data Collection:
-
-With the proxy server and mobile phone configured, the Bixi application was run on the mobile device and used as usual to conduct a trip. This step allowed the proxy to capture the real-time data sent to and from the Bixi API throughout the usage. The captured requests were then analyzed to understand the structure of the API calls, the data within them, and the endpoints involved.
+A proxy server intercepted the HTTP requests sent from the mobile application to Bixi’s API. This required using a proxy application, such as Postman, to create the proxy. A mobile phone installed with the Bixi application was configured to route its traffic through the proxy server. With the proxy server and mobile phone configured, the Bixi application was run on the mobile device and used as usual to conduct a trip. This step allowed the proxy to capture the real-time data sent to and from the Bixi API throughout the usage. The captured requests were then analyzed to understand the structure of the API calls, the data within them, and the endpoints involved.
 
 New York’s bike-sharing service, Citi Bike, was also analyzed to provide further data. Given that Citi Bike shares the same parent company and, consequently, the same technology as Bixi, this application was analyzed to draw Parallels to Bixi
 
