@@ -1,7 +1,8 @@
 ## Privacy Implications of Online Bike Sharing Services 
 
 ### Research Methods
-I looked at the technology of online bike sharing services. I looked at studies that talked about the privacy implications of this technology. I researched about what they collect, and what they do with it.
+- Are there any studies or research done into the privacy implications of this technology
+The overall technology of online bike sharing services was researched. Studies that talked about the privacy implications of this technology were the keypoint of this research. Finally, the data these companies collect and what they do with it was researched as well.
 
 #### Results
 
@@ -11,7 +12,8 @@ Bixi is an online bike sharing service that uses docks, however, in the near fut
 
 Unfortunately, not many papers talk about BIXI specifically, but it can be said that they have the ability collect all the information that Lime and any other bike sharing company collect. It can be said that even if the company's privacy policy states that they are not using their users' data or selling it to third parties, the threat of ill intent individuals is always there as we live in a society where there will always be people trying to take advantage of others. Additionally, any government agencies, with a warrant, could ask Bixi to give them real time data about their users' geolocation or any other information according to Bixi's privacy policy.
 
-
+#### Conclusion
+When it comes to the data they collect, it might be deemed all necessary. Indeed, they do need to track the start point, the end point and the entire route in case of any accidents or even theft. However, they do not need to keep this information after the ride is complete, and it was confirmed to be a trip with no complications. This aggregation of data brings a huge threat of privacy breach which is in itself not necessary for the service. If these companies publish their dataset, the implementation of robust anonymization techniques and adherence to rigid privacy policies are crucial to protecting the privacy of their user. Additionally, users should be clearly informed about the potential threats of using an online bike sharing service, and also warned about exercising caution when sharing sensitive information online.
 
 
 ##### Sources
