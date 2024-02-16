@@ -83,9 +83,6 @@ Bixi uses docking stations. It could become dockless. Lime, a transportation com
 
 
 
-   
-
-
 ## Conclusion
 
 
@@ -136,49 +133,7 @@ After analysis, BIXI's service would benefit in reliability if the system was bu
 
 
 
-
-- Appendix D: Bixi Privacy Policy
-"When you purchase a subscription through the App, our online payment providers collect certain personal information such as payment data (for example, the number, CVV code and expiration date of the payment card). BIXI does not have access to this information, which is encrypted and used by the online payment providers in compliance with PCI-DSS standards. Information thus collected is kept on servers that may be located outside Canada, particularly in the United States."
-(Terms and conditions of the BIXI mobile app, 2023)
-
-
-- Appendix E: API Response From Bixi Endpoint Trip Data 'https://layer.bicyclesharing.net/mobile/v1/mtl/rental/closed?memberId='
-```json
-{
-    "dataWarehouseAvailable": true,
-    "rentals": {
-        "REDACTED": [
-            {
-                "distanceInMeters": 367,
-                "co": 0,
-                "distanceCalculation": "AVERAGE_SPEED",
-                "ti": true,
-                "endLocation": [
-                    -73.57589408755302,
-                    45.50277615861811
-                ],
-                "startLocation": [
-                    -73.57589408755302,
-                    45.50277615861811
-                ],
-                "rentalId": "f252782e-b1b0-4420-a9f0-123c28d95621",
-                "rentalAccessMethod": "QR_CODE_MOBILE",
-                "sd": 1707421801872,
-                "ss": "McTavish / Sherbrooke",
-                "ed": 1707421912077,
-                "es": "McTavish / Sherbrooke",
-                "electricPedalAssist": false,
-                "bike": {
-                    "displayedNumber": "B03960"
-                }
-            }
-        ]
-    }
-}
-```
-
-
-- Appendix F: API Response From Bixi Enpoint Account Data 'https://layer.bicyclesharing.net/mobile/v1/mtl/account'
+- Appendix D: API Response From Bixi Enpoint Account Data 'https://layer.bicyclesharing.net/mobile/v1/mtl/account'
 ```json
 {
     "status": "o",
@@ -264,8 +219,48 @@ After analysis, BIXI's service would benefit in reliability if the system was bu
 }
 ```
 
+- Appendix E: Bixi Privacy Policy
+"When you purchase a subscription through the App, our online payment providers collect certain personal information such as payment data (for example, the number, CVV code and expiration date of the payment card). BIXI does not have access to this information, which is encrypted and used by the online payment providers in compliance with PCI-DSS standards. Information thus collected is kept on servers that may be located outside Canada, particularly in the United States."
+(Terms and conditions of the BIXI mobile app, 2023)
 
-- Appendix G: API Response From Citi Bike Enpoint: 'https://layer.bicyclesharing.net/v2/nyc/favoritestation'
+
+- Appendix F: API Response From Bixi Endpoint Trip Data 'https://layer.bicyclesharing.net/mobile/v1/mtl/rental/closed?memberId='
+```json
+{
+    "dataWarehouseAvailable": true,
+    "rentals": {
+        "REDACTED": [
+            {
+                "distanceInMeters": 367,
+                "co": 0,
+                "distanceCalculation": "AVERAGE_SPEED",
+                "ti": true,
+                "endLocation": [
+                    -73.57589408755302,
+                    45.50277615861811
+                ],
+                "startLocation": [
+                    -73.57589408755302,
+                    45.50277615861811
+                ],
+                "rentalId": "f252782e-b1b0-4420-a9f0-123c28d95621",
+                "rentalAccessMethod": "QR_CODE_MOBILE",
+                "sd": 1707421801872,
+                "ss": "McTavish / Sherbrooke",
+                "ed": 1707421912077,
+                "es": "McTavish / Sherbrooke",
+                "electricPedalAssist": false,
+                "bike": {
+                    "displayedNumber": "B03960"
+                }
+            }
+        ]
+    }
+}
+```
+
+
+- Appendix G: API Response From Citi Bike Endpoint: 'https://layer.bicyclesharing.net/v2/nyc/favoritestation'
 ```json
 {
     "ids": [
