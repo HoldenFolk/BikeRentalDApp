@@ -1,5 +1,46 @@
 # Milestone 3: Requirements and Design
 
+## System Purpose and scope
+
+
+The main purpose of bike sharing systems is to offer a key-in-hand soft-mobility solution to people looking to commute by bike in a metropolitan area. The concept relies on a few of key aspects:
+- Functional bikes
+- Affordable
+- Vast network of stations.
+- Balanced bike distribution on the network (some occupied and some free docks in each station)
+- User-friendly bike rental/return protocol
+
+
+We will aim to achieve all of this without condemning the user to give up huge chunks of his privacy, which as we saw in deliverable 1, is currently the trade-off we have to resign ourselves to as citizens.
+
+
+Of course, the first 3 aspects mentioned are beyond the scope of this project as do not aim to launch a new bike-sharing system rival to BIXI. Instead, we place ourselves in the position of developers hired by BIXI to rebuild the infrastructure of their system in compliance with the principles of privacy by design. We will hence focus on developing an account management/payment protocol that achieves effective user privacy without excessively degrading the user experience. 
+
+To summarize, the scope of our project will be limited to the following points:
+- Develop a convenient bike renting/return protocol.
+- Discourage bike theft (key to maintain affordable service)
+- Collect data on the occupation of stations (essential to keep a balanced network)
+
+
+
+## Similar Systems
+ 
+O
+
+
+## Functional requirements
+ 
+O
+
+
+## Privacy Requirements
+ 
+O
+
+
+## Stakeholders
+ 
+O
 
 ## Architectural Design Decisions and Models
  
