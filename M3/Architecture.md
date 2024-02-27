@@ -60,7 +60,17 @@ O
 
 ## Privacy Requirements
  
-O
+## Data Minimization
+    -   the personal information collected is billing info
+    -   a session id is associated to the user for a period of 24h in case a problem arises
+
+## Identification / Anonymization
+    -   it sould be impossible for anyone to identify a user looking at the trip Data
+    -   there is a risk of identification using the session id but the session id is deleted after 24h (!!) check if this makes sense
+
+## Data Retention
+    -   since no identifiers or quasi identifiers are collected on the trips then all the trip data is preserved
+    -    
 
 
 ## Stakeholders
