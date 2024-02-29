@@ -24,6 +24,7 @@ To summarize, the scope of our project will be limited to the following points:
 
 
 ## Similar Systems
+The following table shows the main differences between our Bixi implementation and some popular bike sharing companies in north america.
  
 | Feature                                            | Our Bixi     | Citi Bike NYC | Lime Bike    | Mobi Bikes   |
 |----------------------------------------------------|:------------:|:-------------:|:------------:|:------------:|
