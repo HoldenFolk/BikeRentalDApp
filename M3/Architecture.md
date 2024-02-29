@@ -113,8 +113,24 @@ In terms of legal compliance with Canadian privacy laws, our Bixi and Mobi Bikes
 
 
 ## Stakeholders
- 
-O
+In the context of our application, stakeholders are identified primarily as the users, the city, and the company. The success of our application is contingent upon the synergistic satisfaction of needs, concerns and requirements of all primary stakeholders. Below is an analysis of each stakeholder category:
+
+
+1. Users:
+The users are the direct interactors with the application. Their primary interests lie in the utility, usability, efficiency, and reliability of the software. They require a user-friendly interface, quick access to information, and assurance that their data are handled with the utmost security and privacy. The feedback from this demographic is crucial for enhancements and dictates the direction of future development efforts.
+
+
+2. The City:
+The city, representing the public sector's interests, is a key stakeholder due to its regulatory and facilitative roles. It is concerned with how the application serves the public good, complies with local regulations, promotes sustainable transportation, and integrates with the existing urban infrastructure. The city may also look at the software's impact on traffic, urban planning, and its potential to provide data to support decision-making processes.
+
+
+3. The Company:
+The company behind the application is the driving force of the system's inception, design, development, and maintenance. Its interests are multifaceted, including achieving business objectives, ensuring a return on investment, maintaining a positive brand image, and fostering customer loyalty. The company must balance profitability with corporate social responsibility and adherence to legal and ethical standards.
+
+
+Interdependency of Stakeholders:
+The users, city, and company are interdependent, with each group's satisfaction contributing to the overall value and viability of the application. User satisfaction can lead to increased adoption rates, which align with the company's commercial goals and the city's objectives for efficient urban mobility solutions. Conversely, the city's support for the application through infrastructure and policy can amplify user adoption and retention, thereby enhancing the company's market position.
+
 
 ## Architectural Design Decisions and Models
  
