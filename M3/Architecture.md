@@ -29,7 +29,7 @@ To summarize, the scope of our project will be limited to the following points:
 |----------------------------------------------------|:------------:|:-------------:|:------------:|:------------:|
 | No phone number or email needed                    | ✅           | ❌           | ❌           | ❌           |
 | No location information needed                     | ✅           | ❌           | ❌           | ❌           |
-| No sharing of personal information                 | ✅           | ❌           | ✅           | ✅           |
+| No sharing of personal information                 | ✅           | ❌           | ❌           | ❌           |
 | No information about browser, computer or mobile device collected | ✅           | ❌           | ❌           | ❌           |
 | PIPEDA compliance                                  | ✅           | ❌           | ❌           | ✅           |
 | Jurisdiction                                       | Canada       | USA          | USA (Many places in the world) | Canada         |
