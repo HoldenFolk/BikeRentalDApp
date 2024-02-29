@@ -36,6 +36,10 @@ The following table shows the main differences between our Bixi implementation a
 | Jurisdiction                                       | Canada       | USA          | USA (Many places in the world) | Canada         |
 
 
+In our comparative analysis of privacy practices among various bike-sharing services, our Bixi emerges as the most privacy-conscious operator. Unlike Citi Bike NYC, Lime Bike, and Mobi Bikes, our Bixi implementation does not require customers to provide a phone number or email address for service usage. Additionally, our Bixi implementation is unique in its commitment to not collecting location data or any personal information from its users, a significant distinction from its competitors. Furthermore, our Bixi version assures that no data regarding the users' devices or browsers is amassed, a standard of privacy not upheld by the other services examined.
+
+In terms of legal compliance with Canadian privacy laws, our Bixi and Mobi Bikes both adhere to the Personal Information Protection and Electronic Documents Act (PIPEDA), demonstrating a robust approach to user data protection within Canadian jurisdiction. In contrast, Citi Bike NYC and Lime Bike, both operating under the jurisdiction of the United States, with Lime Bike additionally functioning globally, do not assert compliance with PIPEDA, which is to be expected.
+
 ## Functional Requirements Without Subscription
  
 ### User Registration : 
