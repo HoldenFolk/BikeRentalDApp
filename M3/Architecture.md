@@ -29,7 +29,7 @@ The following table shows the main differences between our Bixi implementation a
 | Feature                                            | Our Bixi     | Citi Bike NYC | Lime Bike    | Mobi Bikes   |
 |----------------------------------------------------|:------------:|:-------------:|:------------:|:------------:|
 | No phone number or email needed                    | ✅           | ❌           | ❌           | ❌           |
-| No location information needed                     | ✅           | ❌           | ❌           | ❌           |
+| No location information collected                     | ✅           | ❌           | ❌           | ❌           |
 | No sharing of personal information                 | ✅           | ❌           | ❌           | ❌           |
 | No information about browser, computer or mobile device collected | ✅           | ❌           | ❌           | ❌           |
 | PIPEDA compliance                                  | ✅           | ❌           | ❌           | ✅           |
