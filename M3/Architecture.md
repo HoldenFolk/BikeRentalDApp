@@ -61,8 +61,7 @@ We explored two alternative solutions to address our challenge:
 
 
 ### WebApp
-- This is a round bullet point using HTML entity
--	mobile application that lets you login
+-	mobile application 
 -	asks you to enable localisation, to provide help searching for bike, but it is not mandatory
  
 ### User Registration 
