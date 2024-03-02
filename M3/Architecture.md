@@ -57,64 +57,59 @@ We explored two alternative solutions to address our challenge:
 -	The first option proposed a one-trip-only system, eliminating the need for user accounts altogether. Users could instantly engage with the app to create a smart contract with any bike without prior registration. However, we opted against this approach due to its lack of membership features, making it less cost-effective for regular users.
 -	The second approach introduced a signature-based membership system, still avoiding the need for traditional user accounts. Upon purchasing a membership via a smart contract, users were prompted to provide an electronic signature. Bixi then verified user identity by comparing the provided signature with their database. This system offered the advantage of Bixi tracking user history for up to one month, as signatures changed with each new membership. Nevertheless, we dismissed this system as it posed challenges in user-friendliness when generating individual electronic signatures.
 
-
-
-
-
-
 ## 3. Functional requirements
 
 
 ### WebApp
-	-	mobile application that lets you login
-	-	asks you to enable localisation, to provide help searching for bike, but it is not mandatory
+- This is a round bullet point using HTML entity
+-	mobile application that lets you login
+-	asks you to enable localisation, to provide help searching for bike, but it is not mandatory
  
 ### User Registration 
-    	-	users can create an account with a username and password
+-	users can create an account with a username and password
 -	users can subscribe to monthly memberships
 -	users can ask for support and rectify errors on their past trips up to 1 month 
 ### Bike 
-    	-   	bikes should be docked
-    	-   	the only way the bike can be undocked is using a smart contract
-    	-   	it should be easy to create a smart contract with a certain bike
+-   bikes should be docked
+-   the only way the bike can be undocked is using a smart contract
+-   it should be easy to create a smart contract with a certain bike
 ### Blockchain Network 
-   	-   	the blockchain ensures that Bixi does not have your wallet informations
-    	-   	it is a secure way to pay
-    	-   	we chose ethereum
+-   the blockchain ensures that Bixi does not have your wallet informations
+-   it is a secure way to pay
+-   we chose ethereum
 ### Smart Contract 
-    	-   	make the contracts detailed and not overly complicated
-    	-	make the contracts fast and easy for Users
-    	-   	make the contracts robust (what if a bike is not docked properly)
-    	-   	make contracts easily accessible to owner (see state of the trip)
-	-	the timestamp of the smart contract calculates the fees
-    	-   	log every trip with its session id
+-   make the contracts detailed and not overly complicated
+-	make the contracts fast and easy for Users
+-   make the contracts robust (what if a bike is not docked properly)
+-   make contracts easily accessible to owner (see state of the trip)
+-	the timestamp of the smart contract calculates the fees
 ### Payment
-   	 -   payment is managed by the smart contract
-    	-   there is a second policy regarding unexpected scenarios
+-   payment is managed by the smart contract
+-   there is a second policy regarding unexpected scenarios to account for smart contract unflexibility
 
 
 ## 4. Privacy Requirements
  
 ### Data Minimization
-    	-   	database only conserves encrypted username and password
-	-	Bixi does not have your real name since it does not have access to your wallet information
-	-	users don’t have to open geolocation data to use the mobile application, but they can for a better service
+-   the database only contains encrypted usernames and passwords
+-	Bixi does not have your real name since it does not have access to your wallet information
+-	users don’t have to open geolocation data to use the mobile application, but they can for a better service
 
 
 ### Identification / Anonymization
-    	-   	it should be impossible for anyone to identify a user looking at the trip Data
-	-	the best they can do is aggregate the trips you did in your past month
+-   it should be impossible for anyone to identify a user looking at the trip Data
+-	the best they can do is aggregate the trips you did in your past month
 ### Data Retention and Discolure
-
-
-    	-  	trips contain the userID for 1 month, then the userId is removed making the trip anonymized
-	-	smart contracts are permanently visible, but they don’t hold personal information
-	-	by using smart contracts, we remove the 3rd party in charge of your financial transactions, meaning one less party has your wallet informations
-	-	if Bixi had bad intentions, they could still keep your trip history
+-  	trips contain the userID for 1 month, then the userId is removed making the trip anonymized
+-	smart contracts are permanently visible, but they don’t hold personal information
+-	by using smart contracts, we remove the 3rd party in charge of your financial transactions, meaning one less party has your wallet informations
+-	if Bixi had bad intentions, they could still keep your trip history
 
 
 ### Openness
-	-	the duration for which your trip is identified is mentionned
+-	the duration for which your trip is identified is mentionned
+	
+
 	
 
 
