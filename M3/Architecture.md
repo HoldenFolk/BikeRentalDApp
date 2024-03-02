@@ -1,7 +1,10 @@
 # Milestone 3: Requirements and Design
 
 
-## System Purpose and scope
+** Authors **: Pablo Collin, Holden Folk, Antonin Roy, Andrew St-Laurent
+
+
+## 1. System Purpose and scope
 
 
 The main purpose of bike sharing systems is to offer a key-in-hand soft-mobility solution to people looking to commute by bike in a metropolitan area. The concept relies on a few of key aspects:
@@ -28,13 +31,14 @@ Discourage bike theft (key to maintain an affordable service)
 Collect data on the occupation of stations (essential to keep a balanced network)
 
 
-## Similar Systems
+## 2. Similar Systems
  The following table shows the main differences between our Bixi implementation and some popular bike sharing companies in North America.
  
 | Feature                                            | Our Bixi     | Citi Bike NYC | Lime Bike    | Mobi Bikes   |
 |----------------------------------------------------|:------------:|:-------------:|:------------:|:------------:|
 | No phone number or email needed                    | ✅           | ❌           | ❌           | ❌           |
 | No sharing of personal information                 | ✅           | ❌           | ❌           | ❌           |
+| No wallet information collected| ✅           | ❌           | ❌           | ❌           |
 | No information about browser, computer or mobile device collected | ✅           | ❌           | ❌           | ❌           |
 | PIPEDA and law 25 compliance                                  | ✅           | ❌           | ❌           | ✅           |
 | Jurisdiction                                       | Canada       | USA          | USA (Many places in the world) | Canada         |
@@ -42,13 +46,13 @@ Collect data on the occupation of stations (essential to keep a balanced network
 
 
 
-In our comparative analysis of privacy practices among various bike-sharing services, our Bixi emerges as the most privacy-conscious operator. Unlike Citi Bike NYC, Lime Bike, and Mobi Bikes, our Bixi implementation does not require customers to provide a phone number or email address for service usage. Additionally, our Bixi implementation is unique in its commitment to not collecting any personal information from its users, a significant distinction from its competitors. Furthermore, our Bixi version assures that no data regarding the users' devices or browsers is amassed, a standard of privacy not upheld by the other services examined.
+In our comparative analysis of privacy practices among various bike-sharing services, our Bixi emerges as the most privacy-conscious operator. Unlike Citi Bike NYC[^1], Lime Bike[^2], and Mobi Bikes[^3], our Bixi implementation does not require customers to provide a phone number or email address for service usage. Additionally, our Bixi implementation is unique in its commitment to not collecting any personal information from its users, a significant distinction from its competitors. Furthermore, our Bixi version assures that no data regarding the users' devices or browsers is amassed, a standard of privacy not upheld by the other services examined.
 
 
 In terms of legal compliance with Canadian and Quebecois privacy laws, our Bixi and Mobi Bikes both adhere to the Personal Information Protection and Electronic Documents Act (PIPEDA) as well as to Quebec’s law 25., demonstrating a robust approach to user data protection within Canadian jurisdiction. In contrast, Citi Bike NYC and Lime Bike, both operating under the jurisdiction of the United States, with Lime Bike additionally functioning globally, do not assert compliance with PIPEDA, which is to be expected.
 
 
-## Different Approaches
+### Different Approaches
 We explored two alternative solutions to address our challenge:
 -	The first option proposed a one-trip-only system, eliminating the need for user accounts altogether. Users could instantly engage with the app to create a smart contract with any bike without prior registration. However, we opted against this approach due to its lack of membership features, making it less cost-effective for regular users.
 -	The second approach introduced a signature-based membership system, still avoiding the need for traditional user accounts. Upon purchasing a membership via a smart contract, users were prompted to provide an electronic signature. Bixi then verified user identity by comparing the provided signature with their database. This system offered the advantage of Bixi tracking user history for up to one month, as signatures changed with each new membership. Nevertheless, we dismissed this system as it posed challenges in user-friendliness when generating individual electronic signatures.
@@ -58,26 +62,26 @@ We explored two alternative solutions to address our challenge:
 
 
 
-## Functional requirements
+## 3. Functional requirements
 
 
 ### WebApp
 	-	mobile application that lets you login
 	-	asks you to enable localisation, to provide help searching for bike, but it is not mandatory
  
-### User Registration :
+### User Registration 
     	-	users can create an account with a username and password
 -	users can subscribe to monthly memberships
 -	users can ask for support and rectify errors on their past trips up to 1 month 
-### Bike
+### Bike 
     	-   	bikes should be docked
     	-   	the only way the bike can be undocked is using a smart contract
     	-   	it should be easy to create a smart contract with a certain bike
-### Blockchain Network
+### Blockchain Network 
    	-   	the blockchain ensures that Bixi does not have your wallet informations
     	-   	it is a secure way to pay
     	-   	we chose ethereum
-### Smart Contract
+### Smart Contract 
     	-   	make the contracts detailed and not overly complicated
     	-	make the contracts fast and easy for Users
     	-   	make the contracts robust (what if a bike is not docked properly)
@@ -89,7 +93,7 @@ We explored two alternative solutions to address our challenge:
     	-   there is a second policy regarding unexpected scenarios
 
 
-## Privacy Requirements
+## 4. Privacy Requirements
  
 ### Data Minimization
     	-   	database only conserves encrypted username and password
@@ -118,7 +122,7 @@ We explored two alternative solutions to address our challenge:
 
 
 
-## Stakeholders
+## 5. Stakeholders
  
 In the context of our application, stakeholders are identified primarily as the users, the city, and the company. The success of our application is contingent upon the synergistic satisfaction of needs, concerns and requirements of all primary stakeholders. Below is an analysis of each stakeholder category:
 
@@ -139,16 +143,14 @@ Interdependency of Stakeholders:
 The users, city, and company are interdependent, with each group's satisfaction contributing to the overall value and viability of the application. User satisfaction can lead to increased adoption rates, which align with the company's commercial goals and the city's objectives for efficient urban mobility solutions. Conversely, the city's support for the application through infrastructure and policy can amplify user adoption and retention, thereby enhancing the company's market position.
 
 
-## Architectural Design Decisions and Models
+## 6. Architectural Design Decisions and Models
  
 Our design is a new bike-sharing platform that respects the principles of privacy by design. We will build an application that provides complete anonymity to the user. This application, running on a decentralized blockchain network, will not require any personal identifiers to use at the sacrifice of some minor features.
  
 Represented below is the UML class diagram that describes the structure of the application.
 
 
-
-
-
+![](./images/UMLDiagram.png)
  
 
 
@@ -160,27 +162,26 @@ Furthermore, the application will utilize a smart contract to ensure that late/m
 The user must link an Ethereum wallet to make payments within the application. To facilitate this, we will connect MetaMask with the application to create and ensure proper transactions. 
 
 
-## Important scenarios
+## 7. Important scenarios
 
 
 The main scenario that the application will facilitate will be the one-time rental of a bike. We will prompt users to link their Ethereum wallet to their pre-existing account. Next, the user will choose a bike and initiate a smart contract with that specific bike. The appropriate amount is deducted from the user's wallet to start the bike trip. Once the user returns the bike to a station, a response is sent to the smart contract, and the trip terminates. Most of the Ethereum held in the smart contract returns to the user's wallet upon trip completion. 
 Here is a sequence diagram representing the process
 
 
-
+![](.images/SequenceDiagram.png)
 
 
 The application will also include account creation and subscription management. Users will have to create an account using a unique username and password. This account will store no personal information other than an optional email for potential password recovery. The account will save information like trip history and subscription status for user convenience. Even though trip history is stored, no personal information linking users to their trips will be accessible to the application. 
 
 
 One key application element will be retrieving late and lost bike fees. The application will use a smart contract to retrieve these fees. This contract will withhold a certain amount of currency as collateral until the user terminates the trip by returning their bike. The lost bike fee is only refunded if the trip is terminated after a specific time frame. The fee collection is a limitation on the user as they must pay it before every rental. 
- 
 
 
-## Sources 
-https://www.lyft.com/privacy
-https://www.li.me/en-co/legal/privacy-policy
-https://www.mobibikes.ca/en/privacy-policy#:~:text=We%20do%20not%20use%20or,to%20be%20used%20and%20disclosed. 
+## Bibliography
+[^1] https://www.lyft.com/privacy
+[^2] https://www.li.me/en-co/legal/privacy-policy
+[^3] https://www.mobibikes.ca/en/privacy-policy#:~:text=We%20do%20not%20use%20or,to%20be%20used%20and%20disclosed. 
 
 
 
