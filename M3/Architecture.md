@@ -144,7 +144,7 @@ Our design is a new bike-sharing platform that respects the principles of privac
 Represented below is the UML class diagram that describes the structure of the application.
 
 
-![](./Images/UMLDiagram.png)
+![](../Images/UMLDiagram.png)
  
 
 
@@ -162,7 +162,7 @@ The user must link an Ethereum wallet to make payments within the application. T
 The main scenario that the application will facilitate will be the one-time rental of a bike. We will prompt users to link their Ethereum wallet to their pre-existing account. Next, the user will choose a bike and initiate a smart contract with that specific bike. The appropriate amount is deducted from the user's wallet to start the bike trip. Once the user returns the bike to a station, a response is sent to the smart contract, and the trip terminates. Most of the Ethereum held in the smart contract returns to the user's wallet upon trip completion. 
 Here is a sequence diagram representing the process
 
-![](.Images/SequenceDiagram.png)
+![](../Images/SequenceDiagram.png)
 
 The application will also include account creation and subscription management. Users will have to create an account using a unique username and password. This account will store no personal information other than an optional email for potential password recovery. The account will save information like trip history and subscription status for user convenience. Even though trip history is stored, no personal information linking users to their trips will be accessible to the application. 
 
