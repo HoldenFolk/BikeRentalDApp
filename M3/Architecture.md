@@ -155,6 +155,8 @@ The application will also include account creation and subscription management. 
 
 Another key application element will be retrieving late and lost bike fees. The application will use a smart contract to retrieve these fees. This contract will withhold a certain amount of currency as collateral until the user terminates the trip by returning their bike. The lost bike fee is only refunded if the trip is terminated after a specific time frame. The fee collection is a limitation on the user as they must pay it before every rental. 
 
+![](https://cdn.discordapp.com/attachments/1202351672194773062/1213284458472407050/UMLDiagram.JPG?ex=65f4ea34&is=65e27534&hm=e562ccad0fefa9f08c85a54fb40e24a236b06c62464799ade0546493c8aaacbc&)
+
 
 
 
