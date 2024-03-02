@@ -46,7 +46,7 @@ Collect data on the occupation of stations (essential to keep a balanced network
 
 
 
-In our comparative analysis of privacy practices among various bike-sharing services, our Bixi emerges as the most privacy-conscious operator. Unlike Citi Bike NYC[^1], Lime Bike[^2], and Mobi Bikes[^3], our Bixi implementation does not require customers to provide a phone number or email address for service usage. Additionally, our Bixi implementation is unique in its commitment to not collecting any personal information from its users, a significant distinction from its competitors. Furthermore, our Bixi version assures that no data regarding the users' devices or browsers is amassed, a standard of privacy not upheld by the other services examined.
+In our comparative analysis of privacy practices among various bike-sharing services, our Bixi emerges as the most privacy-conscious operator. Unlike Citi Bike NYC([^1]), Lime Bike([^2]), and Mobi Bikes([^3]), our Bixi implementation does not require customers to provide a phone number or email address for service usage. Additionally, our Bixi implementation is unique in its commitment to not collecting any personal information from its users, a significant distinction from its competitors. Furthermore, our Bixi version assures that no data regarding the users' devices or browsers is amassed, a standard of privacy not upheld by the other services examined.
 
 
 In terms of legal compliance with Canadian and Quebecois privacy laws, our Bixi and Mobi Bikes both adhere to the Personal Information Protection and Electronic Documents Act (PIPEDA) as well as to Quebec’s law 25., demonstrating a robust approach to user data protection within Canadian jurisdiction. In contrast, Citi Bike NYC and Lime Bike, both operating under the jurisdiction of the United States, with Lime Bike additionally functioning globally, do not assert compliance with PIPEDA, which is to be expected.
@@ -150,7 +150,7 @@ Our design is a new bike-sharing platform that respects the principles of privac
 Represented below is the UML class diagram that describes the structure of the application.
 
 
-![](./images/UMLDiagram.png)
+![](./Images/UMLDiagram.png)
  
 
 
@@ -168,9 +168,7 @@ The user must link an Ethereum wallet to make payments within the application. T
 The main scenario that the application will facilitate will be the one-time rental of a bike. We will prompt users to link their Ethereum wallet to their pre-existing account. Next, the user will choose a bike and initiate a smart contract with that specific bike. The appropriate amount is deducted from the user's wallet to start the bike trip. Once the user returns the bike to a station, a response is sent to the smart contract, and the trip terminates. Most of the Ethereum held in the smart contract returns to the user's wallet upon trip completion. 
 Here is a sequence diagram representing the process
 
-
-![](.images/SequenceDiagram.png)
-
+![](.Images/SequenceDiagram.png)
 
 The application will also include account creation and subscription management. Users will have to create an account using a unique username and password. This account will store no personal information other than an optional email for potential password recovery. The account will save information like trip history and subscription status for user convenience. Even though trip history is stored, no personal information linking users to their trips will be accessible to the application. 
 
@@ -179,9 +177,10 @@ One key application element will be retrieving late and lost bike fees. The appl
 
 
 ## Bibliography
-[^1] https://www.lyft.com/privacy
-[^2] https://www.li.me/en-co/legal/privacy-policy
-[^3] https://www.mobibikes.ca/en/privacy-policy#:~:text=We%20do%20not%20use%20or,to%20be%20used%20and%20disclosed. 
+
+([^1]: https://www.lyft.com/privacy)
+([^2]: https://www.li.me/en-co/legal/privacy-policy)
+([^3]: https://www.mobibikes.ca/en/privacy-policy#:~:text=We%20do%20not%20use%20or,to%20be%20used%20and%20disclosed) 
 
 
 
