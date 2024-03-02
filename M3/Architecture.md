@@ -18,7 +18,7 @@ User-friendly bike rental/return protocol
 We will aim to achieve all of this without condemning the user to give up unnecessary personal data, which as we saw in deliverable 1, is currently the trade-off we have to resign ourselves to as citizens.
 
 
-Of course, the first 3 aspects mentioned are beyond the scope of this project as we will not aim to launch a new bike-sharing system rival to BIXI. Instead, we place ourselves in the position of developers hired by BIXI to rebuild the infrastructure of their system in compliance with the principles of privacy by design. We will hence focus on developing an account management/payment protocol that achieves effective user privacy without excessively degrading the user experience. 
+Of course, the first three aspects mentioned are beyond the scope of this project as we will not aim to launch a new bike-sharing system rival to BIXI. Instead, we place ourselves in the position of developers hired by BIXI to rebuild the infrastructure of their system in compliance with the principles of privacy by design. We will hence focus on developing an account management/payment protocol that achieves effective user privacy without excessively degrading the user experience. 
 
 
 
