@@ -97,16 +97,16 @@ We explored two alternative solutions to address our challenge:
 
 ### Identification / Anonymization
 -   it should be impossible for anyone to identify a user looking at the trip Data
--	the best they can do is aggregate the trips you did in your past month
+-	the best they can do is aggregate the trips you did in the past month
 ### Data Retention and Discolure
 -  	trips contain the userID for 1 month, then the userId is removed making the trip anonymized
 -	smart contracts are permanently visible, but they don’t hold personal information
--	by using smart contracts, we remove the 3rd party in charge of your financial transactions, meaning one less party has your wallet informations
+-	by using smart contracts, we remove the 3rd party in charge of your financial transactions, meaning one less party has your wallet information
 -	if Bixi had bad intentions, they could still keep your trip history
 
 
 ### Openness
--	the duration for which your trip is identified is mentionned
+-	the duration for which your trip is identified is quantified
 	
 
 	
