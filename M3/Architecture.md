@@ -54,7 +54,7 @@ In terms of legal compliance with Canadian and Quebecois privacy laws, our Bixi 
 
 ### Different Approaches
 We explored two alternative solutions to address our challenge:
--	The first option proposed a one-trip-only system, eliminating the need for user accounts altogether. Users could instantly engage with the app to create a smart contract with any bike without prior registration. However, we opted against this approach due to its lack of membership features, making it less cost-effective for regular users.
+-	The first option proposed a one-trip-only system, eliminating the need for user accounts altogether. Users could instantly engage with the app to create a smart contract with any bike without prior registration. The absence of user accounts was the strength but also the weakness of this option. Indeed, it makes monthly or annual memberships impossible. It also removes the possibility for the user to file any complaints about a past trip (unsuccessful docking or mistake in the billing for example).
 -	The second approach introduced a signature-based membership system, still avoiding the need for traditional user accounts. Upon purchasing a membership via a smart contract, users were prompted to provide an electronic signature. Bixi then verified user identity by comparing the provided signature with their database. This system offered the advantage of Bixi tracking user history for up to one month, as signatures changed with each new membership. Nevertheless, we dismissed this system as it posed challenges in user-friendliness when generating individual electronic signatures.
 
 ## 3. Functional requirements
@@ -159,8 +159,9 @@ The user must link an Ethereum wallet to make payments within the application. T
 ## 7. Important scenarios
 
 
-The main scenario that the application will facilitate will be the one-time rental of a bike. We will prompt users to link their Ethereum wallet to their pre-existing account. Next, the user will choose a bike and initiate a smart contract with that specific bike. The appropriate amount is deducted from the user's wallet to start the bike trip. Once the user returns the bike to a station, a response is sent to the smart contract, and the trip terminates. Most of the Ethereum held in the smart contract returns to the user's wallet upon trip completion. 
-Here is a sequence diagram representing the process
+The main scenario facilitated by the application is the rental of a bike. We will prompt users to link their Ethereum wallet to their pre-existing account. Next, the user will choose a bike and initiate a smart contract with that specific bike. The appropriate amount is deducted from the user's wallet to start the bike trip. Once the user returns the bike to a station, a response is sent to the smart contract, and the trip terminates. The smart contract then transfers the final trip fee to BIXI and returns the leftover amount from the initial deposit to the user’s Ethereum wallet. 
+
+Here is a sequence diagram representing the process:
 
 ![](https://cdn.discordapp.com/attachments/1202351672194773062/1213294331948044288/SequenceDiagram.png?ex=65f4f366&is=65e27e66&hm=de448f9d2027598e62c372b5761fad1dc499574bf47d8a5128c48de314dfbe0b&)
 
