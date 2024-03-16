@@ -40,6 +40,7 @@ Testing a commit
 
 ### using privacy coins
 ***+*** users arte not unlinkable on the blockchain, i.e there trip history cannot be retrieved
+- https://www.chainalysis.com/blog/privacy-coins-anonymity-enhanced-cryptocurrencies/
 
 ### alternative involving revocable privacy potential strategy
 <ol>
