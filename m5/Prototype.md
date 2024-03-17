@@ -6,6 +6,25 @@ Testing a commit
 
 # blockchain
 
+### can we justify the decision of using the blockchain instead of the traditional payement method
+
+***Pros/Cons***
+
+<p>
+
+***+*** Bixi does not have access to your real name (the name on your card), as soon as you make a transaction using a debit or credit card the company automatically has access to the name on the card thus your REAL name since normally the bank verifies that this name is trully yours <br>
+***+*** since we are using privacy coins, the user's transaction history is hidden, compared to lets say visa seing you make 10 bixi payment/week<br>
+***-*** less user-friendly <br>
+***To explore 1*** different kind of wallet which should we use? keeping in mind that this is not a crypto service, but a bike rental service <br>
+<ul>
+  <li>what are the security risks?</li>
+  <li>what are the privacy threats?</li>
+  <li>how practical is it really (performance: speed,complexity)?</li>
+  </ul>
+</p>
+
+
+
 ### so far, we plan on using smart contracts the following way 
 <ol>
   <li>SmartContract(deposit, bikeid) 
