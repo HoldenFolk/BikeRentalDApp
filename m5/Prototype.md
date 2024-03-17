@@ -128,6 +128,9 @@ beforehand, user ask the governement using its private key or SIN a copy of its 
 
 ### current situation : how can the smart contract receive encrypted data, reencrypt it without Bixi knowing how to decrypt it until the contract is broken ?
 
+- possible solution : https://www.coinbureau.com/review/secret-network-scrt/
+- it is said that input and output are encrypted -> encrypted to who, is it robust?
+
 
 
 
