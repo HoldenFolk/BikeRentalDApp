@@ -17,9 +17,10 @@ Testing a commit
 ***-*** less user-friendly <br>
 ***To explore 1*** different kind of wallet which should we use? keeping in mind that this is not a crypto service, but a bike rental service <br>
 <ul>
-  <li>what are the security risks?</li>
-  <li>what are the privacy threats?</li>
-  <li>how practical is it really (performance: speed,complexity)?</li>
+  <li>what are the security risks? A: </li>
+  <li>what are the privacy threats? A: </li>
+  <li>how practical is it really (performance: speed,complexity)? A: </li>
+  <li>how to keep currency stable? A: use Stablecoins</li>
   </ul>
 </p>
 
