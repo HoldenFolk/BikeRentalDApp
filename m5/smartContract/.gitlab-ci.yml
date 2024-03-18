@@ -15,10 +15,11 @@ before_script:
 # Deployment job
 deploy-contract:
   stage: deploy
-  image: docker:latest
+  image: docker:19.03.12
   services:
     - docker:dind
   script:
+    - cd m5/smartContract/
     - docker build -t hardhat-project .
     - docker run --rm hardhat-project npx hardhat run scripts/deploy.js --network sepolia
   only:
