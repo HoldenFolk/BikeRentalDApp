@@ -21,6 +21,8 @@ deploy-contract:
   script:
     - cd m5/smartContract/
     - docker build -t hardhat-project .
+    - echo "API URL  $API_URL"
+    - echo "PRIVATE KEY $PRIVATE_WALLET_KEY"
     - docker run --rm hardhat-project npx hardhat run scripts/deploy.js --network sepolia
   only:
     - main
