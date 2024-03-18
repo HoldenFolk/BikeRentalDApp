@@ -19,9 +19,7 @@ deploy-contract:
   services:
     - docker:dind
   script:
-    - ls
     - cd m5/smartContract/
-    - ls
     - docker build -t hardhat-project .
     - docker run --rm hardhat-project npx hardhat run scripts/deploy.js --network sepolia
   only:
