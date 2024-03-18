@@ -1,7 +1,7 @@
 /** @type import('hardhat/config').HardhatUserConfig */
 
-import "@nomiclabs/hardhat-ethers";
-import settings from './settings.js'
+const { ethers } = require("@nomiclabs/hardhat-ethers");
+const settings = require('./settings.js');
 
 const {API_KEY, PRIVATE_WALLET_KEY} = settings; 
 
