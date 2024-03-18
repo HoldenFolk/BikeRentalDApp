@@ -1,2 +1,25 @@
+stages:
+  - deploy
+
+image: docker:19.03.12
+
+services:
+  - docker:dind
+
 variables:
-  TEST_VARIABLE : "A global variable"
+  DOCKER_DRIVER: overlay2
+
+before_script:
+  - docker info
+
+# Deployment job
+deploy-contract:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t hardhat-project .
+    - docker run --rm hardhat-project npx hardhat run scripts/deploy.js --network sepolia
+  only:
+    - main
