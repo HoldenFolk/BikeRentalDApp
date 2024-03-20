@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity 0.8.24;
+
+import "hardhat/console.sol";
 
 contract BikeRental {
     struct Bike {
@@ -13,15 +15,22 @@ contract BikeRental {
     address payable owner;
     mapping(uint256 => Bike) public bikes;
     uint256 public totalBikes;
+    uint256 public deposit;
 
     event BikeRented(uint256 bikeId, address renter, uint256 startTime);
     event BikeReturned(uint256 bikeId, address renter, uint256 amountRefunded);
 
     constructor() {
         owner = payable(msg.sender);
+        deposit = 1000000;
     }
 
-    function registerBike(uint256 pricePerHour) external {
+    function getOwner() external view returns (address) {
+        require(msg.sender == owner, "Only the owner can see their address.");
+        return owner;
+    }
+
+    function registerBike(uint256 pricePerHour) public {
         require(msg.sender == owner, "Only the owner can register a bike.");
         uint256 bikeId = totalBikes++;
         bikes[bikeId] = Bike(true, pricePerHour, address(0), 0, 0);
@@ -69,6 +78,4 @@ contract BikeRental {
 
         emit BikeReturned(bikeId, msg.sender, refundAmount);
     }
-
-    // Additional functions such as extending rental, handling disputes, etc., can be added as needed
 }

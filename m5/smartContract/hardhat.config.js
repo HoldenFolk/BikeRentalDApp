@@ -8,6 +8,9 @@ const {API_KEY, PRIVATE_WALLET_KEY} = settings;
 module.exports = {
   solidity: "0.8.24",
   defaultNetwork: "sepolia",
+  mocha: {
+    timeout: 100000000,
+  },
   networks: {
     hardhat: {},
     sepolia: {

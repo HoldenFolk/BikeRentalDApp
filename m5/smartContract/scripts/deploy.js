@@ -1,8 +1,8 @@
 async function main() {
 
-    const HelloWorld = await ethers.getContractFactory("HelloWorld");
-    const hello_world = await HelloWorld.deploy("Hello World");
-    console.log("Contract Deployed to address: ", hello_world.address);
+    const BikeRental = await ethers.getContractFactory("BikeRental");
+    const bike_rental = await BikeRental.deploy();
+    console.log("Contract Deployed to address: ", bike_rental.address);
 }
 
 main()
