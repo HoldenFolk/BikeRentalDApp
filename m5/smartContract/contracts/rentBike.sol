@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.24;
 
-import "hardhat/console.sol";
-
 contract BikeRental {
     struct Bike {
         bool isAvailable;
@@ -39,7 +37,10 @@ contract BikeRental {
     function rentBike(uint256 bikeId) external payable {
         Bike storage bike = bikes[bikeId];
         require(bike.isAvailable, "Bike is currently rented.");
-        require(msg.value >= bike.pricePerHour, "Deposit must cover at least one hour.");
+        require(
+            msg.value >= bike.pricePerHour,
+            "Deposit must cover at least one hour."
+        );
 
         bike.isAvailable = false;
         bike.currentRenter = msg.sender;
@@ -52,7 +53,10 @@ contract BikeRental {
     function returnBike(uint256 bikeId) external {
         Bike storage bike = bikes[bikeId];
         require(!bike.isAvailable, "Bike is not rented.");
-        require(bike.currentRenter == msg.sender, "Caller is not the current renter.");
+        require(
+            bike.currentRenter == msg.sender,
+            "Caller is not the current renter."
+        );
 
         uint256 rentalDuration = block.timestamp - bike.rentalStartTime;
         uint256 rentalHours = rentalDuration / 3600;
@@ -60,7 +64,10 @@ contract BikeRental {
             rentalHours += 1; // Round up to the next hour
         }
         uint256 rentalCost = rentalHours * bike.pricePerHour;
-        require(bike.depositAmount >= rentalCost, "Rental cost exceeds deposit.");
+        require(
+            bike.depositAmount >= rentalCost,
+            "Rental cost exceeds deposit."
+        );
 
         uint256 refundAmount = bike.depositAmount - rentalCost;
 
