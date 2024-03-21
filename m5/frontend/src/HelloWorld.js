@@ -22,6 +22,7 @@ useEffect(() => {
     async function fetchMessage() {
       const message = await loadCurrentMessage();
       setMessage(message);
+      console.log("Message: ", message);
     }
     fetchMessage();
   }, []);
