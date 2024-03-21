@@ -20,9 +20,11 @@ const HelloWorld = () => {
 //called only once
 useEffect(() => {
     async function fetchMessage() {
-      const message = await loadCurrentMessage();
-      setMessage(message);
-      console.log("Message: ", message);
+        if(message === "No connection to the network.") {
+            const message = await loadCurrentMessage();
+            setMessage(message);
+            console.log("Message: ", message);
+        }
     }
     fetchMessage();
   }, []);

@@ -35,21 +35,39 @@ export const deployHelloWorldContract = async () => {
     // Create a wallet with the private key
     const signer = new ethers.Wallet(process.env.REACT_APP_PRIVATE_WALLET_KEY, provider);
 
+    const balance = await provider.getBalance(signer.address);
+    console.log("Balance: ", ethers.formatEther(balance), "ETH");
+
     // Get the contract factory
-    const HelloWorldFactory = new ethers.ContractFactory(contractABI, process.env.REACT_APP_BYTE_CODE, signer);
+    helloWorldContract = new ethers.ContractFactory(contractABI, process.env.REACT_APP_BYTE_CODE, signer);
 
-    // Deploy the contract
-    const contractInstance = await HelloWorldFactory.deploy("Test Message");
+    console.log("Deploying contract: ", helloWorldContract);
+    const contract = await helloWorldContract.deploy("Hello World");
+    await contract.deployed();
 
-    // Wait for the contract to be deployed
-    await contractInstance.deployed();
+    console.log("message: ", contract.message());
 
-    // Get the deployed contract address
-    // const contractAddress = contractInstance.address;
+    // // Deploy the contract
+    // const transaction = await HelloWorldFactory.getDeployTransaction("test message", {
+    //     value: 0,
+    //     gasLimit: 3000000,
+    //     gasPrice: ethers.parseEther("0.1"),
+    // });
 
-    console.log("Contract deployed instance", contractInstance);
 
-    return contractInstance;
+    // console.log("Deploy transaction: ", transaction);
+
+    // const gasEstimate = await signer.estimateGas(transaction);
+
+    // console.log("Gas estimate: ", gasEstimate);
+
+    // // Wait for the transaction to be mined
+    // const txReceipt = await signer.sendTransaction(transaction);
+    // console.log("Transaction receipt: ", txReceipt);
+
+    // console.log("Contract deployed instance", HelloWorldFactory);
+
+    return;
 }
 
 // export const helloWorldContract = new web3.eth.Contract(
@@ -62,9 +80,9 @@ export const loadCurrentMessage = async () => {
         await deployHelloWorldContract();
     }
     // log current contrract address
-    console.log("Contract Address: ", helloWorldContract.address);
-    const message = await helloWorldContract.message();
-    return message;
+    // console.log("Contract Address: ", helloWorldContract);
+    // const message = await helloWorldContract.message();
+    return "message";
 };
 
 
