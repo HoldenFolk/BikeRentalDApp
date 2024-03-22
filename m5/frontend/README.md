@@ -10,6 +10,10 @@ In the project directory, you can run:
 
 ### go into webpack.config
 
+new webpack.ProvidePlugin({
+process: 'process/browser',
+}),
+
 - add this fallback: {
   "os": false,
   "crypto": false,

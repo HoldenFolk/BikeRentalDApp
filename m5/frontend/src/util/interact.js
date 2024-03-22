@@ -35,31 +35,32 @@ export const getHelloWorldContract = async () => {
 };
 
 // note to make it work -> have money in your wallet
-export const deployHelloWorldContract = async () => {
-  // Create an ethers provider
-  const provider = new ethers.JsonRpcProvider(
-    process.env.REACT_APP_SEPHOLIA_ENDPOINT
-  );
+async function deployHelloWorldContract() {
+    // Create an ethers provider
+    const provider = new ethers.JsonRpcProvider(
+        process.env.REACT_APP_SEPHOLIA_ENDPOINT
+    );
 
-  // Create a wallet with the private key
-  const signer = new ethers.Wallet(
-    process.env.REACT_APP_PRIVATE_WALLET_KEY,
-    provider
-  );
+    // Create a wallet with the private key
+    const signer = new ethers.Wallet(
+        process.env.REACT_APP_PRIVATE_WALLET_KEY,
+        provider
+    );
 
-  const balance = await provider.getBalance(signer.address);
-  console.log("Balance: ", ethers.formatEther(balance), "ETH");
+    const balance = await provider.getBalance(signer.address);
+    console.log("Balance: ", ethers.formatEther(balance), "ETH");
 
     // Get the contract factory
     helloWorldContract = await new ethers.ContractFactory(contractABI, process.env.REACT_APP_BYTE_CODE, signer);
 
     console.log("Deploying contract: ", helloWorldContract);
     const contract = await helloWorldContract.deploy("Hello World");
-    await contract.deployed();
+
+    // contract.deployed(); : error not a function
 
     console.log("Contract deployed: ", contract);
 
-  console.log("message: ", contract.message());
+    // console.log("message: ", contract.message());
 
   // // Deploy the contract
   // const transaction = await HelloWorldFactory.getDeployTransaction("test message", {
