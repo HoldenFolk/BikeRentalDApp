@@ -39,11 +39,13 @@ export const deployHelloWorldContract = async () => {
     console.log("Balance: ", ethers.formatEther(balance), "ETH");
 
     // Get the contract factory
-    helloWorldContract = new ethers.ContractFactory(contractABI, process.env.REACT_APP_BYTE_CODE, signer);
+    helloWorldContract = await new ethers.ContractFactory(contractABI, process.env.REACT_APP_BYTE_CODE, signer);
 
     console.log("Deploying contract: ", helloWorldContract);
     const contract = await helloWorldContract.deploy("Hello World");
     await contract.deployed();
+
+    console.log("Contract deployed: ", contract);
 
     console.log("message: ", contract.message());
 
