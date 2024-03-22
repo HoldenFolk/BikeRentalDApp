@@ -8,19 +8,9 @@ In the project directory, you can run:
 
 ### `npm start`
 
-### go into webpack.config
+### copy webpack.config in node_modules
 
-new webpack.ProvidePlugin({
-process: 'process/browser',
-}),
-
-- add this fallback: {
-  "os": false,
-  "crypto": false,
-  "http": false,
-  "https": false,
-  "zlib": false
-  },
+### get bytecode from sc/artifacts/contracts/hello.sol/.json -> column bytecode
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
