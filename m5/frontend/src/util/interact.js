@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 require("dotenv").config();
-const contractABI = require("../contract-abi.json");
+const contractABI = require("../bike-contract-abi.json");
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
@@ -38,7 +38,7 @@ export const getHelloWorldContract = async () => {
 async function deployHelloWorldContract() {
     // Create an ethers provider
     const provider = new ethers.JsonRpcProvider(
-        process.env.REACT_APP_SEPHOLIA_ENDPOINT
+        process.env.REACT_APP_SEPHOLIA_ENDPOINT_BIKE
     );
 
     // Create a wallet with the private key
@@ -51,16 +51,12 @@ async function deployHelloWorldContract() {
     console.log("Balance: ", ethers.formatEther(balance), "ETH");
 
     // Get the contract factory
-    helloWorldContract = await new ethers.ContractFactory(contractABI, process.env.REACT_APP_BYTE_CODE, signer);
+    let contract = await new ethers.ContractFactory(contractABI, process.env.REACT_APP_BYTE_CODE_BIKE, signer);
 
-    console.log("Deploying contract: ", helloWorldContract);
-    const contract = await helloWorldContract.deploy("Hello World");
+    console.log("Deploying contract: ", contract);
+    const result = await contract.deploy();
 
     // contract.deployed(); : error not a function
-
-    console.log("Contract deployed: ", contract);
-
-    // console.log("message: ", contract.message());
 
   // // Deploy the contract
   // const transaction = await HelloWorldFactory.getDeployTransaction("test message", {

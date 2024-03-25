@@ -8,7 +8,7 @@ In the project directory, you can run:
 
 ### `npm start`
 
-### copy webpack.config in node_modules
+### copy webpack.config in node_modules in react-scripts
 
 ### get bytecode from sc/artifacts/contracts/hello.sol/.json -> column bytecode
 
