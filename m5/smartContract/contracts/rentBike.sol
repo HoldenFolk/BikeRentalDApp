@@ -34,7 +34,7 @@ contract BikeRental {
         bikes[bikeId] = Bike(true, pricePerHour, address(0), 0, 0);
     }
 
-    function rentBike(uint256 bikeId, bytes32 personalData) external payable {
+    function rentBike(uint256 bikeId) external payable {
         Bike storage bike = bikes[bikeId];
         require(bike.isAvailable, "Bike is currently rented.");
         require(
