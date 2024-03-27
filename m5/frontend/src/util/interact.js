@@ -1,10 +1,10 @@
 import { ethers } from "ethers";
 require("dotenv").config();
-const contractABI = require("../bike-contract-abi.json");
-const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3(alchemyKey);
-const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+const contractABI = require("../contract-abi.json");
+//const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
+//const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+//const web3 = createAlchemyWeb3(alchemyKey);
+const contractAddress = require("../contract-address.json");
 
 let helloWorldContract;
 
@@ -35,50 +35,54 @@ export const getHelloWorldContract = async () => {
 };
 
 // note to make it work -> have money in your wallet
-async function deployHelloWorldContract() {
-    // Create an ethers provider
-    const provider = new ethers.JsonRpcProvider(
-        process.env.REACT_APP_SEPHOLIA_ENDPOINT_BIKE
-    );
+// async function deployHelloWorldContract() {
+//   // Create an ethers provider
+//   const provider = new ethers.JsonRpcProvider(
+//     process.env.REACT_APP_SEPHOLIA_ENDPOINT
+//   );
 
-    // Create a wallet with the private key
-    const signer = new ethers.Wallet(
-        process.env.REACT_APP_PRIVATE_WALLET_KEY,
-        provider
-    );
+//   // Create a wallet with the private key
+//   const signer = new ethers.Wallet(
+//     process.env.REACT_APP_PRIVATE_WALLET_KEY,
+//     provider
+//   );
 
-    const balance = await provider.getBalance(signer.address);
-    console.log("Balance: ", ethers.formatEther(balance), "ETH");
+//   const balance = await provider.getBalance(signer.address);
+//   console.log("Balance: ", ethers.formatEther(balance), "ETH");
 
-    // Get the contract factory
-    let contract = await new ethers.ContractFactory(contractABI, process.env.REACT_APP_BYTE_CODE_BIKE, signer);
+//   // Get the contract factory
+//   let contract = await new ethers.ContractFactory(
+//     contractABI,
+//     process.env.REACT_APP_BYTE_CODE,
+//     signer
+//   );
 
-    console.log("Deploying contract: ", contract);
-    const result = await contract.deploy();
+//   console.log("Deploying contract: ", contract);
+//   const result = await contract.deploy("Hello Andrew");
 
-    // contract.deployed(); : error not a function
+//   // contract.deployed(); : error not a function
 
-  // // Deploy the contract
-  // const transaction = await HelloWorldFactory.getDeployTransaction("test message", {
-  //     value: 0,
-  //     gasLimit: 3000000,
-  //     gasPrice: ethers.parseEther("0.1"),
-  // });
+//   // // Deploy the contract
+//   // const transaction = await HelloWorldFactory.getDeployTransaction("test message", {
+//   //     value: 0,
+//   //     gasLimit: 3000000,
+//   //     gasPrice: ethers.parseEther("0.1"),
+//   // });
 
-  // console.log("Deploy transaction: ", transaction);
+//   // console.log("Deploy transaction: ", transaction);
 
-  // const gasEstimate = await signer.estimateGas(transaction);
+//   // const gasEstimate = await signer.estimateGas(transaction);
 
-  // console.log("Gas estimate: ", gasEstimate);
+//   // console.log("Gas estimate: ", gasEstimate);
 
-  // // Wait for the transaction to be mined
-  // const txReceipt = await signer.sendTransaction(transaction);
-  // console.log("Transaction receipt: ", txReceipt);
+//   // // Wait for the transaction to be mined
+//   // const txReceipt = await signer.sendTransaction(transaction);
+//   // console.log("Transaction receipt: ", txReceipt);
 
-  // console.log("Contract deployed instance", HelloWorldFactory);
+//   // console.log("Contract deployed instance", HelloWorldFactory);
 
-  return;
-};
+//   return;
+// }
 
 // export const helloWorldContract = new web3.eth.Contract(
 //     contractABI,
@@ -87,7 +91,7 @@ async function deployHelloWorldContract() {
 
 export const loadCurrentMessage = async () => {
   if (!helloWorldContract) {
-    await deployHelloWorldContract();
+    await getHelloWorldContract();
   }
   // log current contrract address
   // console.log("Contract Address: ", helloWorldContract);
