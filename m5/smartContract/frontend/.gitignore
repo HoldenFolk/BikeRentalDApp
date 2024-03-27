@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-/contracts
+src/contracts
 
 # production
 /build
