@@ -7,10 +7,11 @@
 
 # testing
 /coverage
-src/contracts
+
 
 # production
 /build
+src/contracts
 
 # misc
 .DS_Store
