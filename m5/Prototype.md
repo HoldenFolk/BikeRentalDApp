@@ -1,5 +1,32 @@
 # Introduction
 
+Problem with BIXI
+
+Our proposed solution.
+
+Explain metamask: how to put money, how easy, check on privacy metamask.
+Ethereum is purchased from someone who's already mined it.
+
+Alchemy is software that connects your smart contract to blockchain (mines the blockchain).
+What smart contracts are and how they work. Secure on the bockchain.
+
+When rent bike pressed, metamask sends money from your ethereum wallet to smart contract. When contract ends, sends the payment to Bixi's ethereum account. 
+
+
+Privacy implications:
+Achieved separation, key privacy improvement.
+
+
+Limitations of Ethereum that puts every transaction public on the blockchain. Currently, BIXI could link separate transactions coming from the same user by retrieving the wallet ID or the execution of the contract. They would still have no idea who you are.
+Unlinkability: Change wallet address between transactions.
+Possible improvement in mind: Change the infrastructure of our project from ethereum to a more private crypto currency like monero which would make the transactions fully unlinkable.
+
+Currently: 
+Metamask:
+Access to your payment method, wallet IDs, Transaction history on the smart contract.
+
+
+
 Our solution relies on the blockchain to implement an unlinkable payment. The smart contract works as an interface between the user and BIXI. It collects the user's payment in a totally anonymous way and deposits it to BIXI in exchange for the freeing of the bike.
 
 Testing a commit
