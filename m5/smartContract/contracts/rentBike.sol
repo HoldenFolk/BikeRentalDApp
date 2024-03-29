@@ -11,16 +11,19 @@ contract BikeRental {
     }
 
     address payable owner;
+    address contractAddress;
     mapping(uint256 => Bike) public bikes;
     uint256 public totalBikes;
-    uint256 public deposit;
+    uint256 public depositCost;
 
     event BikeRented(uint256 bikeId, address renter, uint256 startTime);
     event BikeReturned(uint256 bikeId, address renter, uint256 amountRefunded);
 
     constructor() {
+        //Initalize important attributes of the contract. Will only happen once one the contract is deployed.
         owner = payable(msg.sender);
-        deposit = 1000000;
+        depositCost = 10000000000000000;
+        contractAddress = address(this);
     }
 
     function getOwner() external view returns (address) {
@@ -37,10 +40,7 @@ contract BikeRental {
     function rentBike(uint256 bikeId) external payable {
         Bike storage bike = bikes[bikeId];
         require(bike.isAvailable, "Bike is currently rented.");
-        require(
-            msg.value >= bike.pricePerHour,
-            "Deposit must cover at least one hour."
-        );
+        require(msg.value >= bike.pricePerHour, "Deposit must cover at least one hour.");
 
         bike.isAvailable = false;
         bike.currentRenter = msg.sender;
@@ -50,7 +50,7 @@ contract BikeRental {
         emit BikeRented(bikeId, msg.sender, bike.rentalStartTime);
     }
 
-    function returnBike(uint256 bikeId) external {
+    function returnBike(uint256 bikeId) external payable{
         Bike storage bike = bikes[bikeId];
         require(!bike.isAvailable, "Bike is not rented.");
         require(
@@ -85,4 +85,6 @@ contract BikeRental {
 
         emit BikeReturned(bikeId, msg.sender, refundAmount);
     }
+
+    //TODO: add a feature that allows for the deposit of the bike to be claimed if the bike is not returned to the renter. 
 }
