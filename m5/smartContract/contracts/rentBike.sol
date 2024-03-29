@@ -18,6 +18,7 @@ contract BikeRental {
     event BikeRented(uint256 bikeId, address renter, uint256 startTime);
     event BikeReturned(uint256 bikeId, address renter, uint256 amountRefunded);
 
+    //Nothing
     constructor() {
         owner = payable(msg.sender);
         deposit = 1000000;
