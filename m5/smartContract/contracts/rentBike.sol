@@ -10,6 +10,8 @@ contract BikeRental {
         uint256 depositAmount;
     }
 
+    mapping(uint256 => bytes32) private data;
+
     address payable owner;
     mapping(uint256 => Bike) public bikes;
     uint256 public totalBikes;
@@ -17,10 +19,19 @@ contract BikeRental {
 
     event BikeRented(uint256 bikeId, address renter, uint256 startTime);
     event BikeReturned(uint256 bikeId, address renter, uint256 amountRefunded);
+    event OverdueBikes(bytes32[] overdueBikes);
 
     constructor() {
         owner = payable(msg.sender);
         deposit = 1000000;
+    }
+
+    modifier onlyOwner() {
+        require(
+            msg.sender == owner,
+            "Only the owner can access this function."
+        );
+        _;
     }
 
     function getOwner() external view returns (address) {
@@ -36,6 +47,9 @@ contract BikeRental {
 
     function rentBike(uint256 bikeId, bytes32 personalData) external payable {
         Bike storage bike = bikes[bikeId];
+        // verify personalData
+        data[bikeId] = personalData; // this line is vulnerable to reentrancy attack
+
         require(bike.isAvailable, "Bike is currently rented.");
         require(
             msg.value >= bike.pricePerHour,
@@ -83,6 +97,33 @@ contract BikeRental {
         // Transfer the rental cost to the owner
         owner.transfer(rentalCost);
 
+        data[bikeId] = 0; // clear personal data
+
         emit BikeReturned(bikeId, msg.sender, refundAmount);
+    }
+
+    function getOverdueBikes() public onlyOwner {
+        uint256 currentTime = block.timestamp;
+        bytes32[] memory overdueBikes = new bytes32[](10); // Initialize array with appropriate length
+        uint256 index = 0;
+
+        for (uint256 bikeId = 0; bikeId < 10; bikeId++) {
+            Bike storage bike = bikes[bikeId];
+            if (
+                !bike.isAvailable && currentTime - bike.rentalStartTime < 1 days
+            ) {
+                // Add the bikeId to the overdueBikes list
+                overdueBikes[index] = data[bikeId];
+                index++;
+            }
+        }
+
+        // Resize the array to remove any unused elements
+        bytes32[] memory resizedOverdueBikes = new bytes32[](index);
+        for (uint256 i = 0; i < index; i++) {
+            resizedOverdueBikes[i] = overdueBikes[i];
+        }
+
+        emit OverdueBikes(resizedOverdueBikes);
     }
 }
