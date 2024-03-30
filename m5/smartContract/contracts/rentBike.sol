@@ -31,6 +31,11 @@ contract BikeRental {
         return owner;
     }
 
+    function getBikeData(uint256 bikeId) public view returns (bool isAvailable, uint256 pricePerHour, address currentRenter, uint256 rentalStartTime, uint256 depositAmount) {
+    Bike storage bike = bikes[bikeId];
+    return (bike.isAvailable, bike.pricePerHour, bike.currentRenter, bike.rentalStartTime, bike.depositAmount);
+    }
+
     function registerBike(uint256 pricePerHour) public {
         require(msg.sender == owner, "Only the owner can register a bike.");
         uint256 bikeId = totalBikes++;
@@ -40,7 +45,7 @@ contract BikeRental {
     function rentBike(uint256 bikeId) external payable {
         Bike storage bike = bikes[bikeId];
         require(bike.isAvailable, "Bike is currently rented.");
-        require(msg.value >= bike.pricePerHour, "Deposit must cover at least one hour.");
+        require(msg.value >= depositCost, "Deposit must be greater than or equal to the deposit cost.");
 
         bike.isAvailable = false;
         bike.currentRenter = msg.sender;

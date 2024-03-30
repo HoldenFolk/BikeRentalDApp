@@ -44,21 +44,24 @@ function RegisterBike() {
   }
 
   return (
-    <form onSubmit={handleRegisterBike}>
-      <div>
-        <label htmlFor="pricePerHour">Price Per Hour (in wei):</label>
-        <input
-          id="pricePerHour"
-          type="number"
-          value={pricePerHour}
-          onChange={e => setPricePerHour(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit" disabled={loading}>
-        {loading ? 'Registering...' : 'Register Bike'}
-      </button>
-    </form>
+    <div>  
+      <h2>Register New Bike</h2>
+        <form onSubmit={handleRegisterBike}>
+          <div>
+            <label htmlFor="pricePerHour">Price Per Hour (in wei):</label>
+            <input
+              id="pricePerHour"
+              type="number"
+              value={pricePerHour}
+              onChange={e => setPricePerHour(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Registering...' : 'Register Bike'}
+          </button>
+        </form>
+    </div>
   );
 }
 
