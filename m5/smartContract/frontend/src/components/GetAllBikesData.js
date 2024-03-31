@@ -53,8 +53,7 @@ function GetAllBikesData() {
   
     return (
       <div>
-        <h2>All Bikes Data</h2>
-        <button onClick={fetchAllBikesData} disabled={loading}>
+        <button onClick={fetchAllBikesData} disabled={loading} className='button-50'>
           {loading ? 'Refreshing...' : 'Refresh Bike Data'}
         </button>
         {loading ? (

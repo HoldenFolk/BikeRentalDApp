@@ -8,12 +8,30 @@ import ReturnBike from './components/ReturnBike';
 function App() {
   return (
     <div className="App">
-      
-      <WalletConnect />
-      <RegisterBike />
-      <RentBike />
-      <ReturnBike />
-      <GetAllBikesData />
+      <div className='container-top'>
+        <div className="top-left">
+          <WalletConnect />
+        </div>
+        <div className="one">
+          <h1>Bike Rental System</h1>
+        </div>
+        <div className="top-right">
+            <GetAllBikesData />
+        </div>
+      </div>
+      <div className="container">
+        <div className="top-middle">
+          <RentBike />
+        </div>
+        <div className='top-middle'>
+          <ReturnBike />
+        </div>
+      </div>
+      <div className="main-container">
+        <div className="bottom-component">
+          <RegisterBike />
+        </div>
+      </div>
     </div>
   );
 }
