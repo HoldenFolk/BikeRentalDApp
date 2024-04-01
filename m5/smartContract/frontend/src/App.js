@@ -4,16 +4,22 @@ import RegisterBike from './components/RegisterBike';
 import WalletConnect from './components/WalletConnect';
 import RentBike from './components/RentBike';
 import ReturnBike from './components/ReturnBike';
+import background from './Image/Bixi.jpg';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{
+      backgroundImage: `url(${background})`,
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      height: "100vh",
+      }}>
       <div className='container-top'>
         <div className="top-left">
           <WalletConnect />
         </div>
         <div className="one">
-          <h1>Bike Rental System</h1>
+          <h1>PIXI</h1>
         </div>
         <div className="top-right">
             <GetAllBikesData />
@@ -27,10 +33,8 @@ function App() {
           <ReturnBike />
         </div>
       </div>
-      <div className="main-container">
-        <div className="bottom-component">
-          <RegisterBike />
-        </div>
+      <div>
+        <RegisterBike />
       </div>
     </div>
   );

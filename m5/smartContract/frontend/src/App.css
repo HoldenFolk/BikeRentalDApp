@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+
+
 .container {
   container-type: inline-size;
   display: flex;
@@ -40,9 +42,9 @@
 h1 {
   padding: 0;
   margin: 0;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
-  font-size: 40px;
+  font-size: 50px;
   color: #080808;
   -webkit-transition: all 0.4s ease 0s;
   -o-transition: all 0.4s ease 0s;
@@ -107,7 +109,7 @@ h1 em {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -153,6 +155,7 @@ h1 em {
   padding: 6px 12px;
   font-size: 16px;
   font-weight: 400;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   line-height: 1.5;
   color: #212529;
   background-color: #fff;
@@ -179,6 +182,7 @@ h1 em {
   font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-size: .875rem;
   font-weight: 600;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   line-height: 1.25rem;
   padding: .75rem 1rem;
   text-align: center;
@@ -193,6 +197,7 @@ h1 em {
 
 .button-38:hover {
   background-color: #F9FAFB;
+  transform: scale(1.05);
 }
 
 .button-38:focus {
@@ -220,16 +225,6 @@ h1 em {
 }
 
 
-
-.main-component {
-  /* Add your styles here */
-}
-
-.bottom-component {
-  /* Add your styles here */
-}
-
-
 .label {
   font-size: 16px;
   font-weight: bold;
@@ -243,4 +238,17 @@ h1 em {
   color: black;
   margin-bottom: 5px;
   padding: 10px;
+}
+
+.label_image {
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 5px;
+  padding: 10px;
+  background: white;
+  border: 0.79px solid #5c616a;
+  box-sizing: border-box;
+
 }

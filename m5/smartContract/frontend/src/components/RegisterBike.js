@@ -19,12 +19,8 @@ function RegisterBike() {
     }
 
     try {
-<<<<<<< HEAD
       setLoading(true);
       const hweiPrice = ethers.utils.parseUnits(pricePerHour, 'hwei');
-=======
-      const hweiPrice = ethers.utils.parseUnits(pricePerHour, 'wei');
->>>>>>> af6b8a1ec524297473f86b2b3ef8ca5fa53e6f8d
       if (hweiPrice.lte(0)) {
         alert("Price must be a positive value.");
         return;
@@ -58,7 +54,7 @@ function RegisterBike() {
       <h2>Register New Bike</h2>
         <form onSubmit={handleRegisterBike}>
           <div>
-            <label className='label2' htmlFor="pricePerHour">Price Per Hour (in hwei):</label>
+            <label className='label_image' htmlFor="pricePerHour">Price Per Hour (in hwei):</label>
             <input
               id="pricePerHour"
               className='text-field'
