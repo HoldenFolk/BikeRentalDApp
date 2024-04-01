@@ -19,8 +19,12 @@ function RegisterBike() {
     }
 
     try {
+<<<<<<< HEAD
       setLoading(true);
       const hweiPrice = ethers.utils.parseUnits(pricePerHour, 'hwei');
+=======
+      const hweiPrice = ethers.utils.parseUnits(pricePerHour, 'wei');
+>>>>>>> af6b8a1ec524297473f86b2b3ef8ca5fa53e6f8d
       if (hweiPrice.lte(0)) {
         alert("Price must be a positive value.");
         return;
