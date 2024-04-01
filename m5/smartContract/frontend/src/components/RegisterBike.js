@@ -8,6 +8,7 @@ const contractAddress = contractAdressImport.ContractAddress;
 
 function RegisterBike() {
   const [pricePerHour, setPricePerHour] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function handleRegisterBike(event) {
     event.preventDefault();
@@ -18,6 +19,7 @@ function RegisterBike() {
     }
 
     try {
+      setLoading(true);
       const hweiPrice = ethers.utils.parseUnits(pricePerHour, 'hwei');
       if (hweiPrice.lte(0)) {
         alert("Price must be a positive value.");
@@ -41,6 +43,9 @@ function RegisterBike() {
     } catch (error) {
       console.error("Failed to register bike:", error);
       alert("Failed to register bike. See console for more details.");
+    }
+    finally {
+      setLoading(false);
     }
   }
 
