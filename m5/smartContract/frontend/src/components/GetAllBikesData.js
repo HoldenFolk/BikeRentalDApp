@@ -59,11 +59,12 @@ function GetAllBikesData() {
         fetchAllBikesData();
         setIsOpen(true);
       }} disabled={loading} className='button-50'>
-        {loading ? 'Refreshing...' : 'Refresh Bike Data'}
+        {loading ? 'Refreshing...' : 'See Bikes Data'}
       </button>
       <ReactModal isOpen={isOpen}
       contentLabel='Bikes Data'
-      onRequestClose={() => setIsOpen(false)}>
+      onRequestClose={() => setIsOpen(false)}
+      ariaHideApp={false}>
       {loading ? (
         <p>Loading bikes...</p>
       ) : (
