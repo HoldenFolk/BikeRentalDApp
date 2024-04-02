@@ -29,7 +29,7 @@ function RentBike() {
   
         // Ensure deposit is sent as a transaction value (in wei)
         const tx = await bikeRentalContract.rentBike(bikeId, {
-          value: ethers.utils.parseUnits(deposit, 'wei')
+          value: ethers.utils.parseUnits(deposit.toString(), 'wei')
         });
         await tx.wait();
         alert("Bike rented successfully!");

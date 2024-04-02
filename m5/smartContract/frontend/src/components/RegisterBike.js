@@ -66,7 +66,7 @@ function RegisterBike() {
             />
           </div>
           <button type="submit" className='button-38'>
-            Register Bike
+          {loading ? 'Registering...' : 'Register Bike'}
           </button>
         </form>
     </div>
