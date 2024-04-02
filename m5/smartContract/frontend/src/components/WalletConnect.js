@@ -24,7 +24,7 @@ function WalletConnect() {
   return (
     <div>
       <button className='button-50' onClick={connectWallet}>Connect Wallet</button>
-      {userAddress && <p>Connected Address: {userAddress}</p>}
+      {userAddress && <p className='text-field'>Connected Address: {userAddress}</p>}
     </div>
   );
 }

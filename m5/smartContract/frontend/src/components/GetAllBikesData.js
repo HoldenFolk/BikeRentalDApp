@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import contractAbiImport from '../contracts/BikeRental.json';
 import contractAdressImport from '../contracts/contract-address.json';
+import ReactModal from 'react-modal';
 
 const contractABI = contractAbiImport.abi;
 const contractAddress = contractAdressImport.ContractAddress;
@@ -9,7 +10,8 @@ const contractAddress = contractAdressImport.ContractAddress;
 function GetAllBikesData() {
     const [bikes, setBikes] = useState([]);
     const [loading, setLoading] = useState(false);
-  
+    const [isOpen, setIsOpen] = useState(false);
+
     const fetchAllBikesData = async () => {
       if (!window.ethereum) {
         alert("Please install MetaMask to use this feature.");
@@ -53,24 +55,31 @@ function GetAllBikesData() {
   
     return (
       <div>
-        <button onClick={fetchAllBikesData} disabled={loading} className='button-50'>
-          {loading ? 'Refreshing...' : 'Refresh Bike Data'}
-        </button>
-        {loading ? (
-          <p>Loading bikes...</p>
-        ) : (
-          bikes.map((bike) => (
-            <div key={bike.id}>
-              <p>Bike ID: {bike.id}</p>
-              <p>Is Available: {bike.isAvailable ? 'Yes' : 'No'}</p>
-              <p>Price Per Hour: {bike.pricePerHour} wei</p>
-              <p>Current Renter: {bike.currentRenter === ethers.constants.AddressZero ? 'None' : bike.currentRenter}</p>
-              <p>Rental Start Time: {bike.rentalStartTime}</p>
-              <p>Deposit Amount: {bike.depositAmount} wei</p>
-              <hr />
-            </div>
-          ))
-        )}
+      <button onClick={() => {
+        fetchAllBikesData();
+        setIsOpen(true);
+      }} disabled={loading} className='button-50'>
+        {loading ? 'Refreshing...' : 'Refresh Bike Data'}
+      </button>
+      <ReactModal isOpen={isOpen}
+      contentLabel='Bikes Data'
+      onRequestClose={() => setIsOpen(false)}>
+      {loading ? (
+        <p>Loading bikes...</p>
+      ) : (
+        bikes.map((bike) => (
+        <div className='text-field' key={bike.id}>
+          <p>Bike ID: {bike.id}</p>
+          <p>Is Available: {bike.isAvailable ? 'Yes' : 'No'}</p>
+          <p>Price Per Hour: {bike.pricePerHour} wei</p>
+          <p>Current Renter: {bike.currentRenter === ethers.constants.AddressZero ? 'None' : bike.currentRenter}</p>
+          <p>Rental Start Time: {bike.rentalStartTime}</p>
+          <p>Deposit Amount: {bike.depositAmount} wei</p>
+          <hr />
+        </div>
+        ))
+      )}
+      </ReactModal>
       </div>
     );
   }
