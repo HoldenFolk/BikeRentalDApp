@@ -43,34 +43,35 @@ function RentBike() {
       } finally {
         setLoading(false);
       }
-    }
-  
+    }  
+
     return (
-    
       <div>  
         <h2>Rent Bike</h2>
         <form onSubmit={handleRentBike}>
             <div>
-            <label htmlFor="bikeId">Bike ID:</label>
+            <label htmlFor="bikeId" className='label'>Bike ID:</label>
             <input
                 id="bikeId"
                 type="number"
+                className='text-field'
                 value={bikeId}
-                onChange={e => setBikeId(e.target.value)}
+                onChange={e => setBikeId(Math.max(0, e.target.value))}
                 required
             />
             </div>
             <div>
-            <label htmlFor="deposit">Deposit (in wei):</label>
+            <label htmlFor="deposit" className='label'>Deposit (in wei):</label>
             <input
                 id="deposit"
                 type="text"
+                className='text-field'
                 value={deposit}
-                onChange={e => setDeposit(e.target.value)}
+                onChange={e => setDeposit(Math.max(0, e.target.value))}
                 required
             />
             </div>
-            <button type="submit" disabled={loading}>
+            <button className='button-38' type="submit" disabled={loading}>
             {loading ? 'Renting...' : 'Rent Bike'}
             </button>
         </form>
