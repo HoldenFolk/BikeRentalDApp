@@ -253,3 +253,9 @@ h1 em {
   width: 150px;
 
 }
+
+p {
+  word-break: break-all;
+  white-space: normal;
+  font-size: 10px;
+}
