@@ -60,7 +60,7 @@ function GetAllBikesData() {
           <p>Loading bikes...</p>
         ) : (
           bikes.map((bike) => (
-            <div key={bike.id}>
+            <div key={bike.id} className='text-field'>
               <p>Bike ID: {bike.id}</p>
               <p>Is Available: {bike.isAvailable ? 'Yes' : 'No'}</p>
               <p>Price Per Hour: {bike.pricePerHour} wei</p>
