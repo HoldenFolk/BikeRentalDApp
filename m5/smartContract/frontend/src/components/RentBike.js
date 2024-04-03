@@ -67,7 +67,7 @@ function RentBike() {
                 type="text"
                 className='text-field'
                 value={10000000000000000}
-                //onChange={e => setDeposit(Math.max(0, e.target.value))}
+                onChange={e => setDeposit(Math.max(0, e.target.value))}
                 required
             />
             </div>
