@@ -41,33 +41,12 @@ describe("BikeRental", function () {
   //     expect(bike.pricePerHour.toString()).to.equal(pricePerHour.toString());
   //   });
 
-  //   // it("should fail if a non-owner tries to register a bike", async function () {
-  //   //     const pricePerHour = ethers.utils.parseEther("0.01");
-  //   //     // Attempt to register a bike as a non-owner, should be reverted
-  //   //     await expect(bikeRental.connect(renter).registerBike(pricePerHour)).to.be.revertedWith("Only the owner can register a bike.");
-  //   // });
-  // });
-
-  // describe("rentBike", function () {
-  //   beforeEach(async function () {
-  //     // Register a bike before each rent test
-  //     const pricePerHour = ethers.utils.parseEther("0.01");
-  //     const tx = await bikeRental.registerBike(pricePerHour);
-  //     await tx.wait();
-  //   });
-
-  //   it("should let a user rent an available bike", async function () {
-  //     const pricePerHour = ethers.utils.parseEther("0.01");
-  //     const tx = await bikeRental.rentBike(0, { value: pricePerHour });
-  //     await tx.wait();
-  //     const bike = await bikeRental.bikes(0);
-  //     expect(bike.isAvailable).to.be.false;
-  //     expect(bike.currentRenter).to.equal(deployer.address);
-  //   });
-
-  //   // Add more tests here for different scenarios, such as trying to rent a non-existent bike,
-  //   // renting without enough deposit, etc.
-  // });
+    // it("should fail if a non-owner tries to register a bike", async function () {
+    //     const pricePerHour = ethers.utils.parseEther("0.01");
+    //     // Attempt to register a bike as a non-owner, should be reverted
+    //     await expect(bikeRental.connect(renter).registerBike(pricePerHour)).to.be.revertedWith("Only the owner can register a bike.");
+    // });
+});
 
   // describe("returnBike", function () {
   //   beforeEach(async function () {
@@ -142,5 +121,5 @@ describe("BikeRental", function () {
     });
 
     // Add more tests for returning a bike that's not rented, by someone who isn't the renter, etc.
-  });
+  // });
 });

@@ -13,15 +13,17 @@ contract BikeRental {
     mapping(uint256 => bytes32) private data;
 
     address payable owner;
+    address contractAddress;
     mapping(uint256 => Bike) public bikes;
     uint256 public totalBikes;
-    uint256 public deposit;
+    uint256 public depositCost;
 
     event BikeRented(uint256 bikeId, address renter, uint256 startTime);
     event BikeReturned(uint256 bikeId, address renter, uint256 amountRefunded);
     event OverdueBikes(bytes32[] overdueBikes);
 
     constructor() {
+        //Initalize important attributes of the contract. Will only happen once one the contract is deployed.
         owner = payable(msg.sender);
         deposit = 1000000;
     }
@@ -39,21 +41,44 @@ contract BikeRental {
         return owner;
     }
 
+    function getBikeData(
+        uint256 bikeId
+    )
+        public
+        view
+        returns (
+            bool isAvailable,
+            uint256 pricePerHour,
+            address currentRenter,
+            uint256 rentalStartTime,
+            uint256 depositAmount
+        )
+    {
+        Bike storage bike = bikes[bikeId];
+        return (
+            bike.isAvailable,
+            bike.pricePerHour,
+            bike.currentRenter,
+            bike.rentalStartTime,
+            bike.depositAmount
+        );
+    }
+
     function registerBike(uint256 pricePerHour) public {
         require(msg.sender == owner, "Only the owner can register a bike.");
         uint256 bikeId = totalBikes++;
         bikes[bikeId] = Bike(true, pricePerHour, address(0), 0, 0);
     }
 
-    function rentBike(uint256 bikeId, bytes32 personalData) external payable {
+    function rentBike(uint256 bikeId) external payable {
         Bike storage bike = bikes[bikeId];
         // verify personalData
         data[bikeId] = personalData; // this line is vulnerable to reentrancy attack
 
         require(bike.isAvailable, "Bike is currently rented.");
         require(
-            msg.value >= bike.pricePerHour,
-            "Deposit must cover at least one hour."
+            msg.value >= depositCost,
+            "Deposit must be greater than or equal to the deposit cost."
         );
 
         bike.isAvailable = false;
@@ -64,7 +89,7 @@ contract BikeRental {
         emit BikeRented(bikeId, msg.sender, bike.rentalStartTime);
     }
 
-    function returnBike(uint256 bikeId) external {
+    function returnBike(uint256 bikeId) external payable {
         Bike storage bike = bikes[bikeId];
         require(!bike.isAvailable, "Bike is not rented.");
         require(
