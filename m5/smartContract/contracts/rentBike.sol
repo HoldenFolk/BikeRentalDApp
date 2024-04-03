@@ -25,7 +25,7 @@ contract BikeRental {
     constructor() {
         //Initalize important attributes of the contract. Will only happen once one the contract is deployed.
         owner = payable(msg.sender);
-        deposit = 1000000;
+        depositCost = 1000000;
     }
 
     modifier onlyOwner() {
