@@ -1,6 +1,6 @@
 const express = require('express');
 const { EnclaveFactory } = require('sgx-ias-js');
-const crypto = require('crypto');
+const NodeRSA = require('node-rsa');
 const Web3 = require('web3');
 //const web3 = new Web3('http://localhost:8545'); // Connect to a local Ethereum node
 
@@ -26,6 +26,8 @@ app.get('/decrypt/:encryptedData', async (req, res) => {
 
         const decryptedData = await decryptData(encryptedData);
 
+        console.log('Decrypted data:', decryptedData);
+
         res.send(decryptedData);
 
     } catch (error) {
@@ -36,69 +38,40 @@ app.get('/decrypt/:encryptedData', async (req, res) => {
 
 // happens inside the TEE
 decryptData = async (encryptedData) => {
-    // Sample RSA private key stored in the enclave 
+    // stored in the enclave 
     const privateKey = `-----BEGIN RSA PRIVATE KEY-----
-    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
+    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
     -----END RSA PRIVATE KEY-----`;
 
-    // Convert private key string to Buffer
-    const privateKeyBuffer = await Buffer.from(privateKey, 'utf8');
+    const key = await new NodeRSA(privateKey);
 
-    console.log('Decrypting data...');
+    const decryptedData = await key.decrypt(encryptedData, 'utf8');
 
-    // Decrypt data using private key
-    const decryptedData = await crypto.privateDecrypt(privateKeyBuffer, Buffer.from(encryptedData, 'base64'));
-
-    // Return the decrypted data
-    return decryptedData.toString('utf8');
+    return decryptedData;
 };
 
 // Start server
