@@ -67,7 +67,22 @@ An easy way to enforce this is by requiring the user to make a deposit equivalen
 
 ### The revocable privacy option
 
-However to keep the service affordable and accessible to everyone, we developped a system that significantly reduces the amount of the deposit required.
+However to keep the service affordable and accessible to everyone, we developped a system that significantly reduces the amount of the deposit required, down to the cost of renting a bike for 1 day. In counterpart, the user must provide a file containing his personal data upon invocation of the smartcontract (via the rentbike function). However, we want that personal data to remain inaccessible to anyone unless the bike gets stolen. We developped a system that achieves this by using asymetric key encryption and a TEE (see footnote n4 for an explanation of this technology). This goal can be broken down in 3 subgoals:
+
+##### Users can’t revoke access to personal data once contract is invoked
+
+##### Only PIXI can see data if a bike is stolen
+
+##### Data is accessible only if Bike is stolen
+
+##### Step by step breakdown
+
+Here's how it works in the case of a bike theft:
+
+- The user encrypts his personal data with PIXI's public key (as well as any data sent on contract like the bikeID for example)
+- The user encrypts his personal data with the TEE's public key
+- The Smart Contract calls the TEE to decrypt the personal data
+- BIXI decrypts the 
 
 
 ## Notes and bibliography
