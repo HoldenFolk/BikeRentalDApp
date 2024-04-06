@@ -79,7 +79,8 @@ Since we decided to keep a copy of the personal data within the process, it is o
 
 ##### Data is accessible only if Bike is stolen
 
-To implement privacy-unless, we ensure that user privacy remains confidential until specific conditions are met, employing third-party asymmetric encryption for this purpose. To bolster security, we mandate the use of a Trusted Execution Environment by this third party. TEE furnishes a secure execution environment, elevating security for trusted applications beyond conventional rich operating systems. Simultaneously, it provides enhanced flexibility and functionality compared to secure elements. This approach assures users that their data is meticulously safeguarded within our system.
+To implement privacy-unless, we ensure that user privacy remains confidential until specific conditions are met, employing third-party asymmetric encryption for this purpose. Utilizing a Trusted Execution Environment for decryption offers heightened security compared to relying solely on a server. The TEE creates a secure enclave within the processor, isolating decryption processes from the broader system. This isolation ensures that sensitive decryption keys and operations remain protected from unauthorized access or tampering, even if the server's operating system is compromised by malware or malicious actors. This approach assures users that their data is meticulously safeguarded within our system. However, nothing except reputation prevents collusion between the third-party and PIXI.
+ 
 
 ### Data in Transit
 
