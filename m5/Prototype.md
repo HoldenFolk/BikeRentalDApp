@@ -87,21 +87,32 @@ Our aim is to securely acquire data from an identity provider[^13] to ensure its
 
 The signed data is then presented to a smart contract for verification, providing transparency to all parties involved. Users are informed of the conditions under which their data may be disclosed through the visibility of the smart contract. If the contract remains unaltered, the smart contract abstains from transmitting the data for decryption. However, if the contract is breached, indicating a deviation from the specified conditions, a designated third party with access to the TEE decrypts the data.
 
-It's important to note that PIXI cannot decrypt the data due to the TEE encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount; thus, requesting the identity provider to solely utilize the TEE's key for encryption, while allowing us to encrypt the data using PIXI's key afterward, is not feasible, as the data is initially decrypted by the TEE.
+It's important to note that PIXI cannot decrypt the data due to the TEE encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount; thus, requesting the identity provider to solely utilize the TEE's key for encryption, while allowing us to encrypt the data using PIXI's key afterward, is not feasible, as the data is initially decrypted by the TEE. Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the TEE) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personnal data becoming available to the general public since both keys would need to be compromised for that to happen.
 
+## Summary
+
+By developping PIXI, we have shown that it is possible to build a micro-mobility app that offers very strong privacy guarantees to users. However, we are aware of the limitations that our prototype service may face in a real world context. Indeed, we have had to sacrifice some speed and comfort for the user in order to fulfill our privacy requirements. Although citizens claim to care more about their privacy, they are still reluctant to accepting the sometimes necessary tradeoffs to an enhanced privacy. This is called the privacy paradox[^15].
+
+Regardless, we hope that this proof of concept will serve as a baseline to be improved by other software developpers looking to enhance the privacy of users in the micro-mobility sector.
+
+The success of PIXI in a real world context relies on several assumptions/third parties that we have listed here clarity:
+1. Users are not scared off by the use of cryptocurrency.
+2. The increased cost and latency enduced by the use of a smart contract and cryptocurrency remain tolerable for the user.
+3. Metamask remains privacy preserving (i.e. does not get acquired by a malicious owner who starts accumalating data on its users and their transactions).
+4. There exists a trustable third party authority (i.e. the government) that has access to the user's identity and can provide it to PIXI (doubly encrypted with the TEE's and PIXI's public keys and signed to guarantee authenticity and integrity).
+5. There exists a trusted third-party authority that hosts the TEE and does not divulgate its private key.
 
 ## Notes and bibliography
 [^1]: These new features include the possibility of checking the real time availability of bikes and docks online, as well as an electronized automatic system to dock the bicycles. 
 
 [^2]: Smart contracts are self-executing digital agreements that are hard-coded on the blockchain. Once deployed, they reside on a block and are hashed on all the subsequent blocks, which makes them _unmodifiable_. The security of the Ethereum blockchain relies on its _transparency_. Concretely, all transactions and smart contracts are made public, allowing anyone to verify the data in a peer to peer validation system. 
-
 Source: T. Chen et al., "Understanding Ethereum via Graph Analysis," IEEE INFOCOM 2018 - IEEE Conference on Computer Communications, Honolulu, HI, USA, 2018, pp. 1484-1492, doi: 10.1109/INFOCOM.2018.8486401. keywords: {Conferences},
 
 [^3]: Metamask is a popular cryptocurrency wallet manager and a gateway to blockchain based decentralized applications like PIXI.
 
-[^4]: Trusted Execution Environments (TEEs) function like "black boxes" for data processing... Explain what a TEE is.
+[^4]: A Trusted Execution Environment (TEE) is a segregated area of memory and CPU that is protected from the rest of the CPU using encryption, any data in the TEE can't be read or tampered with by any code outside that environment. Data can be manipulated inside the TEE by suitably authorized code. https://learn.microsoft.com/en-us/azure/confidential-computing/trusted-execution-environment
 
-[^5]: Hoepman, J.-H. (2021). Privacy Is Hard and Seven Other Myths: Achieving Privacy through Careful Design. The MIT Press.
+[^5]: The story of this innovative online payment company is described in section 7.1 of this book: Hoepman, J.-H. (2021). Privacy Is Hard and Seven Other Myths: Achieving Privacy through Careful Design. The MIT Press.
 
 [^6]: Ether coin is Ethereum's native cryptocurrency. 
 Source: https://ethereum.org/en/eth/
@@ -110,19 +121,18 @@ Source: https://ethereum.org/en/eth/
 Source: https://coinatmradar.com/ether-atm-map/
 
 
-[^8]: https://support.metamask.io/hc/en-us/articles/12412707939611-Why-does-MetaMask-need-permission-to-modify-data-on-all-web-pages.
+[^8]: Source: https://support.metamask.io/hc/en-us/articles/12412707939611-Why-does-MetaMask-need-permission-to-modify-data-on-all-web-pages.
 
-[^9]: https://consensys.io/blog/consensys-data-retention-update and https://support.metamask.io/hc/en-us/articles/10992445334555-Does-MetaMask-collect-my-personal-data
+[^9]: Source: https://consensys.io/blog/consensys-data-retention-update and https://support.metamask.io/hc/en-us/articles/10992445334555-Does-MetaMask-collect-my-personal-data
 
 [^10]: This trust is shared by the authors of this publication for the IEEE: D. Pramulia and B. Anggorojati, "Implementation and evaluation of blockchain based e-voting system with Ethereum and Metamask," 2020 International Conference on Informatics, Multimedia, Cyber and Information System (ICIMCIS), Jakarta, Indonesia, 2020, pp. 18-23, doi: 10.1109/ICIMCIS51567.2020.9354310. keywords: {Performance evaluation;Multimedia systems;Reverse engineering;Blockchain;Reliability;Security;Electronic voting;Electronic voting;blockchain;smart contract;Ethereum}
 
-[^11]: https://medium.com/mydex/what-is-a-personal-data-store-a583f7ef9be3
+[^11]: Source: https://medium.com/mydex/what-is-a-personal-data-store-a583f7ef9be3
 
-[^12]: Asymmetric Encryption uses two distinct, yet related keys. One key, the Public Key, is used for encryption and the other, the Private Key, is for decryption. As implied in the name, the Private Key is intended to be private so that only the authenticated recipient can decrypt the message. https://cheapsslsecurity.com/blog/what-is-asymmetric-encryption-understand-with-simple-examples/
+[^12]: Asymmetric Encryption uses two distinct, yet related keys. One key, the Public Key, is used for encryption and the other, the Private Key, is for decryption. As implied in the name, the Private Key is intended to be private so that only the authenticated recipient can decrypt the message. Source: https://cheapsslsecurity.com/blog/what-is-asymmetric-encryption-understand-with-simple-examples/
 
-[^13]: A Trusted Execution Environment (TEE) is a segregated area of memory and CPU that is protected from the rest of the CPU using encryption, any data in the TEE can't be read or tampered with by any code outside that environment. Data can be manipulated inside the TEE by suitably authorized code. https://learn.microsoft.com/en-us/azure/confidential-computing/trusted-execution-environment
+[^13]: An identity provider (IdP) is a service that stores and verifies user identity. Source: https://www.cloudflare.com/en-ca/learning/access-management/what-is-an-identity-provider/
 
-[^14]: An identity provider (IdP) is a service that stores and verifies user identity. https://www.cloudflare.com/en-ca/learning/access-management/what-is-an-identity-provider/
+[^14]: A digital signature is a mathematical technique used to validate the authenticity and integrity of a digital document, message or software. Source: https://www.techtarget.com/searchsecurity/definition/digital-signature
 
-[^15]: A digital signature is a mathematical technique used to validate the authenticity and integrity of a digital document, message or software. https://www.techtarget.com/searchsecurity/definition/digital-signature
-
+[^15]: When it comes to privacy, users tend to value short term gains over long term losses. This idea is developped in section 2.2.2 of this booke: Knijnenburg, B. P., Page, X., Wisniewski, P., Lipford, H. R., Proferes, N., & Romano, J. (Eds.). (2022). Modern Socio-Technical Perspectives on Privacy (1st ed.). Springer Cham. https://doi.org/10.1007/978-3-030-82786-1
