@@ -99,7 +99,7 @@ The success of PIXI in a real world context relies on several assumptions/third 
 1. Users are not scared off by the use of cryptocurrency.
 2. The increased cost and latency enduced by the use of a smart contract and cryptocurrency remain tolerable for the user.
 3. Metamask remains privacy preserving (i.e. does not get acquired by a malicious owner who starts accumalating data on its users and their transactions).
-4. There exists a trustable third party authority (i.e. the government) that has access to the user's identity and can provide it to PIXI (doubly encrypted with the TEE's and PIXI's public keys and signed to guarantee authenticity and integrity).
+4. There exists a trustable third party authority (i.e. the government) that has access to the user's identity and can provide it to the user (doubly encrypted with the TEE's and PIXI's public keys and signed to guarantee authenticity and integrity).
 5. There exists a trusted third-party authority that hosts the TEE and does not divulgate its private key.
 
 ## Notes and bibliography
