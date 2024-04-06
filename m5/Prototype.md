@@ -71,18 +71,23 @@ However to keep the service affordable and accessible to everyone, we developped
 
 ##### Users can’t revoke access to personal data once contract is invoked
 
+Our initial strategy for maintaining user anonymity during the contract involved storing their personal information in a Personal Data Store[^11] (PDS). Users would request proof of their data being stored in the PDS, which they would then send to PIXI. According to contractual agreements, PIXI would access this data only if necessary, such as in the event of a breach. Users could protect themselves by using the PDS's logs. However, the PDS lacked the authority to refuse a user's request to revoke their data, even if they were bound by a contractual agreement with a third party. This meant that a user could rent a bike and subsequently remove their personal information from the platform. Faced with this challenge, we considered two solutions: preserving a copy of the data within the contract or establishing our own PDS to ensure users are contractually bound with us. Ultimately, we chose the former option: keeping a copy of the data within the contract.
+
 ##### Only PIXI can see data if a bike is stolen
+
+Since we decided to keep a copy of the personal data within the process, it is our obligation to securely store and process this data. Meaning that the personal information should not be disclose to the public. Therefore, we must encrypt the data that goes on the smart contract form external users. We achieved this by using asymmetric encryption[^12].
 
 ##### Data is accessible only if Bike is stolen
 
-##### Step by step breakdown
+To implement privacy-unless, we ensure that user privacy remains confidential until specific conditions are met, employing third-party asymmetric encryption for this purpose. To bolster security, we mandate the use of a Trusted Execution Environment by this third party. TEE furnishes a secure execution environment, elevating security for trusted applications beyond conventional rich operating systems. Simultaneously, it provides enhanced flexibility and functionality compared to secure elements. This approach assures users that their data is meticulously safeguarded within our system.
 
-Here's how it works in the case of a bike theft:
+### Data in Transit
 
-- The user encrypts his personal data with PIXI's public key (as well as any data sent on contract like the bikeID for example)
-- The user encrypts his personal data with the TEE's public key
-- The Smart Contract calls the TEE to decrypt the personal data
-- BIXI decrypts the 
+Our aim is to securely acquire data from an identity provider[^13] to ensure its accuracy while preserving its confidentiality. To accomplish this, we implement a multi-layered encryption process. Initially, the identity provider encrypts the data using PIXI's public key, then the data undergoes additional encryption using the Trusted Execution Environment's public key. After encryption, the identity provider adds a digital signature[^14] to authenticate the data.
+
+The signed data is then presented to a smart contract for verification, providing transparency to all parties involved. Users are informed of the conditions under which their data may be disclosed through the visibility of the smart contract. If the contract remains unaltered, the smart contract abstains from transmitting the data for decryption. However, if the contract is breached, indicating a deviation from the specified conditions, a designated third party with access to the TEE decrypts the data.
+
+It's important to note that PIXI cannot decrypt the data due to the TEE encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount; thus, requesting the identity provider to solely utilize the TEE's key for encryption, while allowing us to encrypt the data using PIXI's key afterward, is not feasible, as the data is initially decrypted by the TEE.
 
 
 ## Notes and bibliography
@@ -111,4 +116,13 @@ Source: https://coinatmradar.com/ether-atm-map/
 
 [^10]: This trust is shared by the authors of this publication for the IEEE: D. Pramulia and B. Anggorojati, "Implementation and evaluation of blockchain based e-voting system with Ethereum and Metamask," 2020 International Conference on Informatics, Multimedia, Cyber and Information System (ICIMCIS), Jakarta, Indonesia, 2020, pp. 18-23, doi: 10.1109/ICIMCIS51567.2020.9354310. keywords: {Performance evaluation;Multimedia systems;Reverse engineering;Blockchain;Reliability;Security;Electronic voting;Electronic voting;blockchain;smart contract;Ethereum}
 
+[^11]: https://medium.com/mydex/what-is-a-personal-data-store-a583f7ef9be3
+
+[^12]: Asymmetric Encryption uses two distinct, yet related keys. One key, the Public Key, is used for encryption and the other, the Private Key, is for decryption. As implied in the name, the Private Key is intended to be private so that only the authenticated recipient can decrypt the message. https://cheapsslsecurity.com/blog/what-is-asymmetric-encryption-understand-with-simple-examples/
+
+[^13]: A Trusted Execution Environment (TEE) is a segregated area of memory and CPU that is protected from the rest of the CPU using encryption, any data in the TEE can't be read or tampered with by any code outside that environment. Data can be manipulated inside the TEE by suitably authorized code. https://learn.microsoft.com/en-us/azure/confidential-computing/trusted-execution-environment
+
+[^14]: An identity provider (IdP) is a service that stores and verifies user identity. https://www.cloudflare.com/en-ca/learning/access-management/what-is-an-identity-provider/
+
+[^15]: A digital signature is a mathematical technique used to validate the authenticity and integrity of a digital document, message or software. https://www.techtarget.com/searchsecurity/definition/digital-signature
 
