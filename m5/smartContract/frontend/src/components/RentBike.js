@@ -28,7 +28,7 @@ function RentBike() {
         const bikeRentalContract = new ethers.Contract(contractAddress, contractABI, signer);
   
         // Ensure deposit is sent as a transaction value (in wei)
-        const tx = await bikeRentalContract.rentBike(bikeId, {
+        const tx = await bikeRentalContract.rentBikeDeposit(bikeId, {
           value: ethers.utils.parseUnits(deposit.toString(), 'wei')
         });
         await tx.wait();
@@ -66,7 +66,7 @@ function RentBike() {
                 id="deposit"
                 type="text"
                 className='text-field'
-                value={10000000000000000}
+                value={deposit}
                 onChange={e => setDeposit(Math.max(0, e.target.value))}
                 required
             />

@@ -89,6 +89,22 @@ contract BikeRental {
         emit BikeRented(bikeId, msg.sender, bike.rentalStartTime);
     }
 
+    function rentBikeDeposit(uint256 bikeId) external payable {
+        Bike storage bike = bikes[bikeId];
+        require(bike.isAvailable, "Bike is currently rented.");
+        require(
+            msg.value >= depositCost,
+            "Deposit must be greater than or equal to the deposit cost."
+        );
+
+        bike.isAvailable = false;
+        bike.currentRenter = msg.sender;
+        bike.rentalStartTime = block.timestamp;
+        bike.depositAmount = msg.value;
+
+        emit BikeRented(bikeId, msg.sender, bike.rentalStartTime);
+    }
+
     function returnBike(uint256 bikeId) external payable {
         Bike storage bike = bikes[bikeId];
         require(!bike.isAvailable, "Bike is not rented.");
