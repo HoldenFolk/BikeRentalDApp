@@ -70,7 +70,7 @@ contract BikeRental {
         bikes[bikeId] = Bike(true, pricePerHour, address(0), 0, 0);
     }
 
-    function rentBike(uint256 bikeId) external payable {
+    function rentBike(uint256 bikeId, bytes32 personalData) external payable {
         Bike storage bike = bikes[bikeId];
         // verify personalData
         data[bikeId] = personalData; // this line is vulnerable to reentrancy attack
