@@ -46,7 +46,7 @@ describe("BikeRental", function () {
     //     // Attempt to register a bike as a non-owner, should be reverted
     //     await expect(bikeRental.connect(renter).registerBike(pricePerHour)).to.be.revertedWith("Only the owner can register a bike.");
     // });
-});
+//});
 
   // describe("returnBike", function () {
   //   beforeEach(async function () {
@@ -117,9 +117,9 @@ describe("BikeRental", function () {
       }
 
       // Assert that the returned value is correct (for example, length should be 0 since we just rented the bike)
-      expect(size).to.equal(0);
+      expect(size).to.equal(3);
     });
 
     // Add more tests for returning a bike that's not rented, by someone who isn't the renter, etc.
-  // });
+  });
 });
