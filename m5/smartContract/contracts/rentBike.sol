@@ -4,19 +4,20 @@ pragma solidity 0.8.24;
 contract BikeRental {
     struct Bike {
         bool isAvailable;
+        bool claimed;
         uint256 pricePerHour; // Price per hour in wei
         address currentRenter;
         uint256 rentalStartTime;
         uint256 depositAmount;
+        bytes32 personalData;
     }
-
-    mapping(uint256 => bytes32) private data;
 
     address payable owner;
     address contractAddress;
     mapping(uint256 => Bike) public bikes;
     uint256 public totalBikes;
     uint256 public depositCost;
+    uint256 public currentRental;
 
     event BikeRented(uint256 bikeId, address renter, uint256 startTime);
     event BikeReturned(uint256 bikeId, address renter, uint256 amountRefunded);
@@ -26,6 +27,7 @@ contract BikeRental {
         //Initalize important attributes of the contract. Will only happen once one the contract is deployed.
         owner = payable(msg.sender);
         depositCost = 1000000;
+        currentRental = 0;
     }
 
     modifier onlyOwner() {
@@ -48,6 +50,7 @@ contract BikeRental {
         view
         returns (
             bool isAvailable,
+            bool claimed, // for bike to get claimed only once
             uint256 pricePerHour,
             address currentRenter,
             uint256 rentalStartTime,
@@ -57,6 +60,7 @@ contract BikeRental {
         Bike storage bike = bikes[bikeId];
         return (
             bike.isAvailable,
+            bike.claimed,
             bike.pricePerHour,
             bike.currentRenter,
             bike.rentalStartTime,
@@ -67,13 +71,11 @@ contract BikeRental {
     function registerBike(uint256 pricePerHour) public {
         require(msg.sender == owner, "Only the owner can register a bike.");
         uint256 bikeId = totalBikes++;
-        bikes[bikeId] = Bike(true, pricePerHour, address(0), 0, 0);
+        bikes[bikeId] = Bike(true, true, pricePerHour, address(0), 0, 0, 0);
     }
 
-    function rentBike(uint256 bikeId) external payable {
+    function rentBike(uint256 bikeId, bytes32 personalData) external payable {
         Bike storage bike = bikes[bikeId];
-        // verify personalData
-        data[bikeId] = personalData; // this line is vulnerable to reentrancy attack
 
         require(bike.isAvailable, "Bike is currently rented.");
         require(
@@ -81,10 +83,13 @@ contract BikeRental {
             "Deposit must be greater than or equal to the deposit cost."
         );
 
+        currentRental++;
         bike.isAvailable = false;
+        bike.claimed = false;
         bike.currentRenter = msg.sender;
         bike.rentalStartTime = block.timestamp;
         bike.depositAmount = msg.value;
+        bike.personalData = personalData;
 
         emit BikeRented(bikeId, msg.sender, bike.rentalStartTime);
     }
@@ -110,11 +115,15 @@ contract BikeRental {
 
         uint256 refundAmount = bike.depositAmount - rentalCost;
 
+        currentRental--;
+
         // Reset bike rental information
         bike.isAvailable = true;
+        bike.claimed = true;
         bike.currentRenter = address(0);
         bike.rentalStartTime = 0;
         bike.depositAmount = 0;
+        bike.personalData = 0;
 
         // Refund the remaining deposit to the renter
         payable(msg.sender).transfer(refundAmount);
@@ -122,24 +131,34 @@ contract BikeRental {
         // Transfer the rental cost to the owner
         owner.transfer(rentalCost);
 
-        data[bikeId] = 0; // clear personal data
-
         emit BikeReturned(bikeId, msg.sender, refundAmount);
     }
 
     function getOverdueBikes() public onlyOwner {
         uint256 currentTime = block.timestamp;
-        bytes32[] memory overdueBikes = new bytes32[](10); // Initialize array with appropriate length
+        bytes32[] memory overdueBikes = new bytes32[](currentRental);
         uint256 index = 0;
 
-        for (uint256 bikeId = 0; bikeId < 10; bikeId++) {
+        for (uint256 bikeId = 0; bikeId < currentRental; bikeId++) {
             Bike storage bike = bikes[bikeId];
             if (
-                !bike.isAvailable && currentTime - bike.rentalStartTime < 1 days
+                !bike.isAvailable &&
+                currentTime - bike.rentalStartTime < 1 days &&
+                !bike.claimed
             ) {
-                // Add the bikeId to the overdueBikes list
-                overdueBikes[index] = data[bikeId];
-                index++;
+                // deposit option
+                if (bike.personalData == 0) {
+                    owner.transfer(bike.depositAmount); // Transfer the deposit to the owner
+                    bike.depositAmount = 0; // Reset the deposit amount
+                    bike.claimed = true; // Mark the bike as claimed
+                }
+                // privacy unless option
+                else {
+                    // call to decrypt personal data !!
+                    overdueBikes[index] = bike.personalData;
+                    index++;
+                    bike.claimed = true; // Mark the bike as claimed
+                }
             }
         }
 
@@ -150,5 +169,15 @@ contract BikeRental {
         }
 
         emit OverdueBikes(resizedOverdueBikes);
+    }
+
+    function resetBike(uint256 bikeId) public onlyOwner {
+        Bike storage bike = bikes[bikeId];
+        bike.isAvailable = true;
+        bike.claimed = true;
+        bike.currentRenter = address(0);
+        bike.rentalStartTime = 0;
+        bike.depositAmount = 0;
+        bike.personalData = 0;
     }
 }
