@@ -105,9 +105,11 @@ contract BikeRental {
         );
 
         bike.isAvailable = false;
+        bike.claimed = false;
         bike.currentRenter = msg.sender;
         bike.rentalStartTime = block.timestamp;
         bike.depositAmount = msg.value;
+        bike.personalData = 0;
 
         emit BikeRented(bikeId, msg.sender, bike.rentalStartTime);
     }
