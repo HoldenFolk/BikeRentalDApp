@@ -17,7 +17,7 @@ contract BikeRental {
     mapping(uint256 => Bike) public bikes;
     uint256 public totalBikes;
     uint256 public depositCost;
-    uint256 public currentRental;
+    uint256 public numberOfBikes;
 
     event BikeRented(uint256 bikeId, address renter, uint256 startTime);
     event BikeReturned(uint256 bikeId, address renter, uint256 amountRefunded);
@@ -27,7 +27,7 @@ contract BikeRental {
         //Initalize important attributes of the contract. Will only happen once one the contract is deployed.
         owner = payable(msg.sender);
         depositCost = 1000000;
-        currentRental = 0;
+        numberOfBikes = 0;
     }
 
     modifier onlyOwner() {
@@ -54,7 +54,8 @@ contract BikeRental {
             uint256 pricePerHour,
             address currentRenter,
             uint256 rentalStartTime,
-            uint256 depositAmount
+            uint256 depositAmount,
+            bytes32 personalData
         )
     {
         Bike storage bike = bikes[bikeId];
@@ -64,7 +65,8 @@ contract BikeRental {
             bike.pricePerHour,
             bike.currentRenter,
             bike.rentalStartTime,
-            bike.depositAmount
+            bike.depositAmount,
+            bike.personalData
         );
     }
 
@@ -72,6 +74,7 @@ contract BikeRental {
         require(msg.sender == owner, "Only the owner can register a bike.");
         uint256 bikeId = totalBikes++;
         bikes[bikeId] = Bike(true, true, pricePerHour, address(0), 0, 0, 0);
+        numberOfBikes++;
     }
 
     function rentBike(uint256 bikeId, bytes32 personalData) external payable {
@@ -83,7 +86,6 @@ contract BikeRental {
             "Deposit must be greater than or equal to the deposit cost."
         );
 
-        currentRental++;
         bike.isAvailable = false;
         bike.claimed = false;
         bike.currentRenter = msg.sender;
@@ -131,8 +133,6 @@ contract BikeRental {
 
         uint256 refundAmount = bike.depositAmount - rentalCost;
 
-        currentRental--;
-
         // Reset bike rental information
         bike.isAvailable = true;
         bike.claimed = true;
@@ -152,10 +152,10 @@ contract BikeRental {
 
     function getOverdueBikes() public onlyOwner {
         uint256 currentTime = block.timestamp;
-        bytes32[] memory overdueBikes = new bytes32[](currentRental);
+        bytes32[] memory overdueBikes = new bytes32[](numberOfBikes);
         uint256 index = 0;
 
-        for (uint256 bikeId = 0; bikeId < currentRental; bikeId++) {
+        for (uint256 bikeId = 0; bikeId < numberOfBikes; bikeId++) {
             Bike storage bike = bikes[bikeId];
             if (
                 !bike.isAvailable &&
@@ -172,9 +172,9 @@ contract BikeRental {
                 else {
                     // call to decrypt personal data !!
                     overdueBikes[index] = bike.personalData;
-                    index++;
                     bike.claimed = true; // Mark the bike as claimed
                 }
+                index++;
             }
         }
 
