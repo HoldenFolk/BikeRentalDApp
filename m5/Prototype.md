@@ -21,7 +21,7 @@ There are then 2 potential scenarios:
 
 ## First goal: an anonymous, unlinkable payment system.
 
-One of PIXI's key requirements was to provide anonymous and unlinkable payments, in order to keep the user's identity out of the bike renting process. We quickly realized that this double goal would be impossible to reach. Indeed, ~~there is currently no online payment method that provides perfect anonymity and unlinkability~~ (not true, privacy coins) since the pioneer system DigiCash went bankrupt[^5]. However, we still tried to allow the user to achieve both.
+One of PIXI's key requirements was to provide anonymous and unlinkable payments, in order to keep the user's identity out of the bike renting process. We quickly realized that this double goal would be impossible to reach. Indeed, there is currently no practical online payment method that provides perfect anonymity and unlinkability[^5] since the pioneer system DigiCash went bankrupt[^5]. However, we still tried to allow the user to achieve both.
 
 ### Our solution: Ether coin and Metamask
 
@@ -117,6 +117,10 @@ Source: T. Chen et al., "Understanding Ethereum via Graph Analysis," IEEE INFOCO
 [^3]: Metamask is a popular cryptocurrency wallet manager and a gateway to blockchain based decentralized applications like PIXI.
 
 [^4]: A Trusted Execution Environment (TEE) is a segregated area of memory and CPU that is protected from the rest of the CPU using encryption, any data in the TEE can't be read or tampered with by any code outside that environment. Data can be manipulated inside the TEE by suitably authorized code. https://learn.microsoft.com/en-us/azure/confidential-computing/trusted-execution-environment
+
+[^5]: It can be argued that privacy coins are a type of unlinkable anonymous cryptocurrencies but their scope of use is limited and was not realistically implementable in our project.
+Source: T. Zhang, "Privacy Evaluation of Blockchain Based Privacy Cryptocurrencies: A Comparative Analysis of Dash, Monero, Verge, Zcash, and Grin," in IEEE Transactions on Sustainable Computing, vol. 8, no. 4, pp. 574-582, Oct.-Dec. 2023, doi: 10.1109/TSUSC.2023.3303180.
+keywords: {Privacy;Blockchains;Bitcoin;Receivers;Information integrity;Information filtering;Data privacy;Anonymity;blockchain;privacy;Bitcoin;Zcash;Monero}, 
 
 [^5]: The story of this innovative online payment company is described in section 7.1 of this book: Hoepman, J.-H. (2021). Privacy Is Hard and Seven Other Myths: Achieving Privacy through Careful Design. The MIT Press.
 
