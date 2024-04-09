@@ -21,7 +21,7 @@ There are then 2 potential scenarios:
 
 ## First goal: an anonymous, unlinkable payment system.
 
-One of PIXI's key requirements was to provide anonymous and unlinkable payments, in order to keep the user's identity out of the bike renting process. We quickly realized that this double goal would be impossible to reach. Indeed, there is currently no online payment method that provides perfect anonymity and unlinkability since the pioneer system DigiCash went bankrupt[^5]. However, we still tried to allow the user to achieve both.
+One of PIXI's key requirements was to provide anonymous and unlinkable payments, in order to keep the user's identity out of the bike renting process. We quickly realized that this double goal would be impossible to reach. Indeed, ~~there is currently no online payment method that provides perfect anonymity and unlinkability~~ (not true, privacy coins) since the pioneer system DigiCash went bankrupt[^5]. However, we still tried to allow the user to achieve both.
 
 ### Our solution: Ether coin and Metamask
 
@@ -48,6 +48,7 @@ In spite of these concerns, we think it is reasonable to trust Metamask[^10] eve
 
 ## Second goal: a transparent, unalterable process.
 We wanted to leave no ambiguity to our users about how the rental process works by making the algorithm public. We also wanted the user to have the guarantee that the system cannot be changed internally by PIXI in the middle of a rental.
+(i would talk about the oracles in the system, what if PIXI database is unreliable?)
 
 ### Our solution: Smart Contracts
 
@@ -71,15 +72,15 @@ However to keep the service affordable and accessible to everyone, we developped
 
 ##### Users can’t revoke access to personal data once contract is invoked
 
-Our initial strategy for maintaining user anonymity during the contract involved storing their personal information in a Personal Data Store[^11] (PDS). Users would request proof of their data being stored in the PDS, which they would then send to PIXI. According to contractual agreements, PIXI would access this data only if necessary, such as in the event of a breach. Users could protect themselves by using the PDS's logs. However, the PDS lacked the authority to refuse a user's request to revoke their data, even if they were bound by a contractual agreement with a third party. This meant that a user could rent a bike and subsequently remove their personal information from the platform. Faced with this challenge, we considered two solutions: preserving a copy of the data within the contract or establishing our own PDS to ensure users are contractually bound with us. Ultimately, we chose the former option: keeping a copy of the data within the contract.
+Our initial strategy for maintaining user anonymity during the contract involved storing their personal information in a Personal Data Store[^11] (PDS). Users would request proof of their data being stored in the PDS, which they would then send to PIXI. According to contractual agreements, PIXI would access this data only if necessary, such as in the event of a breach. Users could protect themselves by using the PDS's logs. However, the PDS lacked the authority to refuse a user's request to revoke their data, even if they were bound by a contractual agreement with a third party. This meant that a user could rent a bike and subsequently remove their personal information from the platform. Faced with this challenge, we considered two solutions: preserving a copy of the data within the contract or establishing our own PDS to ensure users are contractually bound with us. Ultimately, we chose the former option: keeping a copy of the data within the contract. (exaplin why? we do not want to store any personal data)
 
 ##### Only PIXI can see data if a bike is stolen
 
-Since we decided to keep a copy of the personal data within the process, it is our obligation to securely store and process this data. Meaning that the personal information should not be disclose to the public. Therefore, we must encrypt the data that goes on the smart contract form external users. We achieved this by using asymmetric encryption[^12].
+Since we decided to keep a copy of the personal data within the process, it is our obligation to securely store and process this data. Meaning that the personal information should not be disclose to the public. Therefore, we must encrypt the data that goes on the smart contract from external users. We achieved this by using asymmetric encryption[^12].
 
 ##### Data is accessible only if Bike is stolen
 
-To implement privacy-unless, we ensure that user privacy remains confidential until specific conditions are met, employing third-party asymmetric encryption for this purpose. Utilizing a Trusted Execution Environment for decryption offers heightened security compared to relying solely on a server. The TEE creates a secure enclave within the processor, isolating decryption processes from the broader system. This isolation ensures that sensitive decryption keys and operations remain protected from unauthorized access or tampering, even if the server's operating system is compromised by malware or malicious actors. This approach assures users that their data is meticulously safeguarded within our system. However, nothing except reputation prevents collusion between the third-party and PIXI.
+To implement privacy-unless, we ensure that user privacy remains confidential until specific conditions are met, employing an off-chain third-party for asymmetric encryption for this purpose. To maximize user's security, we require that the third-party uses Trusted Execution Environment techonlogy to store their private key. Utilizing a TEE for decryption offers heightened security compared to relying solely on a server. The TEE creates a secure enclave within the processor, isolating decryption processes from the broader system. This isolation ensures that sensitive decryption keys and operations remain protected from unauthorized access or tampering, even if the server's operating system is compromised by malware or malicious actors. Also, we require audit logs to track all act of decryption. However, nothing except reputation prevents collusion between the third-party and PIXI.
  
 
 ### Data in Transit
@@ -89,6 +90,10 @@ Our aim is to securely acquire data from an identity provider[^13] to ensure its
 The signed data is then presented to a smart contract for verification, providing transparency to all parties involved. Users are informed of the conditions under which their data may be disclosed through the visibility of the smart contract. If the contract remains unaltered, the smart contract abstains from transmitting the data for decryption. However, if the contract is breached, indicating a deviation from the specified conditions, a designated third party with access to the TEE decrypts the data.
 
 It's important to note that PIXI cannot decrypt the data due to the TEE encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount; thus, requesting the identity provider to solely utilize the TEE's key for encryption, while allowing us to encrypt the data using PIXI's key afterward, is not feasible, as the data is initially decrypted by the TEE. Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the TEE) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personnal data becoming available to the general public since both keys would need to be compromised for that to happen.
+
+## Architecture !!
+
+I would add an Architecture section to talk about the requirements of each system and how they interact with each other
 
 ## Summary
 
