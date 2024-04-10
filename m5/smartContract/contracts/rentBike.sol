@@ -175,8 +175,8 @@ contract BikeRental {
                     // call to decrypt personal data !!
                     overdueBikes[index] = bike.personalData;
                     bike.claimed = true; // Mark the bike as claimed
+                    index++;
                 }
-                index++;
             }
         }
 
