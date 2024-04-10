@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import contractAbiImport from '../contracts/BikeRental.json';
 import contractAdressImport from '../contracts/contract-address.json';
 import ReactModal from 'react-modal';
+import settings from '../settings';
 
 const contractABI = contractAbiImport.abi;
 const contractAddress = contractAdressImport.ContractAddress;
@@ -13,17 +14,13 @@ function GetAllBikesData() {
     const [isOpen, setIsOpen] = useState(false);
 
     const fetchAllBikesData = async () => {
-      if (!window.ethereum) {
-        alert("Please install MetaMask to use this feature.");
-        return;
-      }
   
       setLoading(true);
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const provider = new ethers.providers.JsonRpcProvider(settings.API_KEY);
       const contract = new ethers.Contract(contractAddress, contractABI, provider);
       
       try {
-        const totalBikes = await contract.totalBikes(); // Assume this is a public variable or has a getter
+        const totalBikes = await contract.totalBikes(); 
         const bikeDataPromises = [];
         
         for (let i = 0; i < totalBikes.toNumber(); i++) {

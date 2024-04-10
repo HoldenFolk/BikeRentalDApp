@@ -4,11 +4,11 @@ pragma solidity 0.8.24;
 contract BikeRental {
     struct Bike {
         bool isAvailable;
-        bool claimed;
         uint256 pricePerHour; // Price per hour in wei
         address currentRenter;
         uint256 rentalStartTime;
         uint256 depositAmount;
+        bool claimed;
         bytes32 personalData;
     }
 
@@ -26,7 +26,7 @@ contract BikeRental {
     constructor() {
         //Initalize important attributes of the contract. Will only happen once one the contract is deployed.
         owner = payable(msg.sender);
-        depositCost = 1000000;
+        depositCost = 10000000000000000;
         numberOfBikes = 0;
     }
 
@@ -50,22 +50,22 @@ contract BikeRental {
         view
         returns (
             bool isAvailable,
-            bool claimed, // for bike to get claimed only once
             uint256 pricePerHour,
             address currentRenter,
             uint256 rentalStartTime,
             uint256 depositAmount,
+            bool claimed, // for bike to get claimed only once
             bytes32 personalData
         )
     {
         Bike storage bike = bikes[bikeId];
         return (
             bike.isAvailable,
-            bike.claimed,
             bike.pricePerHour,
             bike.currentRenter,
             bike.rentalStartTime,
             bike.depositAmount,
+            bike.claimed,
             bike.personalData
         );
     }
@@ -73,7 +73,7 @@ contract BikeRental {
     function registerBike(uint256 pricePerHour) public {
         require(msg.sender == owner, "Only the owner can register a bike.");
         uint256 bikeId = totalBikes++;
-        bikes[bikeId] = Bike(true, true, pricePerHour, address(0), 0, 0, 0);
+        bikes[bikeId] = Bike(true, pricePerHour, address(0), 0, 0, true, 0);
         numberOfBikes++;
     }
 
@@ -100,8 +100,8 @@ contract BikeRental {
         Bike storage bike = bikes[bikeId];
         require(bike.isAvailable, "Bike is currently rented.");
         require(
-            msg.value >= depositCost,
-            "Deposit must be greater than or equal to the deposit cost."
+            msg.value == depositCost,
+            "Deposit must equal to the deposit cost."
         );
 
         bike.isAvailable = false;
