@@ -12,9 +12,9 @@ const contractAddress = contractAdressImport.ContractAddress;
 function RentBike() {
   const [bikeId, setBikeId] = useState('');
   //TODO: Make bike deposit a constant value
-  const [deposit, setDeposit] = useState('');
   const [loading, setLoading] = useState(false);
   const { wallet } = useWallet();
+  const deposit = 10000000000000000;
 
   async function handleRentBike(event) {
     event.preventDefault();
@@ -34,7 +34,6 @@ function RentBike() {
 
       // Reset fields
       setBikeId('');
-      setDeposit('');
     } catch (error) {
       console.error("Failed to rent bike:", error);
       alert("Failed to rent bike. See console for more details.");
@@ -59,15 +58,7 @@ function RentBike() {
           />
         </div>
         <div>
-          <label htmlFor="deposit" className='label'>Deposit (in wei):</label>
-          <input
-            id="deposit"
-            type="text"
-            className='text-field'
-            value={deposit}
-            onChange={e => setDeposit(Math.max(0, e.target.value))}
-            required
-          />
+        <div className='text-field' style={{fontSize:'15px', width:'250px'}}>{deposit && `Deposit Cost is: 0.01 Ethereum`}</div>
         </div>
         <button className='button-38' type="submit" disabled={loading}>
           {loading ? 'Renting...' : 'Rent Bike'}
