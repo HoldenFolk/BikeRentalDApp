@@ -10,7 +10,7 @@ The button "connect-wallet" enables the user to conect his metamask wallet in or
 The button "rent-bike" prompts the user to enter the ID engraved in the bike that he wants to rent (this could be replaced by a QR code scan similar to what BIXI currently supports). 
 The user then has 2 options:
 -  Paying a deposit corresponding to the price of the bike.
--  Uploading a file containing his personal info that is doubly encrypted with PIXI's and a Trusted Executing Environment's (TEE)[^4] public keys. He will also pay a samller deposit corresponding to the cost of renting the bike for 1 day (this ensures that the users has sufficient funds to pay for the rental).
+-  Uploading a file containing his personal info that is doubly encrypted with PIXI's and a Trusted Executing Environment's (TEE)[^4] public keys. He will also pay a samller deposit corresponding to the cost of renting the bike for 1 day (this ensures that the users has sufficient funds to pay for the rental). 
 
 There are then 2 potential scenarios:
   1. If the bike is returned within 24 hours, the deposit is refunded to the user (deducting the cost of the rental) and the user's personal information remains encrypted. The only records stored on PIXI's database are that a bike was rented from station x at time t and docked in station y at time t' (allowing for some network analysis to balance the bike distrivution).
@@ -21,12 +21,12 @@ There are then 2 potential scenarios:
 
 ## First goal: an anonymous, unlinkable payment system.
 
-One of PIXI's key requirements was to provide anonymous and unlinkable payments, in order to keep the user's identity out of the bike renting process. We quickly realized that this double goal would be impossible to reach. Indeed, there is currently no practical online payment method that provides perfect anonymity and unlinkability[^5] since the pioneer system DigiCash went bankrupt[^5]. However, we still tried to allow the user to achieve both.
+One of PIXI's key requirements was to provide anonymous and unlinkable payments, in order to keep the user's identity out of the bike renting process. We quickly realized that this double goal would be impossible to reach. Indeed, there is currently no practical online payment method that provides perfect anonymity and unlinkability[^5] since the pioneer system DigiCash went bankrupt[^6]. However, we still tried to allow the user to achieve both.
 
 ### Our solution: Ether coin and Metamask
 
 ##### Why Ether coin?
-In order to make this possible, we decided to use Ether coin (ETH)[^6] for the transactions. It provides the possibility for any user to create a wallet with a private/public key pair. The public key is used to derive a wallet address. Transactions between wallets are securized by the public ethereum blockchain, making ETH a secure pseudo-anonymous currency for our payments. However, transactions involving the same wallet can be linked to one another, thus the payments are not fully unlinkable. That being said, users can still achieve unlinkability by using a different wallet each time they make a payment.
+In order to make this possible, we decided to use Ether coin (ETH)[^7] for the transactions. It provides the possibility for any user to create a wallet with a private/public key pair. The public key is used to derive a wallet address. Transactions between wallets are securized by the public ethereum blockchain, making ETH a secure pseudo-anonymous currency for our payments. However, transactions involving the same wallet can be linked to one another, thus the payments are not fully unlinkable. That being said, users can still achieve unlinkability by using a different wallet each time they make a payment.
 
 ##### Why Metamask?
 Our prototype currently provides integration only for Ethereum wallets managed by Metamask. We chose Metamask for multiple reasons:
@@ -35,27 +35,26 @@ Our prototype currently provides integration only for Ethereum wallets managed b
 - It is easy to set up: users only need to download the browser extension (available on Firefox, Edge, Chrome and Brave).
 - It is very user friendly, making it accessible to the general public. 
 - It greatly facilitates creation of wallets, which opens the path to unlinkability through the use of different wallets.
-- Wallets can be anonymously loaded in ETH by going to an Ether ATM and introducing cash[^7].
+- Wallets can be anonymously loaded in ETH by going to an Ether ATM and introducing cash[^8].
 - It interacts directly with the Ethereum API, which facilitates its integration to decentralized applications like PIXI.
 
 
 ##### Concerns
-However, this comes with the disadvantage of introducing a dependancy to a third party in our system, which comes with legitimate concerns for the user. In particular, the Metamask browser extension asks for 3 permissions including the read and change all data for all websites: a massive tradeoff. However, all metamask does is inject the Ethereum Web3 API into the javascript context of every website in order to enable decentralized apps like PIXI to access blockchain data from within the browser[^8]. Metamask is open source, widely used, and they have never been flagged for an abusive use of these permissions. It has a single CVE instance in the National Vulnerability Database dating from 2022 with medium severity that has been fixed since. The user can mitigate this concern by restricting the extension to PIXI's website (or any other website where he may want to pay using ETH) in the settings of the browser. Metamask also admit collecting the IP address of users when they initiate a transaction. The IP data is required to validate the transaction with the blockchain node and is not linkable to the wallet address[^9].
+However, this comes with the disadvantage of introducing a dependancy to a third party in our system, which comes with legitimate concerns for the user. In particular, the Metamask browser extension asks for 3 permissions including the read and change all data for all websites: a massive tradeoff. However, all metamask does is inject the Ethereum Web3 API into the javascript context of every website in order to enable decentralized apps like PIXI to access blockchain data from within the browser[^9]. Metamask is open source, widely used, and they have never been flagged for an abusive use of these permissions. It has a single CVE instance in the National Vulnerability Database dating from 2022 with medium severity that has been fixed since. The user can mitigate this concern by restricting the extension to PIXI's website (or any other website where he may want to pay using ETH) in the settings of the browser. Metamask also admit collecting the IP address of users when they initiate a transaction. The IP data is required to validate the transaction with the blockchain node and is not linkable to the wallet address[^10].
 
 ##### Still better than normal banking
-In spite of these concerns, we think it is reasonable to trust Metamask[^10] even though we would have preferred that they minimized their permissions by default (asking the user to opt-in to certain domains where the extension runs instead of enabling it for everything at the start). Note that PIXI's dependancy to a third party ethereum wallet like metamask is to be compared with BIXI's dependancy to online credit card payment providers. Metamask and online banking services are comparable in the sense that their use goes way beyond just PIXI or BIXI since they can be used to make transactions with potentially any other online service. The difference is that the bank stores a lot of your personal information whereas metamask only stores your wallet address.
+In spite of these concerns, we think it is reasonable to trust Metamask[^11] even though we would have preferred that they minimized their permissions by default (asking the user to opt-in to certain domains where the extension runs instead of enabling it for everything at the start). Note that PIXI's dependancy to a third party ethereum wallet like metamask is to be compared with BIXI's dependancy to online credit card payment providers. Metamask and online banking services are comparable in the sense that their use goes way beyond just PIXI or BIXI since they can be used to make transactions with potentially any other online service. The difference is that the bank stores a lot of your personal information whereas metamask only stores your wallet address.
 
 
 ## Second goal: a transparent, unalterable process.
-We wanted to leave no ambiguity to our users about how the rental process works by making the algorithm public. We also wanted the user to have the guarantee that the system cannot be changed internally by PIXI in the middle of a rental.
-(i would talk about the oracles in the system, what if PIXI database is unreliable?)
+We wanted to leave no ambiguity to our users about how the rental process works by making the algorithm public. We also wanted the user to have the guarantee that the system cannot be changed internally by PIXI in the middle of a rental. 
 
 ### Our solution: Smart Contracts
 
 Smart Contracts were the perfect fit as they have the double feature of being _transparent_ and _unmodifiable_.
 
 Transparency implies that the contract itself as well as its state (invocation parameters, resulting transactions...) at any point in time is publicly accessible. As mentionned in the previous section, this does imply that PIXI could monitor the wallet addresses of each payments and link them with trips. However in our implementation, the wallet information is NOT stored internally nor is it associated with each trip to build user profiles. 
-Neverhtheless, it is still much better then BIXI's current system as our PIXI can only retrieve a recognizable identifier (the wallet address) instead of a lookup identifier (credit card information).
+Neverhtheless, it is still much better then BIXI's current system as our PIXI can only retrieve a recognizable identifier (the wallet address) instead of a lookup identifier (credit card information). But the true benefit of full transparency comes from the fact that the user himself has access to the different states of the contract. This is crucial in one particular (unlikely) scenario: if PIXI decides for some reason to block the call informing the smart contract that the bike was returned after the user docked it, whether that is inetentionally (keep collateral) or unintentionaly (docking system failure). Then the user could see that the bike is not marked as returned on the contract and challenge PIXI either in court or hurting their reputation online. Indeed the user has an easy access to evidence of an error in the system which 
 
 Unmodifiability is a key property as it ensures that PIXI can never change the terms of the contract during its execution. This means that the user can know exactly what will happen at each step of the process. Note that this does not mean that PIXI will never be able to update its service. Rather, it implies that if PIXI wants to change the terms of the contract for whatever reason, it will have to deploy a new contract on a different block of the Ethereum blockchain, which the user will necessarily be aware of.
 
@@ -72,20 +71,19 @@ However to keep the service affordable and accessible to everyone, we developped
 
 ##### Users can’t revoke access to personal data once contract is invoked
 
-Our initial strategy for maintaining user anonymity during the contract involved storing their personal information in a Personal Data Store[^11] (PDS). Users would request proof of their data being stored in the PDS, which they would then send to PIXI. According to contractual agreements, PIXI would access this data only if necessary, such as in the event of a breach. Users could protect themselves by using the PDS's logs. However, the PDS lacked the authority to refuse a user's request to revoke their data, even if they were bound by a contractual agreement with a third party. This meant that a user could rent a bike and subsequently remove their personal information from the platform. Faced with this challenge, we considered two solutions: preserving a copy of the data within the contract or establishing our own PDS to ensure users are contractually bound with us. Ultimately, we chose the former option: keeping a copy of the data within the contract. (exaplin why? we do not want to store any personal data)
+Our initial strategy for maintaining user anonymity during the contract involved storing their personal information in a Personal Data Store[^12] (PDS). Users would request proof of their data being stored in the PDS, which they would then send to PIXI. According to contractual agreements, PIXI would access this data only if necessary (when the bike is not returned). Users could protect themselves by using the PDS's logs. However, the PDS lacked the authority to refuse a user's request to revoke their data, even if they were bound by a contractual agreement with a third party. This meant that a user could rent a bike and subsequently remove their personal information from the platform. Faced with this challenge, we had to preserve a copy of the user's personal data within the contract. 
 
 ##### Only PIXI can see data if a bike is stolen
 
-Since we decided to keep a copy of the personal data within the process, it is our obligation to securely store and process this data. Meaning that the personal information should not be disclose to the public. Therefore, we must encrypt the data that goes on the smart contract from external users. We achieved this by using asymmetric encryption[^12].
+Since we decided to keep a copy of the personal data within the process, it is our obligation to securely store and process this data. Meaning that the personal information should not be disclose to the public. Therefore, we must encrypt the data that goes on the smart contract from external users. We achieved this by using asymmetric encryption[^13].
 
 ##### Data is accessible only if Bike is stolen
 
-To implement privacy-unless, we ensure that user privacy remains confidential until specific conditions are met, employing an off-chain third-party for asymmetric encryption for this purpose. To maximize user's security, we require that the third-party uses Trusted Execution Environment techonlogy to store their private key. Utilizing a TEE for decryption offers heightened security compared to relying solely on a server. The TEE creates a secure enclave within the processor, isolating decryption processes from the broader system. This isolation ensures that sensitive decryption keys and operations remain protected from unauthorized access or tampering, even if the server's operating system is compromised by malware or malicious actors. Also, we require audit logs to track all act of decryption. However, nothing except reputation prevents collusion between the third-party and PIXI.
- 
+To implement privacy-unless, we ensure that user privacy remains confidential until specific conditions are met, employing an off-chain third-party[^14] for asymmetric encryption for this purpose. To maximize user's security, we require that the third-party uses Trusted Execution Environment technology to store their private key. Utilizing a TEE for decryption offers heightened security compared to relying solely on a server. The TEE creates a secure enclave within the processor, isolating decryption processes from the broader system. This isolation ensures that sensitive decryption keys and operations remain protected from unauthorized access or tampering, even if the server's operating system is compromised by malware or malicious actors. It is crucial that the TEE can be called for decryption of data only by the smart contract itself. This is ensured by checking the provenance of the caller before any decryption happends. Also, we require audit logs to track all act of decryption. However, nothing except reputation prevents collusion between the third-party and PIXI.
 
 ### Data in Transit
 
-Our aim is to securely acquire data from an identity provider[^13] to ensure its accuracy while preserving its confidentiality. To accomplish this, we implement a multi-layered encryption process. Initially, the identity provider encrypts the data using PIXI's public key, then the data undergoes additional encryption using the Trusted Execution Environment's public key. After encryption, the identity provider adds a digital signature[^14] to authenticate the data.
+Our aim is to securely acquire data from an identity provider[^15] to ensure its accuracy while preserving its confidentiality. To accomplish this, we implement a multi-layered encryption process. Initially, the identity provider encrypts the data using PIXI's public key, then the data undergoes additional encryption using the Trusted Execution Environment's public key. After encryption, the identity provider adds a digital signature[^16] to authenticate the data.
 
 The signed data is then presented to a smart contract for verification, providing transparency to all parties involved. Users are informed of the conditions under which their data may be disclosed through the visibility of the smart contract. If the contract remains unaltered, the smart contract abstains from transmitting the data for decryption. However, if the contract is breached, indicating a deviation from the specified conditions, a designated third party with access to the TEE decrypts the data.
 
@@ -95,9 +93,13 @@ It's important to note that PIXI cannot decrypt the data due to the TEE encrypti
 
 I would add an Architecture section to talk about the requirements of each system and how they interact with each other
 
-## Summary
+## Compliance
 
-By developping PIXI, we have shown that it is possible to build a micro-mobility app that offers very strong privacy guarantees to users. However, we are aware of the limitations that our prototype service may face in a real world context. Indeed, we have had to sacrifice some speed and comfort for the user in order to fulfill our privacy requirements. Although citizens claim to care more about their privacy, they are still reluctant to accepting the sometimes necessary tradeoffs to an enhanced privacy. This is called the privacy paradox[^15].
+It is easy for PIXI's privacy officer to show compliance with law 25 since the different states of the contract are publicly accessible. 
+
+## Conclusion
+
+By developping PIXI, we have shown that it is possible to build a micro-mobility app that offers very strong privacy guarantees to users. However, we are aware of the limitations that our prototype service may face in a real world context. Indeed, we have had to sacrifice some speed and comfort for the user in order to fulfill our privacy requirements. Although citizens claim to care more about their privacy, they are still reluctant to accepting the sometimes necessary tradeoffs to an enhanced privacy. This is called the privacy paradox[^17].
 
 Regardless, we hope that this proof of concept will serve as a baseline to be improved by other software developpers looking to enhance the privacy of users in the micro-mobility sector.
 
@@ -106,7 +108,7 @@ The success of PIXI in a real world context relies on several assumptions/third 
 2. The increased cost and latency enduced by the use of a smart contract and cryptocurrency remain tolerable for the user.
 3. Metamask remains privacy preserving (i.e. does not get acquired by a malicious owner who starts accumalating data on its users and their transactions).
 4. There exists a trustable third party authority (i.e. the government) that has access to the user's identity and can provide it to the user (doubly encrypted with the TEE's and PIXI's public keys and signed to guarantee authenticity and integrity).
-5. There exists a trusted third-party authority that hosts the TEE and does not divulgate its private key.
+5. There exists a trusted third-party authority (see footnote 14) that hosts a server using a TEE and that does not divulgate its private key.
 
 ## Notes and bibliography
 [^1]: These new features include the possibility of checking the real time availability of bikes and docks online, as well as an electronized automatic system to dock the bicycles. 
@@ -122,27 +124,28 @@ Source: T. Chen et al., "Understanding Ethereum via Graph Analysis," IEEE INFOCO
 Source: T. Zhang, "Privacy Evaluation of Blockchain Based Privacy Cryptocurrencies: A Comparative Analysis of Dash, Monero, Verge, Zcash, and Grin," in IEEE Transactions on Sustainable Computing, vol. 8, no. 4, pp. 574-582, Oct.-Dec. 2023, doi: 10.1109/TSUSC.2023.3303180.
 keywords: {Privacy;Blockchains;Bitcoin;Receivers;Information integrity;Information filtering;Data privacy;Anonymity;blockchain;privacy;Bitcoin;Zcash;Monero}, 
 
-[^5]: The story of this innovative online payment company is described in section 7.1 of this book: Hoepman, J.-H. (2021). Privacy Is Hard and Seven Other Myths: Achieving Privacy through Careful Design. The MIT Press.
+[^6]: The story of this innovative online payment company is described in section 7.1 of this book: Hoepman, J.-H. (2021). Privacy Is Hard and Seven Other Myths: Achieving Privacy through Careful Design. The MIT Press.
 
-[^6]: Ether coin is Ethereum's native cryptocurrency. 
+[^7]: Ether coin is Ethereum's native cryptocurrency. 
 Source: https://ethereum.org/en/eth/
 
-[^7]: For reference, there are 10 different ether ATMs within a 2km radius of our classroom in McGill's Adams building. Users can also acquire ETH with regular online paying methods (credit card, Paypal...) but we strongly recommend using an Ether ATM to pay with good old cash. That way there is no trace potentially linking any piece of your identity to your ethereum account other than the location of the ATM. 
+[^8]: For reference, there are 10 different ether ATMs within a 2km radius of our classroom in McGill's Adams building. Users can also acquire ETH with regular online paying methods (credit card, Paypal...) but we strongly recommend using an Ether ATM to pay with good old cash. That way there is no trace potentially linking any piece of your identity to your ethereum account other than the location of the ATM. 
 Source: https://coinatmradar.com/ether-atm-map/
 
+[^9]: Source: https://support.metamask.io/hc/en-us/articles/12412707939611-Why-does-MetaMask-need-permission-to-modify-data-on-all-web-pages.
 
-[^8]: Source: https://support.metamask.io/hc/en-us/articles/12412707939611-Why-does-MetaMask-need-permission-to-modify-data-on-all-web-pages.
+[^10]: Source: https://consensys.io/blog/consensys-data-retention-update and https://support.metamask.io/hc/en-us/articles/10992445334555-Does-MetaMask-collect-my-personal-data
 
-[^9]: Source: https://consensys.io/blog/consensys-data-retention-update and https://support.metamask.io/hc/en-us/articles/10992445334555-Does-MetaMask-collect-my-personal-data
+[^11]: This trust is shared by the authors of this publication for the IEEE: D. Pramulia and B. Anggorojati, "Implementation and evaluation of blockchain based e-voting system with Ethereum and Metamask," 2020 International Conference on Informatics, Multimedia, Cyber and Information System (ICIMCIS), Jakarta, Indonesia, 2020, pp. 18-23, doi: 10.1109/ICIMCIS51567.2020.9354310. keywords: {Performance evaluation;Multimedia systems;Reverse engineering;Blockchain;Reliability;Security;Electronic voting;Electronic voting;blockchain;smart contract;Ethereum}
 
-[^10]: This trust is shared by the authors of this publication for the IEEE: D. Pramulia and B. Anggorojati, "Implementation and evaluation of blockchain based e-voting system with Ethereum and Metamask," 2020 International Conference on Informatics, Multimedia, Cyber and Information System (ICIMCIS), Jakarta, Indonesia, 2020, pp. 18-23, doi: 10.1109/ICIMCIS51567.2020.9354310. keywords: {Performance evaluation;Multimedia systems;Reverse engineering;Blockchain;Reliability;Security;Electronic voting;Electronic voting;blockchain;smart contract;Ethereum}
+[^12]: Source: https://medium.com/mydex/what-is-a-personal-data-store-a583f7ef9be3
 
-[^11]: Source: https://medium.com/mydex/what-is-a-personal-data-store-a583f7ef9be3
+[^13]: Asymmetric Encryption uses two distinct, yet related keys. One key, the Public Key, is used for encryption and the other, the Private Key, is for decryption. As implied in the name, the Private Key is intended to be private so that only the authenticated recipient can decrypt the message. Source: https://cheapsslsecurity.com/blog/what-is-asymmetric-encryption-understand-with-simple-examples/
 
-[^12]: Asymmetric Encryption uses two distinct, yet related keys. One key, the Public Key, is used for encryption and the other, the Private Key, is for decryption. As implied in the name, the Private Key is intended to be private so that only the authenticated recipient can decrypt the message. Source: https://cheapsslsecurity.com/blog/what-is-asymmetric-encryption-understand-with-simple-examples/
+[^14]: Any company hosting servers with TEEs could fulfill this role. Since all the data they received is encrypted with PIXI's key, the only privacy risk would come from a leak of this server's private key to PIXI or of PIXI's private key to this company. 
 
-[^13]: An identity provider (IdP) is a service that stores and verifies user identity. Source: https://www.cloudflare.com/en-ca/learning/access-management/what-is-an-identity-provider/
+[^15]: An identity provider (IdP) is a service that stores and verifies user identity. Source: https://www.cloudflare.com/en-ca/learning/access-management/what-is-an-identity-provider/
 
-[^14]: A digital signature is a mathematical technique used to validate the authenticity and integrity of a digital document, message or software. Source: https://www.techtarget.com/searchsecurity/definition/digital-signature
+[^16]: A digital signature is a mathematical technique used to validate the authenticity and integrity of a digital document, message or software. Source: https://www.techtarget.com/searchsecurity/definition/digital-signature
 
-[^15]: When it comes to privacy, users tend to value short term gains over long term losses. This idea is developped in section 2.2.2 of this booke: Knijnenburg, B. P., Page, X., Wisniewski, P., Lipford, H. R., Proferes, N., & Romano, J. (Eds.). (2022). Modern Socio-Technical Perspectives on Privacy (1st ed.). Springer Cham. https://doi.org/10.1007/978-3-030-82786-1
+[^17]: When it comes to privacy, users tend to value short term gains over long term losses. This idea is developped in section 2.2.2 of this booke: Knijnenburg, B. P., Page, X., Wisniewski, P., Lipford, H. R., Proferes, N., & Romano, J. (Eds.). (2022). Modern Socio-Technical Perspectives on Privacy (1st ed.). Springer Cham. https://doi.org/10.1007/978-3-030-82786-1
