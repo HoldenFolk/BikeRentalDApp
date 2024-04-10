@@ -3,6 +3,7 @@ import GetAllBikesData from './components/GetAllBikesData';
 import RegisterBike from './components/RegisterBike';
 import WalletConnect from './components/WalletConnect';
 import RentBike from './components/RentBike';
+import RentBikeData from './components/RentBikeData';
 import WalletSwitcher from './components/WalletSwitcher';
 import { WalletProvider } from './context/WalletContext';
 import ReturnBike from './components/ReturnBike';
@@ -31,6 +32,9 @@ function App() {
         <div className="container">
           <div className="top-middle">
             <RentBike />
+          </div>
+          <div className="top-middle">
+            <RentBikeData />
           </div>
           <div className='top-middle'>
             <ReturnBike />
