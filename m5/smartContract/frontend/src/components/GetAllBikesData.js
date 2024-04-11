@@ -37,9 +37,6 @@ function GetAllBikesData() {
           depositAmount: ethers.utils.formatUnits(bike.depositAmount, 'wei'),
           personalData: ethers.utils.parseBytes32String(bike.personalData)
         }));
-        
-        console.log(bikesData[0].personalData);
-        console.log(ethers.utils.parseBytes32String(bikesData[0].personalData));
   
         setBikes(formattedBikesData);
       } catch (error) {
