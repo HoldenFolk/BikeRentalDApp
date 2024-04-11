@@ -129,6 +129,19 @@ It's important to note that PIXI cannot decrypt the data unless the contract is 
 
 Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the secure decryptor) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personal data becoming available to the general public since both keys would need to be compromised for that to happen.
 
+The state of the personal data should be as follows for the case where the bike is returned.
+
+<div align="center">
+<img src="./m5/resources/data-transit1.png" width = "90%"/>
+</div>
+
+As for the case where the contract is broken, it should behave that way.
+
+<div align="center">
+<img src="./m5/resources/data-transit2.png" width = "90%"/>
+</div>
+
+
 
 # Architecture
 
@@ -138,17 +151,30 @@ PIXI's architecture contains several components:
 - Smart contract (coded in solidity) => Where the proper execution of the rental is enforced.
 - Secure decryptor storing private key inside a TEE[^18] (coded in JavaScript) => Where the personal data is (partially) decrypted in case of theft.
 - Backend (Not implemented) => It would be connected with the electronized docking stations in order to free the bikes/signal their return to the smart contract. This was omitted in our prototype for simplicity because we were able to simulate rentals/returns from the frontend (by updating the status of the bike objects and calling the ReturnBike function).
+- Bike Station => Where the bikes are docked. It returns the current state to the backend. It receives call from backend to unlock bikes.
 - Database (Not implemented) => It would store the trip history (tripID, start station/time, end station/time, cost) for network analysis purposes as well as the thieves' encrypted personal information (which would be deleted once PIXI is compensated for the theft).
 - Identity Provider (Assumption) => It would have access to the user's accurate personnal information and provide doubly encrypted, signed data to the frontend.
 - User's and PIXI's Ethereum wallets => Process payments.
 
 Here's a flow chart of what a rental with revocable privacy would look like in a fully implemented version.
 
+First, the case where the bike is not returned.
 
+<div align="center">
+<img src="./m5/resources/revocableprivacy1.png" width = "90%"/>
+</div>
 
+Second, the case where the bike is returned.
 
+<div align="center">
+<img src="./m5/resources/revocableprivacy2.png" width = "90%"/>
+</div>
 
 Here's a design of what the database would look like.
+
+<div align="center">
+<img src="./m5/resources/Model_databases.png" width = "90%"/>
+</div>
 
 # Compliance
 
