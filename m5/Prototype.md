@@ -129,7 +129,7 @@ It's important to note that PIXI cannot decrypt the data unless the contract is 
 
 Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the secure decryptor) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personal data becoming available to the general public since both keys would need to be compromised for that to happen.
 
-The state of encryption of the personal data should be as follows for the case where the bike is returned.
+The state of encryption of the personal data should be as follows for the case where the bike is returned (these slides were taken from our [presentation](resources/PIXI_presentation.pdf)).
 
 <div align="center">
 <img src="m5/resources/data-transit1.png" width = "90%"/>
