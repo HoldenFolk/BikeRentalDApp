@@ -20,15 +20,32 @@ module.exports = app;
 // Route to decrypt data
 app.get('/decrypt/:encryptedData', async (req, res) => {
     try {
-        const encryptedData = req.params.encryptedData;
 
-        console.log('Encrypted data:', encryptedData);
+        // check for authorization first !!
+        const encryptedData = req.params.encryptedData;
 
         const decryptedData = await decryptData(encryptedData);
 
-        console.log('Decrypted data:', decryptedData);
-
         res.send(decryptedData);
+
+    } catch (error) {
+        console.error('Error decrypting data:', error);
+        res.status(500).send('Error decrypting data');
+    }
+});
+
+app.get('/publickey', async (req, res) => {
+    try {
+        
+        res.send(`-----BEGIN PUBLIC KEY-----
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv5ox8dFEBD+lcWPUI19N
+            S3qf06i9wMKasGCZZq5eI7U/biPD7PtV4pkJhjmLjM5h0hweOPeW2E0DLJ8+Wc8C
+            AEsHTBG3+bMOwXhDKK8cWW8z+boL6G9lpcOM8tt7xUbmCnq15s0JRn2K6LOYS6DO
+            Fb5hhOnU3HtfS+f9RG0/ENO9FZOXhV4x1nhPHYiw6JGM6Nxv2rv32nQ/C8dNZdEb
+            FgVmkoxDnDluShuxBTXkh2C0S505WcE46/nrsD5RWyMYU6VkX514mj1Vp3Dsvzji
+            YP3/MJdrUJHEseETXPFTZuMVvU/OMWEEAQKDViU8ES91LedGkCmplTyn44yhA/qI
+            KQIDAQAB
+            -----END PUBLIC KEY-----`);
 
     } catch (error) {
         console.error('Error decrypting data:', error);

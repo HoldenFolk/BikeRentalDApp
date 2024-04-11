@@ -41,6 +41,8 @@ function App() {
           <div className='top-middle'>
             <ReturnBike />
           </div>
+        </div>
+        <div className="container">
           <div className='top-middle'>
             <ClaimBike />
           </div>

@@ -73,7 +73,7 @@ function ClaimBike() {
 
   return (
     <div>
-      <h2>Return Bike</h2>
+      <h2>Claim Late Bikes</h2>
       <form onSubmit={handleReturnBike}>
         <button type="submit" disabled={loading} className='button-38'>
           {loading ? 'Processing...' : 'Return Bike'}

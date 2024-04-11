@@ -48,7 +48,7 @@ function RentBikeData() {
 
   return (
     <div>
-      <h2>Rent Bike</h2>
+      <h2>Revocable Option</h2>
       <form onSubmit={handleRentBike}>
         <div>
           <label htmlFor="bikeId" className='label'>Bike ID:</label>
