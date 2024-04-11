@@ -132,13 +132,13 @@ Although our system does not enable perfect forward secrecy, the double layer of
 The state of the personal data should be as follows for the case where the bike is returned.
 
 <div align="center">
-<img src="./m5/resources/data-transit1.png" width = "90%"/>
+<img src="m5/resources/data-transit1.png" width = "90%"/>
 </div>
 
 As for the case where the contract is broken, it should behave that way.
 
 <div align="center">
-<img src="./m5/resources/data-transit2.png" width = "90%"/>
+<img src="m5/resources/data-transit2.png" width = "90%"/>
 </div>
 
 
@@ -161,19 +161,19 @@ Here's a flow chart of what a rental with revocable privacy would look like in a
 First, the case where the bike is not returned.
 
 <div align="center">
-<img src="./m5/resources/revocableprivacy1.png" width = "90%"/>
+<img src="m5/resources/revocableprivacy1.png" width = "90%"/>
 </div>
 
 Second, the case where the bike is returned.
 
 <div align="center">
-<img src="./m5/resources/revocableprivacy2.png" width = "90%"/>
+<img src="m5/resources/revocableprivacy2.png" width = "90%"/>
 </div>
 
 Here's a design of what the database would look like.
 
 <div align="center">
-<img src="./m5/resources/Model_databases.png" width = "90%"/>
+<img src="m5/resources/Model_databases.png" width = "90%"/>
 </div>
 
 # Compliance
