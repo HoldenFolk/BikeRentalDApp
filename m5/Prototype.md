@@ -10,7 +10,7 @@ The button "connect-wallet" enables the user to connect his ethereum wallet in o
 The button "rent-bike" prompts the user to enter the ID engraved in the bike that he wants to rent (this could be replaced by a QR code scan similar to what BIXI currently supports). 
 The user then has 2 options:
 -  Paying a deposit corresponding to the price of the bike.
--  Uploading a file containing his personal info that is doubly encrypted with PIXI's and a Trusted Executing Environment's (TEE)[^4] public keys. He will also pay a samller deposit corresponding to the cost of renting the bike for 1 day (this ensures that the users has sufficient funds to pay for the rental). 
+-  Uploading a file containing his personal info that is doubly encrypted with PIXI's and a secure decyptor's[^4] public keys. He will also pay a samller deposit corresponding to the cost of renting the bike for 1 day (this ensures that the users has sufficient funds to pay for the rental). 
 
 There are then 2 potential scenarios:
   1. If the bike is returned within 24 hours, the deposit is refunded to the user (deducting the cost of the rental) and the user's personal information remains encrypted. The only records stored on PIXI's database are that a bike was rented from station x at time t and docked in station y at time t' (allowing for some network analysis to balance the bike distrivution).
@@ -68,7 +68,7 @@ An easy way to enforce this is by requiring the user to make a deposit equivalen
 
 ### The revocable privacy option
 
-However to keep the service affordable and accessible to everyone, we developped a system that significantly reduces the amount of the deposit required, down to the cost of renting a bike for 1 day. In counterpart, the user must provide a file containing his personal data upon invocation of the smartcontract (via the rentbike function). However, we want that personal data to remain inaccessible to anyone unless the bike gets stolen. We developped a system that achieves this by using asymetric key encryption and a TEE (see footnote n4 for an explanation of this technology). This goal can be broken down in 3 subgoals:
+However to keep the service affordable and accessible to everyone, we developped a system that significantly reduces the amount of the deposit required, down to the cost of renting a bike for 1 day. In counterpart, the user must provide a file containing his personal data upon invocation of the smart contract (via the rentbike function). However, we want that personal data to remain inaccessible to anyone unless the bike gets stolen. We developped a system that achieves this by using asymetric key encryption and a secure decryptor on a TEE (see footnote 4 for an explanation of this technology). This goal can be broken down in 3 subgoals:
 
 ##### Users can’t revoke access to personal data once contract is invoked
 
@@ -80,37 +80,42 @@ Since we decided to keep a copy of the personal data within the process, it is o
 
 ##### Data is accessible only if Bike is stolen
 
-To implement privacy-unless, we ensure that the user's privacy remains intact until specific conditions are met. We employ an off-chain third-party[^15] charged of decrypting the user's personal data for this purpose. To maximize the user's security, we require that the third-party uses Trusted Execution Environment technology to store their private key. Utilizing a TEE for decryption offers heightened security compared to relying solely on a server. The TEE creates a secure enclave within the processor, isolating decryption processes from the broader system. This isolation ensures that sensitive decryption keys and operations remain protected from unauthorized access or tampering, even if the server's operating system is compromised by malware or malicious actors. It is crucial that the TEE can be called for decryption of personal data only by the smart contract itself. This is ensured by checking the provenance of the caller before any decryption happends. We also require audit logs to track all act of decryption. However, nothing except reputation prevents collusion between the third-party and PIXI.
+To implement privacy-unless, we ensure that the user's privacy remains intact until specific conditions are met. We employ an off-chain third-party[^15] charged of decrypting the user's personal data for this purpose. To maximize the user's security, we require that the third-party uses Trusted Execution Environment technology to store their private key. Utilizing a TEE for decryption offers heightened security compared to relying solely on a server. The TEE creates a secure enclave within the processor, isolating decryption processes from the broader system. This isolation ensures that sensitive decryption keys and operations remain protected from unauthorized access or tampering, even if the server's operating system is compromised by malware or malicious actors. It is crucial that the secure decryptor can be called for decryption of personal data only by the smart contract itself. This is ensured by checking the provenance of the caller before any decryption happends. We also require audit logs to track all act of decryption. However, nothing except reputation prevents collusion between the third-party and PIXI.
 
 ### Data in Transit
 
 Our aim is to securely acquire data from an identity provider[^16] to ensure its accuracy while preserving its confidentiality. To accomplish this, we implement a multi-layered encryption process. Initially, the identity provider encrypts the data using PIXI's public key, then the data undergoes additional encryption using the Trusted Execution Environment's public key. After encryption, the identity provider adds a digital signature[^17] to authenticate the data.
 
-The signed data is then presented to a smart contract for verification, providing transparency to all parties involved. Users are informed of the conditions under which their data may be disclosed through the visibility of the smart contract. If the bike is returned on time, the smart contract abstains from transmitting the data for decryption. However, if the contract is breached, indicating a deviation from the specified conditions, the TEE will be called to decrypt the data.
+The signed data is then presented to a smart contract for verification, providing transparency to all parties involved. Users are informed of the conditions under which their data may be disclosed through the visibility of the smart contract. If the bike is returned on time, the smart contract abstains from transmitting the data for decryption. However, if the contract is breached, indicating a deviation from the specified conditions, the secure decryptor will be called to decrypt the data.
 
-It's important to note that PIXI cannot decrypt the data unless the contract is breached due to the TEE encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount. Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the TEE) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personnal data becoming available to the general public since both keys would need to be compromised for that to happen.
+It's important to note that PIXI cannot decrypt the data unless the contract is breached due to the secure decryptor's encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount. Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the secure decryptor) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personnal data becoming available to the general public since both keys would need to be compromised for that to happen.
 
-## Architecture !!
+# Architecture
 
-I would add an Architecture section to talk about the requirements of each system and how they interact with each other
+PIXI's architecture contains several components:
+- FrontEnd (coded in react) => Where the user initiates rentals.
+- Smart contract (coded in solidity) => Where the proper execution of the rental is enforced.
+- Secure decryptor storing private key inside a TEE (coded in JavaScript)[^18] => Where the personal data is (partially) decrypted in case of theft.
+- Backend (Not implemented) => It would be connected with the electronized docking stations in order to free the bikes/signal their return to the smart contract. This was omitted in our prototype for simplicity because we were able to simulate rentals/returns from the frontend (by updating the status of the bike and the ReturnBike function). 
+- Database (Not implemented) => It would store the trip history (tripID, start station/time, end station/time) for network analysis purposes as well as the thieves' encrypted personal information (which would be deleted once PIXI is compensated for the theft).
 
-## Compliance
+# Compliance
 
 It is easy for PIXI's privacy officer to show compliance with law 25 since the different states of the contract are publicly accessible. 
 
-## Conclusion
+# Conclusion
 
-By developping PIXI, we have shown that it is possible to build a micro-mobility app that offers very strong privacy guarantees to users. However, we are aware of the limitations that our prototype service may face in a real world context. Indeed, we have had to sacrifice some speed and comfort for the user in order to fulfill our privacy requirements. Although citizens claim to care more about their privacy, they are still reluctant to accepting the sometimes necessary tradeoffs to an enhanced privacy. This is called the privacy paradox[^18].
+By developping PIXI, we have shown that it is possible to build a micro-mobility app that offers very strong privacy guarantees to users. However, we are aware of the limitations that our prototype service may face in a real world context. Indeed, we have had to sacrifice some speed and comfort for the user in order to fulfill our privacy requirements. Although citizens claim to care more about their privacy, they are still reluctant to accepting the sometimes necessary tradeoffs to an enhanced privacy. This is called the privacy paradox[^19].
 
 Regardless, we hope that this proof of concept will serve as a baseline to be improved by other software developpers looking to enhance the privacy of users in the micro-mobility sector.
 
 The success of PIXI in a real world context relies on several assumptions/third parties that we have listed here clarity:
 1. Users are not scared off by the use of cryptocurrency and creates their ethereum wallet in a privacy preserving way (i.e with Metamask).
 2. The increased cost and latency enduced by the use of a smart contract and cryptocurrency remain tolerable for the user.
-3. There exists a trustable third party authority (i.e. the government) that has access to the user's identity and can provide it PIXI (doubly encrypted with the TEE's and PIXI's public keys and signed to guarantee authenticity and integrity).
-4. There exists a trusted third-party authority (see footnote 14) that hosts a server using a TEE and that does not divulgate its private key.
+3. There exists a trustable third party authority (i.e. the government) that has access to the user's identity and can provide it PIXI (doubly encrypted with the decryptor's and PIXI's public keys and signed to guarantee authenticity and integrity).
+4. There exists a trusted third-party authority (see footnote 15) that hosts a server using a TEE and that does not divulgate its private key.
 
-## Notes and bibliography
+# Notes and bibliography
 [^1]: These new features include the possibility of checking the real time availability of bikes and docks online, as well as an electronized automatic system to dock the bicycles. 
 
 [^2]: Smart contracts are self-executing digital agreements that are hard-coded on the blockchain. Once deployed, they reside on a block and are hashed on all the subsequent blocks, which makes them _unmodifiable_. The security of the Ethereum blockchain relies on its _transparency_. Concretely, all transactions and smart contracts are made public, allowing anyone to verify the data in a peer to peer validation system. 
@@ -118,7 +123,7 @@ Source: T. Chen et al., "Understanding Ethereum via Graph Analysis," IEEE INFOCO
 
 [^3]: Metamask is a popular cryptocurrency wallet manager and a gateway to blockchain based decentralized applications like PIXI.
 
-[^4]: A Trusted Execution Environment (TEE) is a segregated area of memory and CPU that is protected from the rest of the CPU using encryption, any data in the TEE can't be read or tampered with by any code outside that environment. Data can be manipulated inside the TEE by suitably authorized code. 
+[^4]: A secure decryptor would store its private key on a Trusted Executing Environment (TEE) hosted on an independant server out of PIXI's control. A TEE is a segregated area of memory and CPU that is protected from the rest of the CPU using encryption, any data in the TEE can't be read or tampered with by any code outside that environment. Data can be manipulated inside the TEE by suitably authorized code. 
 Source: https://learn.microsoft.com/en-us/azure/confidential-computing/trusted-execution-environment
 
 [^5]: It can be argued that privacy coins are a type of unlinkable anonymous cryptocurrencies but their scope of use is limited and was not realistically implementable in our project.
@@ -151,4 +156,6 @@ Source: https://coinatmradar.com/ether-atm-map/
 
 [^17]: A digital signature is a mathematical technique used to validate the authenticity and integrity of a digital document, message or software. Source: https://www.techtarget.com/searchsecurity/definition/digital-signature
 
-[^18]: When it comes to privacy, users tend to value short term gains over long term losses. This idea is developped in section 2.2.2 of this book: Knijnenburg, B. P., Page, X., Wisniewski, P., Lipford, H. R., Proferes, N., & Romano, J. (Eds.). (2022). Modern Socio-Technical Perspectives on Privacy (1st ed.). Springer Cham. https://doi.org/10.1007/978-3-030-82786-1
+[^18]: Our prototype is currently missing the oracle interface allowing the smart contract to call the secure decryptor.
+
+[^19]: When it comes to privacy, users tend to value short term gains over long term losses. This idea is developped in section 2.2.2 of this book: Knijnenburg, B. P., Page, X., Wisniewski, P., Lipford, H. R., Proferes, N., & Romano, J. (Eds.). (2022). Modern Socio-Technical Perspectives on Privacy (1st ed.). Springer Cham. https://doi.org/10.1007/978-3-030-82786-1
