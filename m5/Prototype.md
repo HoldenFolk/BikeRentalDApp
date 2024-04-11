@@ -8,20 +8,19 @@ As explained in milestone 1 of this project, the renting protocols on which curr
 
 
 We propose an alternative to BIXI's current bike-renting protocol that incorporates the core requirements of privacy by design. From now on, we will refer to this solution as PIXI.
-PIXI relies on a publicly accessible and unmodifiable smart contract[^2] that resides on the Ethereum blockchain. Payments are made using Ether coins, which require the user to have an Ether wallet in order to transfer the cryptocurrency. No personal identifiers are collected by our system, and no account is necessary. PIXI's web app consists of a map of all the stations with refreshable data showing the bikes and docking stations available (this map functionality was not implemented in our prototype).
+PIXI relies on a publicly accessible and unmodifiable smart contract[^2] that resides on the Ethereum blockchain. Payments are made using Ether coins, which require the user to have an Ether wallet in order to transfer the cryptocurrency. No personal identifiers are collected by our system, and no account is necessary. PIXI's web app would contain a map of the city with refreshable data showing the available bikes and docking stations (this map functionality was not implemented in our prototype).
 
-The button "connect-wallet" enables the user to connect his Metamask[^3] ethereum wallet in order to make the payments.
+The button "Connect Your Wallet" enables the user to connect his Metamask[^3] Ethereum wallet in order to make the payments.
 
-The button "rent-bike" prompts the user to enter the ID engraved in the bike that he wants to rent (this could be replaced by a QR code scan similar to what BIXI currently supports).
-
-The user then has two options:
+The buttons "Rent Bike" prompt the user to enter the ID engraved in the bike that he wants to rent (this could be replaced by a QR code scan similar to what BIXI currently supports).
+Each "Rent Bike" button represents one of the user's two options:
 -  Paying a deposit corresponding to the price of the bike.
 -  Uploading a file containing his personal information that is doubly encrypted with PIXI's and a secure decryptor's[^4] public keys. He will also pay a samller deposit corresponding to the cost of renting the bike for one day (this ensures that the user has sufficient funds to pay for the rental).
 
 
 There are then two potential scenarios:
 
-  1. If the bike is returned within 24 hours, the deposit is refunded to the user (deducting the cost of the rental) and the user's personal information remains encrypted. The only records stored on PIXI's database are that a bike was rented from station x at time t and docked in station y at time t' (allowing for some network analysis to balance the bike distribution).
+  1. If the bike is returned within 24 hours, the deposit is refunded to the user (deducting the cost of the rental) and the user's personal information remains encrypted. The only records stored on PIXI's database are that trip i stated from station x at time t and ended in station y at time t' costing m ETH (allowing for some network analysis to balance the bike distribution).
 
   2. If the bike is not returned within 24 hours, the bike is considered stolen. In that case the deposit is transferred to PIXI's wallet, and the user's personal information is decrypted by the smart contract and the secure decryptor, allowing PIXI to recover the identity of the thief. The details of this complex revocable privacy protocol will be described in a later section.
 
@@ -56,15 +55,15 @@ Our prototype currently provides the option to connect the user's wallet using M
 
 
 ##### Concerns
-However, this comes with the disadvantage of introducing a dependency to a third party in our system, which comes with legitimate concerns for the user. In particular, the Metamask browser extension asks for three permissions, including the ability to read and change all data for all websites—a massive tradeoff. However, all metamask does is inject the Ethereum Web3 API into the javascript context of every website in order to enable decentralized apps like PIXI to access blockchain data from within the browser[^9]. Metamask is open source, widely used, and they have never been flagged for abusive use of these permissions. It has a single CVE instance in the National Vulnerability Database dating from 2022 with medium severity that has been fixed since. The user can mitigate this concern by restricting the extension to PIXI's website (or any other website where he may want to pay using ETH) in the settings of the browser. Metamask also admits collecting the IP addresses of users when they initiate a transaction. The IP data is required to validate the transaction with the blockchain node and is not linkable to the wallet address[^10].
+However, this comes with the disadvantage of introducing a dependency to a third party in our system, which comes with legitimate concerns for the user. In particular, the Metamask browser extension asks for three permissions, including the ability to read and change all data for all websites — potentially a massive tradeoff. However, all metamask does is inject the Ethereum Web3 API into the javascript context of every website in order to enable decentralized apps like PIXI to directly access blockchain data from the browser[^9]. Metamask is open source, widely used, and they have never been flagged for abusive use of these permissions. It has a single CVE instance in the National Vulnerability Database dating from 2022 with medium severity that has been fixed since. The user can mitigate this concern by restricting the extension to PIXI's domain (or the domain of any other website where he may want to pay using ETH) in the settings of the browser. Metamask also collects the IP addresses of users when they initiate a transaction. The IP data is required to validate the transaction with the blockchain node and is not linkable to the wallet address[^10].
 
 
 ##### Still better than normal banking
-In spite of these concerns, we think it is reasonable to trust Metamask[^11] even though we would have preferred that they minimized their permissions by default (asking the user to opt-in to certain domains where the extension runs instead of enabling it for everything at the start). Note that PIXI's dependency on a third party ethereum wallet like Metamask is to be compared with BIXI's dependency on online credit card payment providers. Metamask and online banking services are comparable in the sense that their use goes way beyond just PIXI or BIXI since they can be used to make transactions with potentially any other online service. The difference is that the bank stores a lot of your personal information, whereas Metamask only stores your wallet address.
+In spite of these concerns, we think it is reasonable to trust Metamask[^11] even though we would have preferred that they minimized their permissions by default (asking the user to opt-in to certain domains where he wants the extension to run instead of enabling it for everything at the start). Note that PIXI's dependency on a third party Ethereum wallet manager like Metamask is to be compared with BIXI's dependency on online credit card payment providers. Metamask and online banking services are comparable in the sense that their use goes way beyond just PIXI or BIXI since they can be used to make transactions with potentially any other online service. The difference is that the bank stores a lot of your personal information, whereas Metamask only stores your wallet address.
 
 
 ##### Users could theoretically bypass Metamask.
-While we used Metamask to simplify the wallet connection/creation process for a non-introduced user, PIXI could provide integration for any Ethereum wallet (not just those managed by Metamask). This would be done by asking the user to input his Ethereum wallet address. We did not implement this feature because the Metamask integration was sufficient to prove that the concept was valid and functional.
+While we used Metamask to simplify the wallet creation/connection process for non-introduced users, PIXI could also provide integration for any Ethereum wallet (not just those managed by Metamask). This would be done by asking the user to input his Ethereum wallet address. We did not implement this feature because the Metamask integration was sufficient to prove that the concept is valid and functional.
 
 
 ## Second goal: a transparent, unalterable process.
@@ -75,11 +74,12 @@ We wanted to leave no ambiguity for our users about how the rental process works
 Smart Contracts were the perfect fit, as they have the double feature of being _transparent_ and _unmodifiable_.
 
 
-Transparency implies that the contract itself as well as its state (invocation parameters, resulting transactions...) at any point in time is publicly accessible. As mentioned in the previous section, this does imply that PIXI could monitor the wallet addresses of each paymentand link them with trips. However, in our implementation, the wallet information is NOT stored internally, nor is it associated with each trip to build user profiles.
-However, it is still much better than BIXI's current system, as our PIXI can only retrieve a recognizable identifier (the wallet address) instead of a lookup identifier (credit card information). But the true benefit of full transparency comes from the fact that the user himself has access to the different states of the contract. This is crucial in one particular (unlikely) scenario: if PIXI decides for some reason to block the call informing the smart contract that the bike was returned after the user docked it, whether that is inetentionally (to keep the collateral) or unintentionally (docking system failure). Then the user could see that the bike was not marked as returned on the contract and challenge PIXI[^12].
+_Transparency_ implies that the contract itself as well as its state (invocation parameters, resulting transactions...) at any point in time is publicly accessible. As mentioned in the previous section, this does imply that PIXI could monitor the wallet addresses of each payment and link them with trips. However, in our implementation, the wallet information is NOT stored internally, nor is it associated with each trip to build user profiles.This is much better than BIXI's current system as our PIXI can only retrieve a recognizable identifier (the wallet address) instead of a lookup identifier (credit card information). 
+
+But the true benefit of full transparency comes from the fact that the user himself has access to the different states of the contract. This is crucial in one particular (unlikely) scenario: if PIXI decides for some reason to block the call informing the smart contract that the bike was returned after the user docked it, whether that is inetentionally (to keep the collateral) or unintentionally (docking system failure). Then the user could see that the bike was not marked as returned on the contract and challenge PIXI[^12].
 
 
-Unmodifiability is a key property, as it ensures that PIXI can never change the terms of the contract during its execution. This means that the user can know exactly what will happen at each step of the process. Note that this does not mean that PIXI will never be able to update its service. Rather, it implies that if PIXI wants to change the terms of the contract for whatever reason, it will have to deploy a new contract on a different block of the Ethereum blockchain, which the user will necessarily be aware of.
+_Unmodifiability_ is a key property, as it ensures that PIXI can never change the terms of the contract during its execution. This means that the user can know exactly what will happen at each step of the process. Note that this does not mean that PIXI will never be able to update its service. Rather, it implies that if PIXI wants to change the terms of the contract for whatever reason, it will have to deploy a new contract on a different block of the Ethereum blockchain, which the user will necessarily be aware of.
 
 
 ## Third goal: A privacy preserving theft prevention method
@@ -89,19 +89,19 @@ An essential requirement of bike rental services like PIXI is to ensure that bik
 ### The deposit option
 
 
-An easy way to enforce this is by requiring the user to make a deposit equivalent to the cost of replacing the bicycle. This option is not adapted to all users as it requires having a large amount of ETH in their wallet. However, this may be a satisfying option for hard privacy fundamentalists who don't want any personal data involved in the process. As a service centered on privacy, we felt like it was legitimate to give them this possibility.
+An easy way to enforce this is by requiring the user to make a deposit equivalent to the cost of replacing the bicycle. This option is not adapted to all users as it requires them to have a large amount of ETH in their wallet. However, this may be a satisfying option for hard privacy fundamentalists who don't want any personal data involved in the process. As a service centered on privacy, we felt like it was legitimate to give them this possibility.
 
 
 ### The revocable privacy option
 
 
-However, to keep the service affordable and accessible to everyone, we developed a system that significantly reduces the amount of deposit required, down to the cost of renting a bike for one day. In contrast, the user must provide a file containing his personal data upon invocation of the smart contract (via the rentbike function). However, we want that personal data to remain inaccessible to anyone unless the bike gets stolen. We developed a system that achieves this by using asymetric key encryption and a secure decryptor on a TEE (see footnote 4 for an explanation of this technology). This goal can be broken down into 3 subgoals:
+However, to keep the service affordable and accessible to everyone, we imagined a system that significantly reduces the amount of the required deposit, down to the cost of renting a bike for one day. In contrast, the user must provide a file containing his personal data upon invocation of the smart contract (via the rentbike function). However, we want that personal data to remain inaccessible to anyone unless the bike gets stolen. We developed a system that achieves this by using asymetric key encryption and a secure decryptor on a TEE (see footnote 4 for an explanation of this technology). This goal can be broken down into 3 subgoals:
 
 
 ##### Users can’t revoke access to personal data once a contract is invoked.
 
 
-Our initial strategy for maintaining user anonymity during the contract involved storing their personal information in a Personal Data Store[^13] (PDS). Users would request proof of their data being stored in the PDS, which they would then send to PIXI. According to contractual agreements, PIXI would access this data only if necessary (when the bike is not returned). Users could protect themselves by using the PDS's logs. However, the PDS lacked the authority to refuse a user's request to revoke their data, even if they were bound by a contractual agreement with a third party. This meant that a user could rent a bike and subsequently remove their personal information from the platform. Faced with this challenge, we had to preserve a copy of the user's personal data within the contract. Since the execution of the contract is _unalterable_, there is no way for the user to remove or modify his personal information after the bike is rented.
+Our initial strategy for maintaining user anonymity during the contract involved storing their personal information in a Personal Data Store[^13] (PDS). Users would request proof of their data being stored in the PDS, which they would then send to PIXI. According to contractual agreements, PIXI would access this data only if necessary (when the bike is not returned). Users could protect themselves by using the PDS's logs. However, the PDS lacked the authority to refuse a user's request to revoke their data, even if they were bound by a contractual agreement with a third party. This meant that a user could rent a bike and subsequently remove their personal information from the platform. Faced with this challenge, we decided to preserve a copy of the user's personal data within the contract. Since the execution of the contract is _unalterable_, there is no way for the user to remove or modify his personal information after the bike is rented, thus achieving our goal.
 
 
 ##### Only PIXI can see data if a bike is stolen.
@@ -113,19 +113,21 @@ Since we decided to keep a copy of the personal data during the process, it is o
 ##### Data is accessible only if a bike is stolen.
 
 
-To implement privacy-unless, we must ensure that the user's privacy remains intact until specific conditions are met. We employ an off-chain third-party[^15] charged with decrypting the user's personal data for this purpose. To maximize the user's security, we require that the third party use Trusted Execution Environment technology to store their private key. Utilizing a TEE for decryption offers heightened security compared to relying solely on a server. The TEE creates a secure enclave within the processor, isolating decryption processes from the broader system. This isolation ensures that sensitive decryption keys and operations remain protected from unauthorized access or tampering, even if the server's operating system is compromised by malware or malicious actors. It is crucial that the secure decryptor can be called for the decryption of personal data only by the smart contract itself. This is ensured by checking the provenance of the caller before any decryption happens. We also require audit logs to track all acts of decryption. However, nothing except reputation prevents collusion between the third party and PIXI.
+To implement privacy-unless, we must ensure that the user's privacy remains intact until specific conditions are met. We employ an off-chain third-party[^15] charged with decrypting the user's personal data for this purpose. To maximize the user's security, we require the third party to use Trusted Execution Environment technology (TEE) to store their private key. Utilizing a TEE for decryption offers heightened security compared to relying solely on a server. The TEE creates a secure enclave within the processor, isolating decryption processes from the broader system. This isolation ensures that sensitive decryption keys and operations remain protected from unauthorized access or tampering, even if the server's operating system is compromised by malware or malicious actors. It is crucial that the secure decryptor can be called for the decryption of personal data only by the smart contract itself. This is ensured by checking the provenance of the caller before any decryption happens. We also require audit logs to track all acts of decryption. However, nothing except contractual agreements and reputation prevents collusion between the third party and PIXI.
 
 
 ### Data in Transit
 
 
-Our aim is to securely acquire data from an identity provider[^16] to ensure its accuracy while preserving its confidentiality. To accomplish this, we implement a multi-layered encryption process. Initially, the identity provider encrypts the data using PIXI's public key, then the data undergoes additional encryption using the Trusted Execution Environment's public key. After encryption, the identity provider adds a digital signature[^17] to authenticate the data.
+Our aim is to securely acquire data from an identity provider[^16] to ensure its accuracy while preserving its confidentiality. To accomplish this, we implemented a multi-layered encryption process. Initially, the identity provider encrypts the data using PIXI's public key, then the data undergoes additional encryption using the Trusted Execution Environment's public key. After encryption, the identity provider adds a digital signature[^17] to authenticate the data.
 
 
-The signed data is then presented to a smart contract for verification, providing transparency to all parties involved. Users are informed of the conditions under which their data may be disclosed through the visibility of the smart contract. If the bike is returned on time, the smart contract abstains from transmitting the data for decryption. However, if the contract is breached, indicating a deviation from the specified conditions, the secure decryptor will be called to decrypt the data.
+The signed data is then presented to the smart contract for verification, providing transparency to all parties involved. Users are clearly informed of the conditions under which their data may be accessed and can double check that thanks to the visibility of the smart contract. If the bike is returned on time, the smart contract abstains from transmitting the data for decryption. However, if the contract is breached, indicating a deviation from the specified conditions, the secure decryptor will be called to decrypt the data.
 
 
-It's important to note that PIXI cannot decrypt the data unless the contract is breached due to the secure decryptor's encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount. Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the secure decryptor) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personal data becoming available to the general public since both keys would need to be compromised for that to happen.
+It's important to note that PIXI cannot decrypt the data unless the contract is breached due to the secure decryptor's encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount. 
+
+Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the secure decryptor) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personal data becoming available to the general public since both keys would need to be compromised for that to happen.
 
 
 # Architecture
@@ -134,11 +136,11 @@ It's important to note that PIXI cannot decrypt the data unless the contract is 
 PIXI's architecture contains several components:
 - FrontEnd (coded in react) => Where the user initiates rentals.
 - Smart contract (coded in solidity) => Where the proper execution of the rental is enforced.
-- Secure decryptor storing private key inside a TEE (coded in JavaScript)[^18] => Where the personal data is (partially) decrypted in case of theft.
-- Backend (Not implemented) => It would be connected with the electronized docking stations in order to free the bikes/signal their return to the smart contract. This was omitted in our prototype for simplicity because we were able to simulate rentals/returns from the frontend (by updating the status of the bike and the ReturnBike function).
+- Secure decryptor storing private key inside a TEE[^18] (coded in JavaScript) => Where the personal data is (partially) decrypted in case of theft.
+- Backend (Not implemented) => It would be connected with the electronized docking stations in order to free the bikes/signal their return to the smart contract. This was omitted in our prototype for simplicity because we were able to simulate rentals/returns from the frontend (by updating the status of the bike objects and calling the ReturnBike function).
 - Database (Not implemented) => It would store the trip history (tripID, start station/time, end station/time, cost) for network analysis purposes as well as the thieves' encrypted personal information (which would be deleted once PIXI is compensated for the theft).
-- Identity Provider (Assumption) => It would have access to the user's accurate personnal information and provide doubly encrypted, signed data to the frontend
-- User's and PIXI's ethereum wallets => Process payments.
+- Identity Provider (Assumption) => It would have access to the user's accurate personnal information and provide doubly encrypted, signed data to the frontend.
+- User's and PIXI's Ethereum wallets => Process payments.
 
 Here's a flow chart of what a rental with revocable privacy would look like in a fully implemented version.
 
@@ -151,11 +153,13 @@ Here's a design of what the database would look like.
 # Compliance
 
 
-In order to comply with Quebec's Law 25, PIXI would have to appoint a data privacy officer (DPO). PIXI's privacy policy should be clearly accessible on the webapp as well as the DPO's contact information. We would have to conduct Privacy Impact Assessments before launching the revocable privacy system, as it involves potentially collecting personal data. Note that we would not have to ask the user for his consent before using his personal data since relying on implied consent is permitted by law (and consent is clearly implied here since the user inputs his information). We would also have to prepare a protocol to inform the Commission d'Accès à l'Information du Québec (CAI) and the user in case of unauthorized access, use, disclosure, loss, or any other violation of the protection of his personal information. Since the decryptor would only manipulate encrypted data that it could not fully decrypt, this would not be considered outsourcing[^19].
+In order to comply with Quebec's Law 25, PIXI would have to appoint a data privacy officer (DPO). PIXI's privacy policy should be clearly accessible on the webapp as well as the DPO's contact information. We would have to conduct Privacy Impact Assessments before launching the revocable privacy system, as it involves potentially collecting personal data. Note that we would not have to ask the user for his consent before using his personal data since relying on implied consent is permitted by the law (and consent is clearly implied here since the user inputs his information). That being said, the user would be clearly informed of the conditions that would lead to the decryption of his personal data before uploading it.
+
+We would also have to prepare a protocol to inform the Commission d'Accès à l'Information du Québec (CAI) and the user in case of unauthorized access, use, disclosure, loss, or any other violation of the protection of his personal information. Since the decryptor would only manipulate encrypted data that it could not fully decrypt, this would not be considered outsourcing[^19].
 
 
-Apart from those procedural requirements, it would be fairly easy for the DPO to demonstrate compliance. Indeed, the smart contract is public, soe CAI could easily check that our claims are correct.
-PIXI only collects personal information from the smart contract when the bike is not returned. This information would remain encrypted on the database and would just be decrypted to transmit it to claim compensation (in which case it may be divulged to a court, for example). The thief's encrypted personal information would be deleted from the database as soon as the compensation wass received.
+Apart from those procedural requirements, it would be fairly easy for the DPO to demonstrate compliance. Indeed, the smart contract is public, so the CAI could easily check that our claims are correct.
+PIXI only collects personal information from the smart contract when the bike is not returned. This information would remain encrypted on the database and would only be decrypted to claim compensation (in which case it may be divulged to a court, for example). The thief's encrypted personal information would be deleted from the database as soon as the compensation is received.
 
 # Privacy Policy 
 Here is our privacy policy: [Privacy Policy](resources/Privacy Policy.md)
@@ -170,9 +174,9 @@ Regardless, we hope that this proof of concept will serve as a baseline to be im
 
 
 The success of PIXI in a real-world context relies on several assumptions and third parties that we have listed here for clarity:
-1. Users are not scared off by the use of cryptocurrency and create their ethereum wallet in a privacy-preserving way (i.e. with Metamask).
+1. Users are not scared off by the use of cryptocurrency and create their Ethereum wallet in a privacy-preserving way (i.e. with Metamask).
 2. The increased cost and latency enduced by the use of a smart contract and cryptocurrency remain tolerable for the user.
-3. There exists a trustworthy third party authority (i.e. the government) that has access to the user's identity and can provide it with PIXI (doubly encrypted with the decryptor's and PIXI's public keys and signed to guarantee authenticity and integrity).
+3. There exists a trustworthy third party authority (i.e. the government) that has access to the user's identity and can provide it to PIXI (doubly encrypted with the decryptor's and PIXI's public keys and signed to guarantee authenticity and integrity).
 4. There exists a trusted third-party authority (see footnote 15) that hosts a server using a TEE and that does not divulge its private key.
 
 
@@ -203,7 +207,7 @@ keywords: {Privacy;Blockchains;Bitcoin;Receivers;Information integrity;Informati
 Source: https://ethereum.org/en/eth/
 
 
-[^8]: For reference, there are 10 different ether ATMs within a 2km radius of our classroom in McGill's Adams building. Users can also acquire ETH with regular online payment methods (credit card, Paypal...) but we strongly recommend using an Ether ATM to pay with good old cash. That way there is no trace potentially linking any piece of your identity to your ethereum account other than the location of the ATM.
+[^8]: For reference, there are 10 different ether ATMs within a 2km radius of our classroom in McGill's Adams building. Users can also acquire ETH with regular online payment methods (credit card, Paypal...) but we strongly recommend using an Ether ATM to pay with good old cash. That way there is no trace potentially linking any piece of your identity to your Ethereum account other than the location of the ATM.
 Source: https://coinatmradar.com/ether-atm-map/
 
 
@@ -216,7 +220,7 @@ Source: https://coinatmradar.com/ether-atm-map/
 [^11]: This trust is shared by the authors of this publication for the IEEE: D. Pramulia and B. Anggorojati, "Implementation and evaluation of blockchain based e-voting systems with Ethereum and Metamask," 2020 International Conference on Informatics, Multimedia, Cyber and Information System (ICIMCIS), Jakarta, Indonesia, 2020, pp. 18-23, doi: 10.1109/ICIMCIS51567.2020.9354310. keywords: {Performance evaluation;Multimedia systems;Reverse engineering;Blockchain;Reliability;Security;Electronic voting;Electronic voting;blockchain;smart contract;Ethereum}
 
 
-[^12]: Note that we did not implement such a "challenge" feature in our prototype. However, users could always pursue PIXI in court or harm their reputation online by revealing a photo proving that they docked their bike in time but that the contract was not called to validate the user's respect for the terms.
+[^12]: Note that we did not implement such a "challenge" feature in our prototype. However, users could pursue PIXI in court or harm their reputation online by revealing a photo proving that they docked their bike in time but that the contract was not called to validate the user's respect for the terms.
 
 
 [^13]: Source: https://medium.com/mydex/what-is-a-personal-data-store-a583f7ef9be3
