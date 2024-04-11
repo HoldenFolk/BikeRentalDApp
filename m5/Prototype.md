@@ -136,8 +136,17 @@ PIXI's architecture contains several components:
 - Smart contract (coded in solidity) => Where the proper execution of the rental is enforced.
 - Secure decryptor storing private key inside a TEE (coded in JavaScript)[^18] => Where the personal data is (partially) decrypted in case of theft.
 - Backend (Not implemented) => It would be connected with the electronized docking stations in order to free the bikes/signal their return to the smart contract. This was omitted in our prototype for simplicity because we were able to simulate rentals/returns from the frontend (by updating the status of the bike and the ReturnBike function).
-- Database (Not implemented) => It would store the trip history (tripID, start station/time, end station/time) for network analysis purposes as well as the thieves' encrypted personal information (which would be deleted once PIXI is compensated for the theft).
+- Database (Not implemented) => It would store the trip history (tripID, start station/time, end station/time, cost) for network analysis purposes as well as the thieves' encrypted personal information (which would be deleted once PIXI is compensated for the theft).
+- Identity Provider (Assumption) => It would have access to the user's accurate personnal information and provide doubly encrypted, signed data to the frontend
+- User's and PIXI's ethereum wallets => Process payments.
 
+Here's a flow chart of what a rental with revocable privacy would look like in a fully implemented version.
+
+
+
+
+
+Here's a design of what the database would look like.
 
 # Compliance
 
