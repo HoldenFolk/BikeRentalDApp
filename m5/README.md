@@ -1,6 +1,6 @@
 ## DEMO
 
-the demo is 4-5min long, it is an overview of the functions in the frontend
+the demo is 4-5min long, it is an overview of the functions in the frontend.
 
 ## Project
 
@@ -13,7 +13,7 @@ You can run the frontend locally in m5/frontend.
 
 ## Smart contract
 
-The code for the smart contract is situated in m5/smartContract/contracts
+The code for the smart contract is situated in m5/smartContract/contracts.
 
 ## Decryptor
 
