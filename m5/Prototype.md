@@ -158,7 +158,7 @@ Apart from those procedural requirements, it would be fairly easy for the DPO to
 PIXI only collects personal information from the smart contract when the bike is not returned. This information would remain encrypted on the database and would just be decrypted to transmit it to claim compensation (in which case it may be divulged to a court, for example). The thief's encrypted personal information would be deleted from the database as soon as the compensation wass received.
 
 # Privacy Policy 
-Here is our privacy policy: [Privacy Policy](m5/resources/Privacy Policy.md)
+Here is our privacy policy: [Privacy Policy](resources/Privacy Policy.md)
 
 # Conclusion
 
