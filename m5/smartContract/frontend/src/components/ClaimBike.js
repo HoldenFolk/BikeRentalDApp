@@ -76,7 +76,7 @@ function ClaimBike() {
       <h2>Claim Late Bikes</h2>
       <form onSubmit={handleReturnBike}>
         <button type="submit" disabled={loading} className='button-38'>
-          {loading ? 'Processing...' : 'Return Bike'}
+          {loading ? 'Processing...' : 'Claim Late Bikes'}
         </button>
       </form>
       <ReactModal isOpen={isOpen}

@@ -50,7 +50,7 @@ function RentBikeData() {
 
   return (
     <div>
-      <h2>Testing Rent</h2>
+      <h2>Testing Stolen Bike</h2>
       <form onSubmit={handleRentBike}>
         <div>
           <label htmlFor="bikeId" className='label'>Bike ID:</label>
