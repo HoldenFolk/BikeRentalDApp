@@ -1,6 +1,0 @@
-# Root .gitlab-ci.yml
-
-include:
-  - local: '/m5/smartContract/.gitlab-ci.yml'
-  # - local: '/m5/frontend/.gitlab-ci.yml'
-  # - local: '/m5/backend/.gitlab-ci.yml'
