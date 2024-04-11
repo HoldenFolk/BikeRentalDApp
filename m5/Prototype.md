@@ -129,11 +129,13 @@ It's important to note that PIXI cannot decrypt the data unless the contract is 
 
 Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the secure decryptor) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personal data becoming available to the general public since both keys would need to be compromised for that to happen.
 
-The state of the personal data should be as follows for the case where the bike is returned.
+The state of encryption of the personal data should be as follows for the case where the bike is returned.
 
 <div align="center">
 <img src="m5/resources/data-transit1.png" width = "90%"/>
 </div>
+
+As we can see, the data remains encrypted with the decryptor's key (TEE) all the way. PIXI cannot decrypt it.
 
 As for the case where the contract is broken, it should behave that way.
 
@@ -141,7 +143,7 @@ As for the case where the contract is broken, it should behave that way.
 <img src="m5/resources/data-transit2.png" width = "90%"/>
 </div>
 
-
+The decryptor (TEE) has "removed his lock" and the personal data can be fully decrypted by PIXI only.
 
 # Architecture
 
@@ -156,7 +158,7 @@ PIXI's architecture contains several components:
 - Identity Provider (Assumption) => It would have access to the user's accurate personnal information and provide doubly encrypted, signed data to the frontend.
 - User's and PIXI's Ethereum wallets => Process payments.
 
-Here's a flow chart of what a rental with revocable privacy would look like in a fully implemented version.
+The following flow charts represent what a rental with revocable privacy would look like in a fully implemented version.
 
 First, the case where the bike is not returned.
 
@@ -170,7 +172,8 @@ Second, the case where the bike is returned.
 <img src="m5/resources/revocableprivacy2.png" width = "90%"/>
 </div>
 
-Here's a design of what the database would look like.
+### Database
+The following image describes what PIXI's database would look like.
 
 <div align="center">
 <img src="m5/resources/Model_databases.png" width = "90%"/>
