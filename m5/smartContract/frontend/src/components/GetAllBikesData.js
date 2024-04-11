@@ -30,12 +30,16 @@ function GetAllBikesData() {
         const bikesData = await Promise.all(bikeDataPromises);
         const formattedBikesData = bikesData.map((bike, index) => ({
           id: index,
-          isAvailable: bike[0],
-          pricePerHour: ethers.utils.formatUnits(bike[1], 'wei'),
-          currentRenter: bike[2],
-          rentalStartTime: new Date(bike[3].toNumber() * 1000).toLocaleString(),
-          depositAmount: ethers.utils.formatUnits(bike[4], 'wei'),
+          isAvailable: bike.isAvailable,
+          pricePerHour: ethers.utils.formatUnits(bike.pricePerHour, 'wei'),
+          currentRenter: bike.currentRenter,
+          rentalStartTime: new Date(bike.rentalStartTime.toNumber() * 1000).toLocaleString(),
+          depositAmount: ethers.utils.formatUnits(bike.depositAmount, 'wei'),
+          personalData: ethers.utils.parseBytes32String(bike.personalData)
         }));
+        
+        console.log(bikesData[0].personalData);
+        console.log(ethers.utils.parseBytes32String(bikesData[0].personalData));
   
         setBikes(formattedBikesData);
       } catch (error) {
@@ -73,6 +77,7 @@ function GetAllBikesData() {
           <p>Current Renter: {bike.currentRenter === ethers.constants.AddressZero ? 'None' : bike.currentRenter}</p>
           <p>Rental Start Time: {bike.rentalStartTime}</p>
           <p>Deposit Amount: {bike.depositAmount} wei</p>
+          <p>Personal Data: {bike.personalData === 0 ? 'None' : bike.personalData}</p>
           <hr />
         </div>
         ))

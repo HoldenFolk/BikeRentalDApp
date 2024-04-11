@@ -10,4 +10,8 @@
 ## RUN
 
 1. Go to the root of this directory (m5/smartContract) and run command "npx hardhat compile".
-2. enter npx hardhat run scripts/deploy.js
+2. run "npx hardhat run scripts/deploy.js"
+
+## Test
+
+1. run "npx hardhat test"

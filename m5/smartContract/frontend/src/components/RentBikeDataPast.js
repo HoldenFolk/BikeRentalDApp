@@ -28,8 +28,10 @@ function RentBikeData() {
 
       const personalData = ethers.utils.formatBytes32String(`(encrypted) ${name}`);
 
+      console.log(personalData);
+
       // Ensure deposit is sent as a transaction value (in wei)
-      const tx = await bikeRentalContract.rentBike(bikeId, personalData, {
+      const tx = await bikeRentalContract.rentBikePast(bikeId, personalData, {
         value: ethers.utils.parseUnits(deposit.toString(), 'wei')
       });
       await tx.wait();

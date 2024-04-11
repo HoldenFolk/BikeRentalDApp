@@ -4,9 +4,11 @@ import RegisterBike from './components/RegisterBike';
 import WalletConnect from './components/WalletConnect';
 import RentBike from './components/RentBike';
 import RentBikeData from './components/RentBikeData';
+import RentBikeDataPast from './components/RentBikeDataPast';
 import WalletSwitcher from './components/WalletSwitcher';
 import { WalletProvider } from './context/WalletContext';
 import ReturnBike from './components/ReturnBike';
+import ClaimBike from './components/ClaimBike';
 import background from './Image/Bixi.jpg';
 
 function App() {
@@ -38,6 +40,12 @@ function App() {
           </div>
           <div className='top-middle'>
             <ReturnBike />
+          </div>
+          <div className='top-middle'>
+            <ClaimBike />
+          </div>
+          <div className='top-middle'>
+            <RentBikeDataPast />
           </div>
         </div>
         <div>
