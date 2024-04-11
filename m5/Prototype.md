@@ -9,16 +9,21 @@ As explained in milestone 1 of this project, the renting protocols on which curr
 
 We propose an alternative to BIXI's current bike-renting protocol that incorporates the core requirements of privacy by design. From now on, we will refer to this solution as PIXI.
 PIXI relies on a publicly accessible and unmodifiable smart contract[^2] that resides on the Ethereum blockchain. Payments are made using Ether coins, which require the user to have an Ether wallet in order to transfer the cryptocurrency. No personal identifiers are collected by our system, and no account is necessary. PIXI's web app consists of a map of all the stations with refreshable data showing the bikes and docking stations available (this map functionality was not implemented in our prototype).
-The button "connect-wallet" enables the user to connect his Ethereum wallet in order to make the payments.
+
+The button "connect-wallet" enables the user to connect his Metamask[^3] ethereum wallet in order to make the payments.
+
 The button "rent-bike" prompts the user to enter the ID engraved in the bike that he wants to rent (this could be replaced by a QR code scan similar to what BIXI currently supports).
+
 The user then has two options:
 -  Paying a deposit corresponding to the price of the bike.
 -  Uploading a file containing his personal information that is doubly encrypted with PIXI's and a secure decryptor's[^4] public keys. He will also pay a samller deposit corresponding to the cost of renting the bike for one day (this ensures that the user has sufficient funds to pay for the rental).
 
 
 There are then two potential scenarios:
+
   1. If the bike is returned within 24 hours, the deposit is refunded to the user (deducting the cost of the rental) and the user's personal information remains encrypted. The only records stored on PIXI's database are that a bike was rented from station x at time t and docked in station y at time t' (allowing for some network analysis to balance the bike distribution).
-  2. If the bike is not returned within 24 hours, the bike is considered stolen. In that case the deposit is transferred to PIXI's wallet, and the user's personal information is decrypted by the smart contract and the TEE, allowing PIXI to recover the identity of the thief. The details of this complex revocable privacy protocol will be described in a later section.
+
+  2. If the bike is not returned within 24 hours, the bike is considered stolen. In that case the deposit is transferred to PIXI's wallet, and the user's personal information is decrypted by the smart contract and the secure decryptor, allowing PIXI to recover the identity of the thief. The details of this complex revocable privacy protocol will be described in a later section.
 
 
 
