@@ -88,7 +88,7 @@ Our aim is to securely acquire data from an identity provider[^16] to ensure its
 
 The signed data is then presented to a smart contract for verification, providing transparency to all parties involved. Users are informed of the conditions under which their data may be disclosed through the visibility of the smart contract. If the bike is returned on time, the smart contract abstains from transmitting the data for decryption. However, if the contract is breached, indicating a deviation from the specified conditions, the secure decryptor will be called to decrypt the data.
 
-It's important to note that PIXI cannot decrypt the data unless the contract is breached due to the secure decryptor's encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount. Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the secure decryptor) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personnal data becoming available to the general public since both keys would need to be compromised for that to happen.
+It's important to note that PIXI cannot decrypt the data unless the contract is breached due to the secure decryptor's encryption. Furthermore, the third party cannot access the decrypted data as it remains encrypted using PIXI's key within the contract. The precise order of encryption is paramount. Although our system does not enable perfect forward secrecy, the double layer of encryption (by both PIXI and the secure decryptor) that persists in most cases (all except when the bike is stolen) greatly limits the risk of the user's personal data becoming available to the general public since both keys would need to be compromised for that to happen.
 
 # Architecture
 
@@ -101,7 +101,9 @@ PIXI's architecture contains several components:
 
 # Compliance
 
-It is easy for PIXI's privacy officer to show compliance with law 25 since the different states of the contract are publicly accessible. 
+In order to comply with Quebec's law 25, PIXI would have to appoint a data privacy officer (DPO). The privacy policy should be clearly accessible on the webapp as well as the DPO's contact. We would have to conduct Privacy Impact Assessments before launching the revocable privacy system, as it involves potentially handling personal data. Note that we would not have to ask the user for his consent before using his personal data since relying on implied consent is permitted in the law (and consent is clearly implied here since the user inputs his information). We would have to prepare a protocol to inform the Commission d'Accès à l'Information du Québec (CAI) and the user in case of an unauthorized access, use, disclosure, loss or any other violation of the protection of his personal information.
+Apart from those procedurial requirements, it would be fairly easy for the DPO to demonstrate compliance. Indeed, the smart contract is public hence the CAI could easily check that our claims are correct. 
+PIXI only collects personal information from the smart contract when the bike is not returned. This information would remain encrypted on the database and would just be decrypted to transmit it to claim a compensation (in which case it may be divulged to a court for example). The thief's encrypted personal information would be deleted from the database as soon as the compensation is received.
 
 # Conclusion
 
