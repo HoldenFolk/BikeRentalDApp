@@ -4,12 +4,13 @@ the demo is 4-5min long, it is an overview of the functions in the frontend.
 
 ## Project
 
-The code is hosted at : https://main.d2mnzmzdybndib.amplifyapp.com/
-By default, it uses the owner address so that you don't have to connect a metamask account.
-The smart contract is also deployed.
+- The code is hosted at : https://main.d2mnzmzdybndib.amplifyapp.com/
+- By default, it uses the owner address so that you don't have to connect a metamask account.
+- The smart contract is also deployed.
+- By opening the link, you should be able to use the system as in the demo.
 
-You can redeploy the smart contract in m5/smartContract, but it takes some time.
-You can run the frontend locally in m5/frontend.
+- You can redeploy the smart contract in m5/smartContract, but it takes some time.
+- You can run the frontend locally in m5/frontend.
 
 ## Smart contract
 
