@@ -23,6 +23,7 @@ contract BikeRental {
     event BikeReturned(uint256 bikeId, address renter, uint256 amountRefunded);
     event OverdueBikes(uint256[] overdueBikes);
 
+    //Nothing
     constructor() {
         //Initalize important attributes of the contract. Will only happen once one the contract is deployed.
         owner = payable(msg.sender);
