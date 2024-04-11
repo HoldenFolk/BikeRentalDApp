@@ -101,13 +101,14 @@ PIXI's architecture contains several components:
 
 # Compliance
 
-In order to comply with Quebec's law 25, PIXI would have to appoint a data privacy officer (DPO). The privacy policy should be clearly accessible on the webapp as well as the DPO's contact. We would have to conduct Privacy Impact Assessments before launching the revocable privacy system, as it involves potentially handling personal data. Note that we would not have to ask the user for his consent before using his personal data since relying on implied consent is permitted in the law (and consent is clearly implied here since the user inputs his information). We would have to prepare a protocol to inform the Commission d'Accès à l'Information du Québec (CAI) and the user in case of an unauthorized access, use, disclosure, loss or any other violation of the protection of his personal information.
+In order to comply with Quebec's law 25, PIXI would have to appoint a data privacy officer (DPO). PIXI's privacy policy should be clearly accessible on the webapp as well as the DPO's contact. We would have to conduct Privacy Impact Assessments before launching the revocable privacy system, as it involves potentially collecting personal data. Note that we would not have to ask the user for his consent before using his personal data since relying on implied consent is permitted in the law (and consent is clearly implied here since the user inputs his information). We would also have to prepare a protocol to inform the Commission d'Accès à l'Information du Québec (CAI) and the user in case of an unauthorized access, use, disclosure, loss or any other violation of the protection of his personal information. Since the decryptor would only manipulate encrypted data which it cannot fully decrypt, this would not be considered as outsourcing[^19].
+
 Apart from those procedurial requirements, it would be fairly easy for the DPO to demonstrate compliance. Indeed, the smart contract is public hence the CAI could easily check that our claims are correct. 
 PIXI only collects personal information from the smart contract when the bike is not returned. This information would remain encrypted on the database and would just be decrypted to transmit it to claim a compensation (in which case it may be divulged to a court for example). The thief's encrypted personal information would be deleted from the database as soon as the compensation is received.
 
 # Conclusion
 
-By developping PIXI, we have shown that it is possible to build a micro-mobility app that offers very strong privacy guarantees to users. However, we are aware of the limitations that our prototype service may face in a real world context. Indeed, we have had to sacrifice some speed and comfort for the user in order to fulfill our privacy requirements. Although citizens claim to care more about their privacy, they are still reluctant to accepting the sometimes necessary tradeoffs to an enhanced privacy. This is called the privacy paradox[^19].
+By developping PIXI, we have shown that it is possible to build a micro-mobility app that offers very strong privacy guarantees to users. However, we are aware of the limitations that our prototype service may face in a real world context. Indeed, we have had to sacrifice some speed and comfort for the user in order to fulfill our privacy requirements. Although citizens claim to care more about their privacy, they are still reluctant to accepting the sometimes necessary tradeoffs to an enhanced privacy. This is called the privacy paradox[^20].
 
 Regardless, we hope that this proof of concept will serve as a baseline to be improved by other software developpers looking to enhance the privacy of users in the micro-mobility sector.
 
@@ -160,4 +161,6 @@ Source: https://coinatmradar.com/ether-atm-map/
 
 [^18]: Our prototype is currently missing the oracle interface allowing the smart contract to call the secure decryptor.
 
-[^19]: When it comes to privacy, users tend to value short term gains over long term losses. This idea is developped in section 2.2.2 of this book: Knijnenburg, B. P., Page, X., Wisniewski, P., Lipford, H. R., Proferes, N., & Romano, J. (Eds.). (2022). Modern Socio-Technical Perspectives on Privacy (1st ed.). Springer Cham. https://doi.org/10.1007/978-3-030-82786-1
+[^19]: Source: Borden Ladner Gervais, "Québec Privacy Law Reform: Compliance Guide for Organizations", 2022.
+
+[^20]: When it comes to privacy, users tend to value short term gains over long term losses. This idea is developped in section 2.2.2 of this book: Knijnenburg, B. P., Page, X., Wisniewski, P., Lipford, H. R., Proferes, N., & Romano, J. (Eds.). (2022). Modern Socio-Technical Perspectives on Privacy (1st ed.). Springer Cham. https://doi.org/10.1007/978-3-030-82786-1
