@@ -82,7 +82,7 @@ describe("BikeRental", function () {
       for (let i = 0; i < 3; i++) {
         let tx = await bikeRental.registerBike(pricePerHour);
         await tx.wait();
-        const personalData = ethers.utils.formatBytes32String("name");
+        const personalData = ethers.utils.formatBytes32String("name (encrypted)");
         tx = await bikeRental.rentBike(i, personalData, {
           value: pricePerHour,
         });

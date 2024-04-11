@@ -21,7 +21,7 @@ contract BikeRental {
 
     event BikeRented(uint256 bikeId, address renter, uint256 startTime);
     event BikeReturned(uint256 bikeId, address renter, uint256 amountRefunded);
-    event OverdueBikes(bytes32[] overdueBikes);
+    event OverdueBikes(uint256[] overdueBikes);
 
     constructor() {
         //Initalize important attributes of the contract. Will only happen once one the contract is deployed.
@@ -96,6 +96,29 @@ contract BikeRental {
         emit BikeRented(bikeId, msg.sender, bike.rentalStartTime);
     }
 
+    // fucntion to test the revocable privacy option
+    function rentBikePast(
+        uint256 bikeId,
+        bytes32 personalData
+    ) external payable {
+        Bike storage bike = bikes[bikeId];
+
+        require(bike.isAvailable, "Bike is currently rented.");
+        require(
+            msg.value >= depositCost,
+            "Deposit must be greater than or equal to the deposit cost."
+        );
+
+        bike.isAvailable = false;
+        bike.claimed = false;
+        bike.currentRenter = msg.sender;
+        bike.rentalStartTime = block.timestamp - 1 days;
+        bike.depositAmount = msg.value;
+        bike.personalData = personalData;
+
+        emit BikeRented(bikeId, msg.sender, bike.rentalStartTime);
+    }
+
     function rentBikeDeposit(uint256 bikeId) external payable {
         Bike storage bike = bikes[bikeId];
         require(bike.isAvailable, "Bike is currently rented.");
@@ -154,14 +177,14 @@ contract BikeRental {
 
     function getOverdueBikes() public onlyOwner {
         uint256 currentTime = block.timestamp;
-        bytes32[] memory overdueBikes = new bytes32[](numberOfBikes);
+        uint256[] memory overdueBikes = new uint256[](numberOfBikes);
         uint256 index = 0;
 
         for (uint256 bikeId = 0; bikeId < numberOfBikes; bikeId++) {
             Bike storage bike = bikes[bikeId];
             if (
                 !bike.isAvailable &&
-                currentTime - bike.rentalStartTime < 1 days &&
+                currentTime - bike.rentalStartTime > 1 days &&
                 !bike.claimed
             ) {
                 // deposit option
@@ -169,11 +192,14 @@ contract BikeRental {
                     owner.transfer(bike.depositAmount); // Transfer the deposit to the owner
                     bike.depositAmount = 0; // Reset the deposit amount
                     bike.claimed = true; // Mark the bike as claimed
+                    overdueBikes[index] = bikeId;
                 }
                 // privacy unless option
                 else {
                     // call to decrypt personal data !!
-                    overdueBikes[index] = bike.personalData;
+                    bike.personalData = removeLast12(bike.personalData);
+                    //
+                    overdueBikes[index] = bikeId;
                     bike.claimed = true; // Mark the bike as claimed
                 }
                 index++;
@@ -181,9 +207,9 @@ contract BikeRental {
         }
 
         // Resize the array to remove any unused elements
-        bytes32[] memory resizedOverdueBikes = new bytes32[](index);
+        uint256[] memory resizedOverdueBikes = new uint256[](index);
         for (uint256 i = 0; i < index; i++) {
-            resizedOverdueBikes[i] = overdueBikes[i];
+            resizedOverdueBikes[i] = i;
         }
 
         emit OverdueBikes(resizedOverdueBikes);
@@ -197,5 +223,14 @@ contract BikeRental {
         bike.rentalStartTime = 0;
         bike.depositAmount = 0;
         bike.personalData = 0;
+    }
+
+    function removeLast12(bytes32 input) public pure returns (bytes32) {
+        bytes32 result;
+        assembly {
+            // Set the result to the input shifted right by 96 bits (12 bytes)
+            result := shl(96, input)
+        }
+        return result;
     }
 }
