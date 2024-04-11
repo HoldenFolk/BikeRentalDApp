@@ -1,10 +1,13 @@
 import React from 'react';
 import { useWallet } from '../context/WalletContext';
+import settings from '../settings';
+import { ethers } from 'ethers';
 
 
 const WalletSwitcher = () => {
-    const {wallet, isUserWalletConnected, connectWallet, useDefaultWallet } = useWallet();
-    const walletAddress = wallet.address;
+    const {wallet, isUserWalletConnected, walletAddress, connectWallet, useDefaultWallet } = useWallet();
+    const provider = isUserWalletConnected ? new ethers.providers.Web3Provider(window.ethereum) : new ethers.providers.JsonRpcProvider(settings.API_KEY);
+    
     return (
         <div>
             {isUserWalletConnected ? (

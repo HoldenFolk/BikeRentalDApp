@@ -10,16 +10,23 @@ const defaultWallet = new ethers.Wallet(settings.PRIVATE_WALLET_KEY, defaultProv
 export const WalletProvider = ({ children }) => {
   const [wallet, setWallet] = useState(defaultWallet);
   const [isUserWalletConnected, setIsUserWalletConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState(defaultWallet.address)
 
   async function connectWallet() {
+   
     if (window.ethereum) {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
         const signer = provider.getSigner();
         const address = await signer.getAddress();
-        setWallet(address);
+        //Set context variables for the wallet
+        setWallet(signer);
+        setIsUserWalletConnected(true);
+        setWalletAddress(address);
+
         console.log("Wallet connected: ", address);
+        console.log(isUserWalletConnected);
       } catch (error) {
         console.error("Could not connect to wallet", error);
       }
@@ -31,10 +38,11 @@ export const WalletProvider = ({ children }) => {
   const useDefaultWallet = () => {
     setWallet(defaultWallet);
     setIsUserWalletConnected(false);
+    setWalletAddress(defaultWallet.address);
   };
 
   return (
-    <WalletContext.Provider value={{ wallet, isUserWalletConnected, connectWallet, useDefaultWallet }}>
+    <WalletContext.Provider value={{ wallet, isUserWalletConnected, walletAddress, connectWallet, useDefaultWallet }}>
       {children}
     </WalletContext.Provider>
   );
