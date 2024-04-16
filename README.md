@@ -32,4 +32,6 @@ The solution is outlined in a diagram below.
 
 ## Hosting and Interaction
 
-This app is hosted through AWS Amplify! You can view the deployed version here: `https://main.d2jusiuq0y07ky.amplifyapp.com`. As stated, the owners wallet is already connected to the application. This allows you to use the application without creating and conncecting your own wallet. However, if you would like to connect your own wallet, then you can do so using MetaMask. Simply download the MetaMask extension on your browser and connect it to the app using the 'Connect Wallet' feature. You can then add Ethereum Sepolia (Tester Ethereum) to your wallet to perform transactions!
+This app is hosted through AWS Amplify! You can view the deployed version here: https://main.d2jusiuq0y07ky.amplifyapp.com. As stated, the owners wallet is already connected to the application. This allows you to use the application without creating and conncecting your own wallet. This is a security risk to the owners wallet credentials; however, is just done to show proof of concept. Furthermore, the connected wallet has no real Ethereum and is simply for testing.
+
+If you would like to connect your own wallet, then you can do so using MetaMask. Simply download the MetaMask extension on your browser and connect it to the app using the 'Connect Wallet' feature. You can then add Ethereum Sepolia (Tester Ethereum) to your wallet to perform transactions!
