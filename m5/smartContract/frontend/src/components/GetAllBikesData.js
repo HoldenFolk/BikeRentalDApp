@@ -35,7 +35,6 @@ function GetAllBikesData() {
           currentRenter: bike.currentRenter,
           rentalStartTime: new Date(bike.rentalStartTime.toNumber() * 1000).toLocaleString(),
           depositAmount: ethers.utils.formatUnits(bike.depositAmount, 'wei'),
-          personalData: ethers.utils.parseBytes32String(bike.personalData)
         }));
   
         setBikes(formattedBikesData);
@@ -74,7 +73,6 @@ function GetAllBikesData() {
           <p>Current Renter: {bike.currentRenter === ethers.constants.AddressZero ? 'None' : bike.currentRenter}</p>
           <p>Rental Start Time: {bike.rentalStartTime}</p>
           <p>Deposit Amount: {bike.depositAmount} wei</p>
-          <p>Personal Data: {bike.personalData === 0 ? 'None' : bike.personalData}</p>
           <hr />
         </div>
         ))
