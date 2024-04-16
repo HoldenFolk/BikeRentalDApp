@@ -13,7 +13,12 @@ The research done before creating the solution is in 'BixiResearch.md'. Here, we
 
 ## Project Structure
 
-This project contains a smart contract project as well as a front end. The front-end project is nested inside the smart contract to facilitate ease of local deployment.
+This project contains a smart contract project as well as a front end. The front-end project is nested inside the smart contract to facilitate ease of local deployment. For more info on local deployment see the individual README in each project.
+
+- Smart Contract:
+  We decided to develop the smart contract on the Ethereum network using Solidity. This is the most common and well supported network for creating smart contracts.
+- Front end:
+  The front-end of the application was created using React.js
 
 ## Solution
 
@@ -24,3 +29,7 @@ The owner's wallet is already linked to the Web application. This way, you can r
 The solution is outlined in a diagram below.
 
 ![Solution Diagram](./images/architecture.png "Solution Architecture")
+
+## Hosting and Interaction
+
+This app is hosted through AWS Amplify! You can view the deployed version here: `https://main.d2jusiuq0y07ky.amplifyapp.com`. As stated, the owners wallet is already connected to the application. This allows you to use the application without creating and conncecting your own wallet. However, if you would like to connect your own wallet, then you can do so using MetaMask. Simply download the MetaMask extension on your browser and connect it to the app using the 'Connect Wallet' feature. You can then add Ethereum Sepolia (Tester Ethereum) to your wallet to perform transactions!
